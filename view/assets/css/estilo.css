@@ -1,0 +1,24 @@
+h4 { 
+  border-bottom:1px solid #fff;
+  padding-bottom:10px;
+  text-align: center;
+} 
+
+input {
+  margin-bottom: 15px;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.col-md-3{
+  margin: 0 auto;
+}
+
+.form-login {
+  background-color: #ededed;
+  padding: 10px 20px 20px 20px;
+  border-radius: 15px;
+  border-color:#d2d2d2;
+}

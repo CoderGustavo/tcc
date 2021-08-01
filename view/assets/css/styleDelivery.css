@@ -1,0 +1,53 @@
+.metodopagamento input{
+    display: none;
+}
+.metodopagamento ul{
+    list-style: none;
+}
+.metodopagamento li{
+    font-size: 15pt;
+    background-color: rgba(0, 0, 0, 0.096);
+}
+
+.metodopagamento .active{
+    background: #fcb94e !important;
+    border: 1px solid #ffffff;
+}
+
+
+.itempedido{
+    position: relative;
+    height: 10vh;
+    cursor: pointer;
+}
+.itempedido input[type='checkbox']{
+    display: none;
+}
+.pedido .active{
+    background-color: var(--warning);
+}
+.pedidoselect li{
+    list-style: none;
+    line-height: 10vh;
+}
+.precoDelivery, .qtds{
+    position: absolute;
+    right: 0;
+    width: 30%;
+    line-height: 10vh;
+    top: 0vh;
+}
+.precoDelivery, .qtds span{
+    font-size: 15pt;
+    line-height: 5vh;
+}
+.inqtds{
+    line-height: 5vh;
+    margin-bottom: 2.5vh;
+}
+.itempedido input[type='number']{
+    position: absolute;
+    z-index: 9999;
+    bottom: 0;
+    width: 50%;
+}
