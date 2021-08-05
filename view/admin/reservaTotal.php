@@ -105,11 +105,11 @@ if ($logado == 1) {
                       <?php } ?>
                       <td>
                       <?php if ($linha['status'] == "Pendente") { ?>
-                        <a href="#"  data-toggle="modal" data-target="#aprovarReserva<?php echo $linha['idReserva'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
-                        <a href="#"  data-toggle="modal" data-target="#excluirReserva<?php echo $linha['idReserva'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
+                        <a href="#"  data-toggle="modal" data-target="#aprovarReserva<?php echo $linha['id'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
+                        <a href="#"  data-toggle="modal" data-target="#excluirReserva<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       <?php } else { ?>
                         <i class="taman far fa-check text-light bg-secondary rounded-circle border border-dark p-1"></i>
-                        <a href="#" data-toggle="modal" data-target="#excluirReserva<?php echo $linha['idReserva'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#excluirReserva<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       <?php } ?>
                       </td>
                       </tr>

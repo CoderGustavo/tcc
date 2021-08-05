@@ -98,10 +98,14 @@ if ($logado == 1) {
                       <td><?php echo $linha['datahora'] ?></td>
                       <td><?php echo $linha['numero_pessoas'] ?></td>
                       <td><?php echo $linha['observacao'] ?></td>
-                      <td class="teste badge badge-pill bg-warning p-2"> <?php echo $linha['status'] ?> </td>
                       <td>
-                        <a href="#"  data-toggle="modal" data-target="#aprovarReserva<?php echo $linha['idReserva'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
-                        <a href="#"  data-toggle="modal" data-target="#excluirReserva<?php echo $linha['idReserva'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
+                        <span class="badge badge-pill badge-warning p-2">
+                          <?php echo $linha['status'] ?> 
+                        </span>
+                      </td>
+                      <td>
+                        <a href="#" data-toggle="modal" data-target="#aprovarReserva<?php echo $linha['id'] ?>"><i class="far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#excluirReserva<?php echo $linha['id'] ?>"><i class="fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       </td>
                     </tr>
                     <?php endforeach ?>

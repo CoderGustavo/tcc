@@ -77,13 +77,13 @@ if ($logado == 1) {
                   <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
-                      <th">Nome</th>
-                      <th">Telefone</th>
-                      <th">Data-hora</th>
-                      <th">Nº Pessoas</th>
-                      <th">Obs.</th>
-                      <th">Status</th>
-                      <th">Ações</th>
+                      <th>Nome</th>
+                      <th>Telefone</th>
+                      <th>Data-hora</th>
+                      <th>Nº Pessoas</th>
+                      <th>Obs.</th>
+                      <th>Status</th>
+                      <th>Ações</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -98,7 +98,7 @@ if ($logado == 1) {
                       <td class="teste badge badge-pill bg-success p-2"> <?php echo $linha['status'] ?> </td>
                       <td>
                         <i class="taman far fa-check text-light bg-secondary rounded-circle border border-dark p-1"></i>
-                        <a href="#" data-toggle="modal" data-target="#excluirReserva<?php echo $linha['idReserva'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#excluirReserva<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       </td>
                       </tr>
                     <?php endforeach ?>

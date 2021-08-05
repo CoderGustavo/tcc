@@ -19,25 +19,9 @@ class Usuario{
         $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
         $conexao->exec($sql);
     }
-
-    public function InserirAdmin() {
-        $sql = "INSERT INTO usuario (nome, email, senha, telefone) 
-        VALUES ('".$this->nome."' , '".$this->email."' , '".$this->senha."' , '".$this->telefone."' , '".$this->endereco."' , '1')"; 
-        $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
-        $conexao->exec($sql);
-    }
-
-    public function ListarAdmin() {
-        $sql = "SELECT usuario.id, usuario.nome, usuario.email, usuario.telefone, admin.niveis_acesso FROM usuario INNER JOIN admin ON usuario.id = admin.id_usuario";
-        $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
-        $resultado = $conexao->query($sql);
-        $lista = $resultado->fetchAll();
-        //var_dump($lista);
-        return $lista;
-    }
     
     public function ListarCliente() {
-        $sql = "SELECT * FROM usuario INNER JOIN admin ON usuario.id <> admin.id_usuario";
+        $sql = "SELECT usuario.id, usuario.nome, usuario.email, usuario.telefone FROM usuario INNER JOIN admin ON usuario.id <> admin.id_usuario";
         $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
         $resultado = $conexao->query($sql);
         $lista = $resultado->fetchAll();

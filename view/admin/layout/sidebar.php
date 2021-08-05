@@ -42,17 +42,34 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-           <li class="nav-item">
-                <a href="./index.php" class="nav-link active">
-                  <i class="fas fa-cogs nav-icon"></i>
-                  <p>Informações gerais</p>
-                </a>
-              </li>
-          <li class="nav-item menu">
+          <li class="nav-item">
+              <a href="./index.php" class="nav-link active">
+                <i class="fas fa-cogs nav-icon"></i>
+                <p>Informações gerais</p>
+              </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Usuários
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="listaCliente.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Clientes</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user-alt"></i>
+              <p>
+                Administradores
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -67,12 +84,6 @@
                 <a href="listaAdmin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lista de administradores</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="listaCliente.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Clientes</p>
                 </a>
               </li>
             </ul>

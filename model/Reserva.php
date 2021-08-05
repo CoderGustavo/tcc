@@ -44,7 +44,7 @@
 		}
 
 		public function excluir(){
-			$sql = "DELETE FROM reserva WHERE idReserva=".$this->idReserva;
+			$sql = "DELETE FROM reserva WHERE id=".$this->idReserva;
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2','root','');
 			$conexao->exec($sql);
 		}

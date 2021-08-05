@@ -1,7 +1,7 @@
 <?php 
-  require_once '../../model/Usuario.php';
-  $usuario = new Usuario();
-  $lista = $usuario->ListarAdmin();
+  require_once '../../model/Admin.php';
+  $admin = new Admin();
+  $lista = $admin->ListarAdmin();
   session_start();
 $logado = $_SESSION['usuario_logado'];
 if ($logado == 1) {
@@ -71,7 +71,7 @@ if ($logado == 1) {
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th style="width: 10px">#</th>
+                      <th style="width: 10px">ID</th>
                       <th>Nome</th>
                       <th>Email</th>
                       <th>Telefone</th>

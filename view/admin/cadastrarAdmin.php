@@ -68,7 +68,15 @@ if ($logado == 1) {
           <!-- /.col -->
           <div class="offset-md-4 col-md-4">
             <!-- /.card -->
-          <form class="form-signin1" method="POST" action="../usuario-salvar.php">
+          <?php if (isset($_SESSION["erro"])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <?php } ?>
+          <form class="form-signin1" method="POST" action="../../controller/admin/cadastrar-admin.php">
 
           <label for="inputEmail" class="sr-only">Nome</label>
           <input type="text" name="nome" id="" required="required" class="form-control mb-3" placeholder="Nome" />
@@ -78,9 +86,6 @@ if ($logado == 1) {
 
           <label for="inputEmail" class="sr-only">Telefone</label>
           <input type="text" name="telefone" id="" required="required" class="form-control mb-3" placeholder="Telefone" />
-
-          <label for="inputEmail" class="sr-only">Endereço</label>
-          <input type="email" name="email" id="" required="required" class="form-control mb-3" placeholder="E-mail" />
 
           <label for="inputPassword" class="sr-only">Senha</label>
           <input type="password" name="senha" id="" required="required" data-msg="Preencha o campo senha" class="form-control mb-3" placeholder="Senha" />  
@@ -93,13 +98,6 @@ if ($logado == 1) {
           
           
         </form>     
-        <?php
-          if (isset($_SESSION["erro"])) {
-            
-          
-        ?>
-        <div class="bg-danger w-100 p-3 mt-2 text-center"><?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></div>
-          <?php } ?>
           </div>
 
         </div>

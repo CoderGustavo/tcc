@@ -1,5 +1,5 @@
 <?php
-require_once 'classe/Reserva.php';
+require_once '../../model/Reserva.php';
 
 $idReserva = $_GET['idReserva'];
 $link = $_GET['link'];
