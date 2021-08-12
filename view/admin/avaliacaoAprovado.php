@@ -7,6 +7,7 @@ if ($logado == 1) {
 ?>
 
 <head>
+  <meta charset="utf-8">
   <title>Todas reservas</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -82,7 +83,11 @@ if ($logado == 1) {
                       <td> <?php echo $linha['nome'] ?> </td>
                       <td> <?php echo $linha['comentario'] ?> </td>
                       <td> <?php echo $linha['data'] ?> </td>
-                      <td class="teste badge badge-pill bg-success p-2"> <?php echo $linha['status'] ?> </td>
+                      <td> 
+                        <span class="teste badge badge-pill bg-success p-2">
+                          <?php echo $linha['status'] ?>
+                        </span>
+                      </td>
                       <td>
                         <i class="taman far fa-check text-light bg-secondary rounded-circle border border-dark p-1"></i>
                       </td>

@@ -1,7 +1,7 @@
 <link href="../assets/img/favicon1.png" rel="icon">
-<?php require_once 'classe/Comentario.php';
-$comentario = new Comentario();
-$lista = $comentario->listar();
+<?php require_once 'classe/Avaliacao.php';
+$avaliacao = new Avaliacao();
+$lista = $avaliacao->listar();
 session_start();
 $logado = $_SESSION['usuario_logado'];
 
@@ -50,13 +50,13 @@ if ($logado == 1) {
           <tr>
             <td> <?php echo $linha['id'] ?> </td>
             <td> <?php echo $linha['nome'] ?> </td>
-            <td> <?php echo $linha['comentario'] ?> </td>
+            <td> <?php echo $linha['avaliacao'] ?> </td>
             <td> <?php echo $linha['datahora'] ?> </td>
             <td> <?php echo $linha['status'] ?> </td>
             <td>
-              <a href="comentario-aprovar.php?idComentario=<?php echo $linha['id'] ?>"
+              <a href="avaliacao-aprovar.php?idAvaliacao=<?php echo $linha['id'] ?>"
                  class="btn btn-sm btn-success">Aprovar</a>
-              <a href="comentario-excluir.php?idComentario=<?php echo $linha['id'] ?>"
+              <a href="avaliacao-excluir.php?idAvaliacao=<?php echo $linha['id'] ?>"
                  class="btn btn-sm btn-danger espaco">Excluir</a>
             </td>
           </tr>

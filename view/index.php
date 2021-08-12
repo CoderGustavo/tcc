@@ -311,7 +311,7 @@ if(isset($_SESSION['usuario_logado'])){
 
     <!-- ======= Sessão comentário ======= -->
     <?php if ($logado == 1) {?>
-      <section id="comentario" class="contact section-bg">
+      <section id="avaliacao" class="contact section-bg">
           <div class="container" data-aos="fade-up">
               <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
                 <div class="row book-a-table" data-aos="fade-up">
@@ -336,7 +336,7 @@ if(isset($_SESSION['usuario_logado'])){
                       </div>
                     </div>
                     <div class="form-group">
-                      <textarea class="form-control" id="comentario" name="comentario" rows="5" placeholder="Digite seu comentário aqui!"></textarea>
+                      <textarea class="form-control" id="avaliacao" name="avaliacao" rows="5" placeholder="Digite seu comentário aqui!"></textarea>
                       <div class="validate"></div>
                     </div>
                     <div class="mb-3">
@@ -370,7 +370,7 @@ if(isset($_SESSION['usuario_logado'])){
               <span class="h4 text-uppercase"><?php echo explode(" ", $linha['nome'])[0];?></span>
               <br>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              <?php echo $linha['comentario'] ?>
+              <?php echo $linha['avaliacao'] ?>
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>                
             </p>
             <div class="img-data">

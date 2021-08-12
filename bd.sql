@@ -64,11 +64,11 @@ INSERT INTO `categoria` (`id`, `nome`) VALUES
 	(1, 'lanche');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
--- Dumping structure for table lanchonete2.comentario
-CREATE TABLE IF NOT EXISTS `comentario` (
+-- Dumping structure for table lanchonete2.avaliacao
+CREATE TABLE IF NOT EXISTS `avaliacao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
-  `comentario` varchar(50) NOT NULL DEFAULT '',
+  `avaliacao` varchar(50) NOT NULL DEFAULT '',
   `status` varchar(50) NOT NULL DEFAULT '',
   `data` varchar(50) NOT NULL DEFAULT '',
   `estrela` int(11) DEFAULT NULL,
@@ -76,11 +76,11 @@ CREATE TABLE IF NOT EXISTS `comentario` (
   KEY `FK1_idUsuario` (`id_usuario`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table lanchonete2.comentario: 1 rows
-/*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
-INSERT INTO `comentario` (`id`, `id_usuario`, `comentario`, `status`, `data`, `estrela`) VALUES
+-- Dumping data for table lanchonete2.avaliacao: 1 rows
+/*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
+INSERT INTO `avaliacao` (`id`, `id_usuario`, `avaliacao`, `status`, `data`, `estrela`) VALUES
 	(1, 2, 'muito legal', 'Pendente', '30/07/2021', 5);
-/*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
+/*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 
 -- Dumping structure for table lanchonete2.endereco
 CREATE TABLE IF NOT EXISTS `endereco` (

@@ -4,17 +4,17 @@
 
 	class Avaliacao{
 		//declaração dos atributos
-		public $idComentario, $nome, $profissao, $comentario, $estrela, $idUsuario;
+		public $idAvaliacao, $nome, $profissao, $avaliacao, $estrela, $idUsuario;
 		
-		public function __construct($idComentario = false){
-			if (isset($idComentario)){
-				$this->idComentario = $idComentario;
+		public function __construct($idAvaliacao = false){
+			if (isset($idAvaliacao)){
+				$this->idAvaliacao = $idAvaliacao;
 			}
 		}
 
 		public function listar(){
-			$sql = "SELECT comentario.id, comentario.status, comentario.data, usuario.nome, comentario.comentario, comentario.estrela 
-			FROM comentario INNER JOIN usuario ON usuario.id = comentario.id_usuario";
+			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.data, usuario.nome, avaliacao.comentario, avaliacao.estrela 
+			FROM avaliacao INNER JOIN usuario ON usuario.id = avaliacao.id_usuario";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$resultado = $conexao->query($sql);
 			$lista = $resultado->fetchAll();
@@ -22,8 +22,8 @@
 		}
 		
 		public function listarPendentes(){
-			$sql = "SELECT comentario.id, comentario.status, comentario.data, usuario.nome, comentario.comentario, comentario.estrela 
-			FROM comentario INNER JOIN usuario ON usuario.id = comentario.id_usuario WHERE comentario.status LIKE 'Pendente'";
+			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.data, usuario.nome, avaliacao.comentario, avaliacao.estrela 
+			FROM avaliacao INNER JOIN usuario ON usuario.id = avaliacao.id_usuario WHERE avaliacao.status LIKE 'Pendente'";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$resultado = $conexao->query($sql);
 			$lista = $resultado->fetchAll();
@@ -32,8 +32,8 @@
 		}
 
 		public function listarAprovados(){
-			$sql = "SELECT comentario.id, comentario.status, comentario.data, usuario.nome, comentario.comentario, comentario.estrela 
-			FROM comentario INNER JOIN usuario ON usuario.id = comentario.id_usuario WHERE comentario.status LIKE 'Aprovado'";
+			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.data, usuario.nome, avaliacao.comentario, avaliacao.estrela 
+			FROM avaliacao INNER JOIN usuario ON usuario.id = avaliacao.id_usuario WHERE avaliacao.status LIKE 'Aprovado'";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$resultado = $conexao->query($sql);
 			$lista = $resultado->fetchAll();
@@ -43,23 +43,23 @@
 
 		public function inserir(){
 			$data = date('d/m/Y H:i');
-			$sql = "INSERT INTO comentario (id_usuario, comentario, datahora, qtd_estrela, status) VALUES (
-			  '".$this->idUsuario."' , '".$this->comentario."' , '".$data."' , '".$this->estrela."', 'Pendente')"; 
+			$sql = "INSERT INTO avaliacao (id_usuario, comentario, datahora, qtd_estrela, status) VALUES (
+			  '".$this->idUsuario."' , '".$this->avaliacao."' , '".$data."' , '".$this->estrela."', 'Pendente')"; 
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$conexao->exec($sql);
 
 		}
 		
 		public function aprovar(){
-			$sql = "UPDATE comentario SET 
+			$sql = "UPDATE avaliacao SET 
                     status = 'Aprovado'
-                WHERE id = $this->idComentario";
+                WHERE id = $this->idAvaliacao";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$conexao->exec($sql);
 		}
 
 		public function excluir(){
-			$sql = "DELETE FROM comentario WHERE id = $this->idComentario";
+			$sql = "DELETE FROM avaliacao WHERE id = $this->idAvaliacao";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$conexao->exec($sql);
 		}

@@ -1,12 +1,13 @@
 <?php require_once '../../model/Avaliacao.php';
 $avaliacao = new Avaliacao();
-$lista = $avaliacao->listar();
+$lista = $avaliacao->listarPendentes();
 session_start();
 $logado = $_SESSION['usuario_logado'];
 if ($logado == 1) {
 ?>
 
 <head>
+  <meta charset="utf-8">
   <title>Todas reservas</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -39,12 +40,12 @@ if ($logado == 1) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Todos as avaliações</h1>
+            <h1>Todos as avaliações pendentes</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Administração</a></li>
-              <li class="breadcrumb-item active">Todos as avaliações</li>
+              <li class="breadcrumb-item active">Todos as avaliações pendentes</li>
             </ol>
           </div>
         </div>
@@ -60,7 +61,7 @@ if ($logado == 1) {
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Todos as avaliações</h3>
+                <h3 class="card-title">Todos as avaliações pendentes</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -82,20 +83,14 @@ if ($logado == 1) {
                       <td> <?php echo $linha['nome'] ?> </td>
                       <td> <?php echo $linha['comentario'] ?> </td>
                       <td> <?php echo $linha['data'] ?> </td>
-
-                      <?php if ($linha['status'] == "Pendente") { ?>
-                          <td class="teste badge badge-pill bg-warning p-2"> <?php echo $linha['status'] ?> </td>
-                      <?php } else { ?>
-                        <td class="teste badge badge-pill bg-success p-2"> <?php echo $linha['status'] ?> </td>
-                      <?php } ?>
+                      <td> 
+                        <span class="teste badge badge-pill bg-warning p-2">
+                          <?php echo $linha['status'] ?>
+                        </span>
+                      </td>
                       <td>
-                      <?php if ($linha['status'] == "Pendente") { ?>
-                        <a href="#"  data-toggle="modal" data-target="#aprovarComentario<?php echo $linha['id'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
-                        <a href="#"  data-toggle="modal" data-target="#excluirComentario<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
-                      <?php } else { ?>
-                        <i class="taman far fa-check text-light bg-secondary rounded-circle border border-dark p-1"></i>
-                        <a href="#" data-toggle="modal" data-target="#excluirComentario<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
-                      <?php } ?>
+                      <a href="#"  data-toggle="modal" data-target="#aprovarAvaliacao<?php echo $linha['id'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
+                        <a href="#"  data-toggle="modal" data-target="#excluirAvaliacao<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       </td>
                     </tr>
                     <?php endforeach ?>

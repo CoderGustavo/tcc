@@ -1,11 +1,11 @@
 <?php
-require_once 'classe/Comentario.php';
+require_once 'classe/Avaliacao.php';
 
-$idComentario = $_GET['id'];
+$idAvaliacao = $_GET['id'];
 $link = $_GET['link'];
-$comentario = new Comentario($idComentario);
+$avaliacao = new Avaliacao($idAvaliacao);
 
-$comentario->aprovar();
+$avaliacao->aprovar();
 header('Location:' . $link);
 
 

@@ -127,19 +127,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="comentarioPendente.php" class="nav-link">
+                <a href="avaliacaoPendente.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Comentários pendentes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="comentarioAprovado.php" class="nav-link">
+                <a href="avaliacaoAprovado.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Comentários aprovados</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="comentarioTotal.php" class="nav-link">
+                <a href="avaliacaoTotal.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Todos comentários</p>
                 </a>

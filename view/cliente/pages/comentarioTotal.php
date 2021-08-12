@@ -1,6 +1,6 @@
-<?php require_once '../classe/Comentario.php';
-$comentario = new Comentario();
-$lista = $comentario->listar();
+<?php require_once '../classe/Avaliacao.php';
+$avaliacao = new Avaliacao();
+$lista = $avaliacao->listar();
 session_start();
 $logado = $_SESSION['usuario_logado'];
 if ($logado == 1) {
@@ -94,7 +94,7 @@ if ($logado == 1) {
                     <tr>
                       <td> <?php echo $linha['id'] ?> </td>
                       <td> <?php echo $linha['nome'] ?> </td>
-                      <td> <?php echo $linha['comentario'] ?> </td>
+                      <td> <?php echo $linha['avaliacao'] ?> </td>
                       <td> <?php echo $linha['datahora'] ?> </td>
 
                       <?php if ($linha['status'] == "Pendente") { ?>
@@ -104,11 +104,11 @@ if ($logado == 1) {
                       <?php } ?>
                       <td>
                       <?php if ($linha['status'] == "Pendente") { ?>
-                        <a href="#"  data-toggle="modal" data-target="#aprovarComentario<?php echo $linha['id'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
-                        <a href="#"  data-toggle="modal" data-target="#excluirComentario<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
+                        <a href="#"  data-toggle="modal" data-target="#aprovarAvaliacao<?php echo $linha['id'] ?>"><i class="taman far fa-check text-light bg-success rounded-circle border border-dark p-1"></i></a>
+                        <a href="#"  data-toggle="modal" data-target="#excluirAvaliacao<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       <?php } else { ?>
                         <i class="taman far fa-check text-light bg-secondary rounded-circle border border-dark p-1"></i>
-                        <a href="#" data-toggle="modal" data-target="#excluirComentario<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#excluirAvaliacao<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>
                       <?php } ?>
                       </td>
                     </tr>
