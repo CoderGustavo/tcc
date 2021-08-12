@@ -1,5 +1,5 @@
 <?php
-require_once 'classe/Avaliacao.php';
+require_once '../../model/Avaliacao.php';
 
 $idAvaliacao = $_GET['id'];
 $link = $_GET['link'];

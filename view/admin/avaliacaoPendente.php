@@ -82,7 +82,7 @@ if ($logado == 1) {
                       <td> <?php echo $linha['id'] ?> </td>
                       <td> <?php echo $linha['nome'] ?> </td>
                       <td> <?php echo $linha['comentario'] ?> </td>
-                      <td> <?php echo $linha['data'] ?> </td>
+                      <td> <?php echo $linha['datahora'] ?> </td>
                       <td> 
                         <span class="teste badge badge-pill bg-warning p-2">
                           <?php echo $linha['status'] ?>

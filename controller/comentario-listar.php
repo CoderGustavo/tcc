@@ -30,7 +30,7 @@ if ($logado == 1) {
     </div> 
         <br>
         <br>
-        <h2> Lista de comentários pendentes: </h2>
+        <h2> Lista de avaliaçãos pendentes: </h2>
 
 
     <div class="table-responsive">
@@ -39,7 +39,7 @@ if ($logado == 1) {
           <tr>
             <th width="10"> Id </th>
             <th> Nome </th>
-            <th> Comentário </th>
+            <th> Avaliação </th>
             <th> Data/Hora </th>
             <th> Status </th>
             <th> Opções </th>

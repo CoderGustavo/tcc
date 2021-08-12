@@ -9,9 +9,9 @@
 	$avaliacao->avaliacao = $_POST['avaliacao'];
 	$avaliacao->idUsuario = $_SESSION['id_usuario'];
 
-	$verificar = $_POST['estrela'];
+	$estrela = $_POST['estrela'];
 
-	if ($verificar > 0) {
+	if ($estrela > 0) {
 		$avaliacao->inserir();
 		echo "Sua avaliação está aguardando aprovação e será postado em breve!";
 	} else {

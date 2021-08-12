@@ -52,12 +52,12 @@ if ($logado == 1) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Todos os comentários aprovados</h1>
+            <h1>Todos os avaliaçãos aprovados</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Tela Inicial</a></li>
-              <li class="breadcrumb-item active">Comentários aprovados</li>
+              <li class="breadcrumb-item active">Avaliaçãos aprovados</li>
             </ol>
           </div>
         </div>
@@ -73,7 +73,7 @@ if ($logado == 1) {
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Todos os comentários aprovados</h3>
+                <h3 class="card-title">Todos os avaliaçãos aprovados</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -82,7 +82,7 @@ if ($logado == 1) {
                     <tr>
                       <th style="width: 10px">ID</th>
                       <th>Nome</th>
-                      <th>Comentário</th>
+                      <th>Avaliação</th>
                       <th style="width: 40px">Data/Hora</th>
                       <th style="width: 100px">Status</th>
                       <th style="width: 40px">Ações</th>

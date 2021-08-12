@@ -13,7 +13,7 @@
 		}
 
 		public function listar(){
-			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.data, usuario.nome, avaliacao.comentario, avaliacao.estrela 
+			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.datahora, usuario.nome, avaliacao.comentario, avaliacao.estrela 
 			FROM avaliacao INNER JOIN usuario ON usuario.id = avaliacao.id_usuario";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$resultado = $conexao->query($sql);
@@ -22,7 +22,7 @@
 		}
 		
 		public function listarPendentes(){
-			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.data, usuario.nome, avaliacao.comentario, avaliacao.estrela 
+			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.datahora, usuario.nome, avaliacao.comentario, avaliacao.estrela 
 			FROM avaliacao INNER JOIN usuario ON usuario.id = avaliacao.id_usuario WHERE avaliacao.status LIKE 'Pendente'";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$resultado = $conexao->query($sql);
@@ -32,7 +32,7 @@
 		}
 
 		public function listarAprovados(){
-			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.data, usuario.nome, avaliacao.comentario, avaliacao.estrela 
+			$sql = "SELECT avaliacao.id, avaliacao.status, avaliacao.datahora, usuario.nome, avaliacao.comentario, avaliacao.estrela 
 			FROM avaliacao INNER JOIN usuario ON usuario.id = avaliacao.id_usuario WHERE avaliacao.status LIKE 'Aprovado'";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$resultado = $conexao->query($sql);
@@ -43,7 +43,7 @@
 
 		public function inserir(){
 			$data = date('d/m/Y H:i');
-			$sql = "INSERT INTO avaliacao (id_usuario, comentario, datahora, qtd_estrela, status) VALUES (
+			$sql = "INSERT INTO avaliacao (id_usuario, comentario, datahora, estrela, status) VALUES (
 			  '".$this->idUsuario."' , '".$this->avaliacao."' , '".$data."' , '".$this->estrela."', 'Pendente')"; 
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$conexao->exec($sql);

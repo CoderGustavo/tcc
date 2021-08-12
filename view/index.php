@@ -309,7 +309,7 @@ if(isset($_SESSION['usuario_logado'])){
     <?php } else { } ?>
     <!-- End Delivery Section -->
 
-    <!-- ======= Sessão comentário ======= -->
+    <!-- ======= Sessão avaliação ======= -->
     <?php if ($logado == 1) {?>
       <section id="avaliacao" class="contact section-bg">
           <div class="container" data-aos="fade-up">
@@ -336,7 +336,7 @@ if(isset($_SESSION['usuario_logado'])){
                       </div>
                     </div>
                     <div class="form-group">
-                      <textarea class="form-control" id="avaliacao" name="avaliacao" rows="5" placeholder="Digite seu comentário aqui!"></textarea>
+                      <textarea class="form-control" id="avaliacao" name="avaliacao" rows="5" placeholder="Digite seu avaliação aqui!"></textarea>
                       <div class="validate"></div>
                     </div>
                     <div class="mb-3">
@@ -351,14 +351,14 @@ if(isset($_SESSION['usuario_logado'])){
           </div>
       </section>
     <?php } else { } ?>
-    <!-- Fim da sessão comentário -->
+    <!-- Fim da sessão avaliação -->
 
-    <!-- ======= Sessão Lista de Comentários ======= -->
+    <!-- ======= Sessão Lista de Avaliaçãos ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Comentários</h2>
+          <h2>Avaliaçãos</h2>
           <p>Avaliações</p>
         </div>
 
@@ -370,13 +370,13 @@ if(isset($_SESSION['usuario_logado'])){
               <span class="h4 text-uppercase"><?php echo explode(" ", $linha['nome'])[0];?></span>
               <br>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              <?php echo $linha['avaliacao'] ?>
+              <?php echo $linha['comentario'] ?>
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>                
             </p>
             <div class="img-data">
               <img src="assets/img/testimonials/testimonials-2.png" class="testimonial-img" alt="">
               <span class="testimonial-data-estrela">
-                <?php echo $linha['data']  ?>
+                <?php echo $linha['datahora']  ?>
                 <br>
                 <?php if ($linha['estrela'] == 1) {  ?>
                   <i class="fas fa-star text-warning"></i>
@@ -416,7 +416,7 @@ if(isset($_SESSION['usuario_logado'])){
 
       </div>
     </section>
-    <!-- Fim da sessão comentários  -->
+    <!-- Fim da sessão avaliaçãos  -->
 
     <!-- ======= Sessão Fotos ======= -->
     <section id="gallery" class="gallery section-bg">
