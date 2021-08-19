@@ -65,11 +65,10 @@
     }
 
     	public function aprovar(){
-		$sql = "UPDATE reserva SET 
-                    status = 'Aprovado'
-                WHERE idReserva = $this->idReserva";
-		$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
-		$conexao->exec($sql);
+			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
+			$sql = "UPDATE reserva SET status = 'Aprovado' WHERE id = '".$this->idReserva."'";
+			$conexao->exec($sql);
+			return $this->idReserva;
 		}
 		
 	}

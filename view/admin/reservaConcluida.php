@@ -95,7 +95,11 @@ if ($logado == 1) {
                       <td><?php echo $linha['datahora'] ?></td>
                       <td><?php echo $linha['numero_pessoas'] ?></td>
                       <td><?php echo $linha['observacao'] ?></td>
-                      <td class="teste badge badge-pill bg-success p-2"> <?php echo $linha['status'] ?> </td>
+                      <td> 
+                        <span class="teste badge badge-pill bg-success p-2">
+                          <?php echo $linha['status'] ?>
+                        </span>
+                      </td>
                       <td>
                         <i class="taman far fa-check text-light bg-secondary rounded-circle border border-dark p-1"></i>
                         <a href="#" data-toggle="modal" data-target="#excluirReserva<?php echo $linha['id'] ?>"><i class="taman fas fa-times text-light text-center bg-danger rounded-circle border border-dark p-1"></i></a>

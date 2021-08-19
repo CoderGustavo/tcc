@@ -19,5 +19,5 @@ if ($logado == null) {
 	$_SESSION['id_usuario'] = $logado['id'];
 	$_SESSION['senha_usuario'] = $logado['senha'];
 	$_SESSION['nome_usuario'] = $logado['nome'];
-	header('Location: /lanchonete');
+	header('Location: /tcc');
 }

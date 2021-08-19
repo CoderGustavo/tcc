@@ -121,7 +121,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-comments"></i>
               <p>
-                Avaliaçãos
+                Avaliações
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -129,13 +129,13 @@
               <li class="nav-item">
                 <a href="avaliacaoPendente.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Avaliaçãos pendentes</p>
+                  <p>Avaliações pendentes</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="avaliacaoAprovado.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Avaliaçãos aprovados</p>
+                  <p>Avaliações aprovados</p>
                 </a>
               </li>
               <li class="nav-item">

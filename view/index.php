@@ -231,7 +231,7 @@ if(isset($_SESSION['usuario_logado'])){
           <p>Peça seu delivery agora mesmo</p>
         </div>
 
-        <form action="../controller/delivery/delivery-salvar.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+        <form action="../controller/pedido/pedido-salvar.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
           <div class="form-row">
             <div class="col-lg-4 col-md-6 form-group">
               <input type="text" name="rua" class="form-control" id="rua" placeholder="Ex: Rua joãozinho" data-rule="minlen:4"  data-msg="Por favor, coloque seu logradouro">
@@ -353,66 +353,66 @@ if(isset($_SESSION['usuario_logado'])){
     <?php } else { } ?>
     <!-- Fim da sessão avaliação -->
 
-    <!-- ======= Sessão Lista de Avaliaçãos ======= -->
+    <!-- ======= Sessão Lista de Avaliações ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Avaliaçãos</h2>
+          <h2>Deixe seu feedback</h2>
           <p>Avaliações</p>
         </div>
 
         <div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
 
           <?php foreach($avaliacoes as $key => $linha){ ?>
-          <div class="testimonial-item">
-            <p class="text-center">
-              <span class="h4 text-uppercase"><?php echo explode(" ", $linha['nome'])[0];?></span>
-              <br>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              <?php echo $linha['comentario'] ?>
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>                
-            </p>
-            <div class="img-data">
-              <img src="assets/img/testimonials/testimonials-2.png" class="testimonial-img" alt="">
-              <span class="testimonial-data-estrela">
-                <?php echo $linha['datahora']  ?>
+            <div class="testimonial-item">
+              <p class="text-center">
+                <span class="h4 text-uppercase"><?php echo explode(" ", $linha['nome'])[0];?></span>
                 <br>
-                <?php if ($linha['estrela'] == 1) {  ?>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                <?php } else if ($linha['estrela'] == 2) {  ?>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                <?php   } else if ($linha['estrela'] == 3) {  ?>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                <?php } else if ($linha['estrela'] == 4 ){ ?>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star-alt text-warning"></i>
-                <?php } else { ?>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
-                <?php } ?>
-              </span>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                <?php echo $linha['comentario'] ?>
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>                
+              </p>
+              <div class="img-data">
+                <img src="assets/img/testimonials/testimonials-2.png" class="testimonial-img" alt="">
+                <span class="testimonial-data-estrela">
+                  <?php echo $linha['datahora']  ?>
+                  <br>
+                  <?php if ($linha['estrela'] == 1) {  ?>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                  <?php } else if ($linha['estrela'] == 2) {  ?>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                  <?php   } else if ($linha['estrela'] == 3) {  ?>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                  <?php } else if ($linha['estrela'] == 4 ){ ?>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star-alt text-warning"></i>
+                  <?php } else { ?>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                  <?php } ?>
+                </span>
+              </div>
             </div>
           <?php } ?>
-        </div>
 
       </div>
     </section>

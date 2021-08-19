@@ -3,6 +3,8 @@
 	require_once '../../model/Itens_pedido.php';
 	require_once '../../model/Cardapio.php';
 
+	session_start();
+
 	$cardapio= new Cardapio();
 	$card = $cardapio->listarCardapio();
 
@@ -39,6 +41,7 @@
 			$itens_pedido->quantidade = $qtd[$indice];
 
 			$itens_pedido->inserir();
+			echo "Pedido realizado com sucesso, cheque seu pedido na sua área de cliente.";
 		}
 		
 	}else{

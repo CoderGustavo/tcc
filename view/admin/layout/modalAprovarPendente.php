@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Não, deixa aí</button>
-        <a href="../../controller/avaliacao/avaliacao-aprovar.php?id=<?php echo $linha['id'] ?>&link=../../view/admin/avaliacaoTotal.php" class="btn btn-success"> Sim, desejo </a>
+        <a href="../../controller/avaliacao/avaliacao-aprovar.php?id=<?php echo $linha['id'] ?>&link=../../view/admin/avaliacaoPendente.php" class="btn btn-success"> Sim, desejo </a>
       </div>
     </div>
   </div>

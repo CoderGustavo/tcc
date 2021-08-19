@@ -58,7 +58,7 @@ if ($logado == 1) {
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Tela Inicial</a></li>
-              <li class="breadcrumb-item active">Avaliaçãos pendentes</li>
+              <li class="breadcrumb-item active">Avaliações pendentes</li>
             </ol>
           </div>
         </div>

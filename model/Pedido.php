@@ -57,18 +57,17 @@
 			  '".$this->idEndereco."' , '".$this->idUsuario."' , 'pendente' , '".$this->formaPagamento."' , '".$this->total."' , '".$this->obs."')";
 			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 			$conexao->exec($sql); 
-			echo "Pedido realizado com sucesso, cheque seu pedido na sua área de cliente.";
 		}
 
 		public function atualizar(){
 			$pdo = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
-			$stmt = $pdo->prepare("UPDATE delivery SET status = :param1 WHERE id = :id");
+			$stmt = $pdo->prepare("UPDATE pedido SET status = :param1 WHERE id = :id");
 			if($this->status == 'Pendente'){
 				$stmt->bindValue(':param1', 'Em Preparo');
 			}else if($this->status == 'Em Preparo'){
 				$stmt->bindValue(':param1', 'Entregue');
 			}
 			$stmt->bindValue(':id', $this->id);
-			$run = $stmt->execute();
+			$stmt->execute();
 		}
 	}

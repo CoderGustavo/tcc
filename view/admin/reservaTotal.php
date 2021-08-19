@@ -99,9 +99,17 @@ if ($logado == 1) {
                       <td><?php echo $linha['observacao'] ?></td>
                   
                          <?php if ($linha['status'] == "Pendente") { ?>
-                          <td class="teste badge badge-pill bg-warning p-2"> <?php echo $linha['status'] ?> </td>
+                          <td> 
+                            <span class="teste badge badge-pill bg-warning p-2">
+                              <?php echo $linha['status'] ?>
+                            </span>
+                          </td>
                       <?php } else { ?>
-                        <td class="teste badge badge-pill bg-success p-2"> <?php echo $linha['status'] ?> </td>
+                        <td>
+                          <span class="teste badge badge-pill bg-success p-2">
+                            <?php echo $linha['status'] ?>
+                          </span>
+                        </td>
                       <?php } ?>
                       <td>
                       <?php if ($linha['status'] == "Pendente") { ?>
