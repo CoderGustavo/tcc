@@ -1,3 +1,18 @@
+.menu-conta{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #fcb94e;
+    width: 100%;
+    border-radius: 1rem;
+    top: 3rem;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.menu-conta li a{
+    line-height: 4rem;
+    font-size: 14pt;
+}
+
 .metodopagamento input{
     display: none;
 }
@@ -13,8 +28,6 @@
     background: #fcb94e !important;
     border: 1px solid #ffffff;
 }
-
-
 .itempedido{
     position: relative;
     height: 10vh;
@@ -51,3 +64,8 @@
     bottom: 0;
     width: 50%;
 }
+.stars{
+	cursor: pointer;
+	transition: .5s;
+}
+

@@ -19,8 +19,8 @@ if ($logado == 1) {
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
-    <?php include("layout/modalAprovarTotal.php"); ?>
-    <?php include("layout/modalExcluirTotal.php"); ?>
+    <?php include("layout/modalAprovarAvaliacao.php"); ?>
+    <?php include("layout/modalExcluirAvaliacao.php"); ?>
 <div class="wrapper">
   <!-- Navbar -->
   <?php 

@@ -1,41 +1,24 @@
  <?php
     require_once '../../model/Usuario.php';
     $usuarioLogado = new Usuario();
-    $usuario = $usuarioLogado->ListarUsuarioLogado($_SESSION['id_usuario']);
+    $usuario = $usuarioLogado->ListarLogado($_SESSION['id_usuario']);
  ?> 
 
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link d-flex justify-content-center">
+    <a href="index.php" class="brand-link border-0">
       <img src="../assets/img/favicon1.png" alt="AdminLTE Logo" class="brand-image">
       <span class="brand-text font-weight-light">Administração</span>
     </a>
     
-
+    <a href="#" class="brand-link">
+      <img src="dist/img/perfil.png" alt="AdminLTE Logo" class="brand-image">
+      <span class="brand-text text-light text-uppercase"><?php echo explode(" ", $usuario['nome'])[0] ?></span>
+    </a>
+    
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
-        <div class="image">
-          <img src="dist/img/perfil.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
-        </div>
-        <div class="info text-uppercase">
-          <a class="d-block"> <?php echo explode(" ", $usuario['nome'])[0] ?></a>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -52,7 +35,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
-                Usuários
+                Clientes
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -186,6 +169,14 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="../" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Inicio
+              </p>
+            </a>
           </li>
       </nav>
       <!-- /.sidebar-menu -->

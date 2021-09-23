@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Não, deixa aí</button>
-        <a href="../../../controller/usuario-excluir.php?id=<?php echo $linha['id'] ?>&link=../../view/admin/listaCliente.php" class="btn btn-success"> Sim, desejo </a>
+        <a href="../../controller/usuario/usuario-excluir.php?id=<?php echo $linha['id'] ?>&link=../../view/admin/listaCliente.php" class="btn btn-success"> Sim, desejo </a>
       </div>
     </div>
   </div>

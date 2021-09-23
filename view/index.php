@@ -6,6 +6,7 @@ $avaliacao = new Avaliacao();
 $avaliacoes = $avaliacao->listar();
 session_start();
 $logado = 0;
+$admin = 1;
 if(isset($_SESSION['usuario_logado'])){
   $logado = $_SESSION['usuario_logado'];
 }
@@ -41,14 +42,9 @@ if(isset($_SESSION['usuario_logado'])){
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/styleDelivery.css" rel="stylesheet">
+  <link href="assets/css/stylePersonalizado.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Restaurantly - v1.1.0
-  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>
@@ -79,9 +75,21 @@ if(isset($_SESSION['usuario_logado'])){
           <li><a href="#book-a-table">Reserva de Mesa</a></li>
             <li><a href="#delivery">Delivery</a></li>
           <li><a href="#about">Sobre</a></li>
-            <li class="book-a-table text-center"><a href="../controller/usuario/sair-usuario.php">Sair</a></li>
+          <li class="conta text-center">
+            <a href="" class="btn-minhaconta">
+              Minha conta <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="menu-conta">
+              <li><a href="#">Minha conta</a></li>
+              <li><a href="#">Meus Pedidos</a></li>
+              <?php if ($admin == 1){?>
+                <li><a href="admin/index.php">Admin</a></li>
+              <?php } ?>
+              <li><a href="../controller/usuario/sair-usuario.php">Sair</a></li>
+            </ul>
+          </li>
           <?php } else { ?>
-            <li class="book-a-table text-center"><a href="login.php">Entrar</a></li>
+            <li class="conta text-center"><a href="login.php" class="btn-entrar">Entrar</a></li>
           <?php } ?>
         </ul>
       </nav><!-- .nav-menu -->
@@ -121,19 +129,34 @@ if(isset($_SESSION['usuario_logado'])){
         </div>
 
 
-        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-          <?php foreach ($card as $lista): ?>
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src=" <?php echo $lista ['imagem']?> " class="menu-img" alt="" height="70" width="70">
-            <div class="menu-content">
-              <?php echo $lista ['nome']?><span><?php echo 'R$' .$lista ['preco']?></span>
+        <div class="row menu-container mb-2" data-aos="fade-up" data-aos-delay="200">
+            <?php foreach ($card as $lista): ?>
+            <div class="col-lg-6 menu-item">
+              <div class="row">
+                <div class="col-lg-2">
+                  <img src="assets/img/menu/lanche1.jpg" class="menu-img" alt="">
+                </div>
+                <div class="col-lg-10 row">
+                  <a href="" class="col-lg-6 item-nome">
+                    <?php echo $lista ['nome']?>
+                  </a>
+                  <div class="col-lg-6 text-right">
+                    <span class="item-preco">
+                      <?php echo 'R$' .$lista ['preco']?>
+                    </span>
+                  </div>
+                  <div class="col-lg-12">
+                    <p class="item-ingrediente text-truncate">
+                    <?php foreach($lista["ingredientes"] as $a){?>
+                      <?php echo $a['nome']?>,
+                    <?php } ?>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="menu-ingredients">
-              <?php echo $lista ['descricao']?> 
-            </div>
+              <?php endforeach; ?>
           </div>
-            <?php endforeach; ?>
-        </div>
       </div>
 
     </section><!-- Fim da  Sessão cardápio -->
@@ -231,76 +254,59 @@ if(isset($_SESSION['usuario_logado'])){
           <p>Peça seu delivery agora mesmo</p>
         </div>
 
-        <form action="../controller/pedido/pedido-salvar.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-          <div class="form-row">
-            <div class="col-lg-4 col-md-6 form-group">
-              <input type="text" name="rua" class="form-control" id="rua" placeholder="Ex: Rua joãozinho" data-rule="minlen:4"  data-msg="Por favor, coloque seu logradouro">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-3 col-md-6 form-group">
-              <input type="text" name="bairro" class="form-control" id="bairro" placeholder="Insira o nome do seu bairro" data-rule="minlen:4"  data-msg="Por favor, coloque seu bairro">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-3 col-md-6 form-group">
-              <input type="text" name="complemento" class="form-control" id="complemento" placeholder="Insira o seu complemento">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-2 col-md-6 form-group">
-              <input type="number" name="num" class="form-control" id="numero" placeholder="Insira o numero de sua casa" data-rule="minlen:1"  data-msg="Por favor, coloque o número de sua casa">
-              <div class="validate"></div>
-            </div>
-          </div>
-          <div class="pedido">
-            <label for="pedido">Escolha seu pedido:</label>
-            <ul>
-                <div class="listapedidos row">
-                    <?php foreach($card as $indice => $lista):?>
-                      <div class="itempedido col-lg-6">
-                          <div class="pedidoselect">
-                              <input type="checkbox" name="pedido<?php echo $indice?>" id="<?php echo $lista['nome']?>" value="<?php echo $lista['nome']?>">
-                              <label for="<?php echo $lista['nome']?>">
-                                  <li class="align-middle">
-                                      <span><?php echo $lista['nome']?></span>
-                                      <div class="precoDelivery col-lg-4">
-                                        <span>R$<?php echo $lista['preco']?></span>
-                                      </div>
-                                  </li>
-                              </label>
-                              <div class="qtds col-lg-4">
-                                  <span>Qtd: </span>
-                                  <input type="number" name="qtd<?php echo $indice?>" class="inqtds" value='0'>
-                              </div>
-                              <input type="hidden" name="preco<?php echo $indice?>" value="<?php echo $lista['preco']?>">
-                          </div>
-                      </div>
-                    <?php endforeach; ?>
+        <form action="../controller/pedido/pedido-salvar.php" method="post" class="php-email-form menu" data-aos="fade-up" data-aos-delay="100">
+          <div class="row menu-container mb-2" data-aos="fade-up" data-aos-delay="200">
+            <?php foreach ($card as $key => $lista): ?>
+              <div class="col-lg-6 menu-item">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <img src="assets/img/menu/lanche1.jpg" class="menu-img" alt="">
+                  </div>
+                  <div class="col-lg-10 row">
+                    <a href="" class="col-lg-6 item-nome">
+                      <?php echo $lista ['nome']?>
+                    </a>
+                    <div class="col-lg-6 text-right">
+                      <span class="item-preco">
+                        <?php echo 'R$' .$lista ['preco']?>
+                      </span>
+                    </div>
+                    <div class="col-lg-12">
+                      <p class="item-ingrediente">
+                        Selecione para ver os ingredientes
+                      </p>
+                    </div>
+                  </div>
                 </div>
-            </ul>     
-          </div>
-          <div class="metodopagamento">
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                <p>Método de pagamento:</p>
-                <div>
-                  <input type="checkbox" class="btn-check" id="btn-check" name="formapagamento" autocomplete="off" checked>
-                  <label class="btn btn-amarelin active list-metodo1" for="btn-check">Dinheiro</label>
-                  
-                  <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                  <label class="btn btn-amarelin list-metodo2" for="btn-check">Outras Formas</label>
+                <div class="row">
+                  <?php foreach($lista["ingredientes"] as $a){?>
+                    <div class="col-lg-6 p-2 text-center">
+                      <div class="w-100 bg-warning rounded d-flex justify-content-between p-2">
+                        <div>
+                          <?php echo $a['nome']?>
+                        </div>
+                        <div>
+                          <i class="far fa-trash"></i>
+                        </div>
+                      </div>
+                    </div>
+                  <?php } ?>
+                  <div class="col-12">
+                    <input type="number" placeholder="Qtd.: " class="w-75 m-auto form-control">
+                  </div>
                 </div>
               </div>
-            </div>
-        </div>
-          <div class="form-group">
-            <textarea class="form-control" id="obs" name="obs" rows="5" placeholder="Observações, Ex: Retire o hamburguer do lanche X-Burguer"></textarea>
-            <div class="validate"></div>
+            <?php endforeach; ?>
           </div>
+          
+          <a class="button" href="#add_endereco" data-toggle="modal">Adicionar Endereço</a>
 
           <div class="mb-3">
             <div class="loading">Carregando</div>
             <div class="error-message"></div>
             <div class="sent-message">Aguarde, entregaremos assim que possivel</div>
           </div>
+
           <div class="text-center"><button type="submit">Pedir</button></div>
         </form>
 
@@ -358,8 +364,8 @@ if(isset($_SESSION['usuario_logado'])){
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Deixe seu feedback</h2>
-          <p>Avaliações</p>
+          <h2>Avaliações</h2>
+          <p>Dê uma olhadinha em nossas avaliações</p>
         </div>
 
         <div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
@@ -539,27 +545,28 @@ if(isset($_SESSION['usuario_logado'])){
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
-      <div class="container">
+      <div class="container-xl">
         <div class="row">
 
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
+          <div class="col-md-4 text-center">
               <h3>Delicious Hamburgueria</h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Telefone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> delicioushamb@gmail.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-              </div>
+              <img src="assets/img/favicon1.png" alt="logo" title="logo Delicious Hamburgueria" class="img-fluid w-25">
+          </div>
+          <div class="col-md-4 text-center">
+            <p>
+              A108 Adam Street <br>
+              NY 535022, USA<br><br>
+              <strong>Telefone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> delicioushamb@gmail.com<br>
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
             </div>
           </div>
-            </div>
-
         </div>
       </div>
     </div>
@@ -573,7 +580,7 @@ if(isset($_SESSION['usuario_logado'])){
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-        Desenvolvido por <a href="https://bootstrapmade.com/">BootstrapMade (Grupo 9, rs)</a>
+        Desenvolvido por <a href="">Time Delicious</a>
       </div>
     </div>
   </footer><!-- End Footer -->

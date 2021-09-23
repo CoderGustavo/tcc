@@ -27,7 +27,7 @@ if ($logado == 1) {
 <body class="hold-transition sidebar-mini">
 
   <?php
-    include("layout/modalExcluirReservaConcluida.php");
+    include("layout/modalExcluirReserva.php");
   ?>
 <div class="wrapper">
   <!-- Navbar -->

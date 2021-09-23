@@ -26,7 +26,7 @@ if ($logado == 1) {
 <body class="hold-transition sidebar-mini">
 
   <?php
-    include("layout/modalAtualizarPedidoTotal.php");
+    include("layout/modalAtualizarPedido.php");
   ?>
 
 <div class="wrapper">

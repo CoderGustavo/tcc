@@ -1,7 +1,15 @@
 <?php
 class Admin{
 
-    public $id, $nome, $email, $senha, $telefone, $idUsuario, $confirmarsenha, $usuario, $niveis;
+    public $id;
+    public $nome;
+    public $email;
+    public $senha;
+    public $telefone;
+    public $idUsuario;
+    public $confirmarsenha;
+    public $usuario;
+    public $niveis;
 
 
     public function InserirAdmin() {

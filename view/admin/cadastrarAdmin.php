@@ -82,7 +82,7 @@ if ($logado == 1) {
           <input type="text" name="nome" id="" required="required" class="form-control mb-3" placeholder="Nome" />
 
           <label for="inputEmail" class="sr-only">E-mail</label>
-          <input type="text" name="endereco" id="" required="required" class="form-control mb-3" placeholder="Endereço" />
+          <input type="text" name="email" id="" required="required" class="form-control mb-3" placeholder="E-mail" />
 
           <label for="inputEmail" class="sr-only">Telefone</label>
           <input type="text" name="telefone" id="" required="required" class="form-control mb-3" placeholder="Telefone" />

@@ -1,7 +1,7 @@
 <?php 
   require_once '../../model/Usuario.php';
   $usuario = new Usuario();
-  $lista = $usuario->ListarCliente();
+  $lista = $usuario->Listar();
   session_start();
   $logado = $_SESSION['usuario_logado'];
 if ($logado == 1) {

@@ -25,11 +25,11 @@ if ($logado == 1) {
 </head>
 <body class="hold-transition sidebar-mini">
   <?php
-    include("layout/modalAprovarReservaTotal.php");
+    include("layout/modalAprovarReserva.php");
   ?>
 
   <?php
-    include("layout/modalExcluirReservaTotal.php");
+    include("layout/modalExcluirReserva.php");
   ?>
 <div class="wrapper">
   <!-- Navbar -->
