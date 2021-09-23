@@ -144,3 +144,10 @@
     visibility: visible;
     border: 2px solid white;
 }
+#addendereco_modal input{
+    color: #fff;
+}
+#addendereco_modal input:focus{
+    background-color: transparent !important;
+    box-shadow: none;
+}

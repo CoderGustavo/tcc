@@ -1,7 +1,7 @@
 <?php 
 require_once '../model/Avaliacao.php';
 require_once '../model/Cardapio.php';
-include_once 'assets/modals/delivery.html';
+include_once 'assets/modals/delivery.php';
 $cardapio= new Cardapio();
 $card = $cardapio->listarCardapio();
 $avaliacao = new Avaliacao();

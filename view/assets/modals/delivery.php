@@ -1,3 +1,10 @@
+<?php
+  require_once '../model/Endereco.php';
+  $endereco = new Endereco();
+  $lista = $endereco->listar();
+?>
+
+
 <div class="modal fade" id="deliverymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content bg-darkdark">
@@ -8,6 +15,7 @@
           </button>
         </div>
         <div class="modal-body row">
+          <?php foreach($lista as $key => $linha):?>
           <div class="col-lg-6 p-2">
             <label class="container border border-primarycolor rounded" for="end1">
                 <div class="row mt-2">
@@ -20,34 +28,15 @@
                         </a>
                     </div>
                     <div class="col-12">
-                        <p class="m-1">Rua:</p>
-                        <p class="m-1">Bairro:</p>
-                        <p class="m-1">Número:</p>
-                        <p class="m-1">Referência:</p>
+                        <p class="m-1">Rua: <?php echo $linha["logradouro"]?></p>
+                        <p class="m-1">Bairro: <?php echo $linha["numero"]?></p>
+                        <p class="m-1">Número: <?php echo $linha["bairro"]?></p>
+                        <p class="m-1">Referência: <?php echo $linha["referencia"]?></p>
                     </div>
                 </div>
             </label>
           </div>
-          <div class="col-lg-6 p-2">
-            <label class="container border border-primarycolor rounded" for="end2">
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <input type="radio" name="endereco" id="end2">
-                    </div>
-                    <div class="col-6 text-right">
-                        <a href="" class="text-primarycolor">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </div>
-                    <div class="col-12">
-                        <p>Rua:</p>
-                        <p>Bairro:</p>
-                        <p>Número:</p>
-                        <p>Referência:</p>
-                    </div>
-                </div>
-            </label>
-          </div>
+          <?php endforeach; ?>
         </div>
         <div class="modal-footer border-top-0">
           <button type="button" class="btn btn-add-end" data-toggle="modal" data-target="#addendereco_modal">Adicionar novo endereço</button>
@@ -77,7 +66,7 @@
         </div>
         <div class="col-12 mb-3">
           <label for="txtnumero">Número: </label>
-          <input type="text" placeholder="Digite seu Número: " id="txtnumero" class="w-100 m-auto form-control rounded bg-darkdark border border-primarycolor">
+          <input type="text" placeholder="Digite seu número: " id="txtnumero" class="w-100 m-auto form-control rounded bg-darkdark border border-primarycolor">
         </div>
         <div class="col-12 mb-3">
           <label for="txtreferencia">Referência: </label>
