@@ -1,5 +1,7 @@
-<?php require_once '../model/Avaliacao.php';
+<?php 
+require_once '../model/Avaliacao.php';
 require_once '../model/Cardapio.php';
+include_once 'assets/modals/delivery.html';
 $cardapio= new Cardapio();
 $card = $cardapio->listarCardapio();
 $avaliacao = new Avaliacao();
@@ -247,6 +249,7 @@ if(isset($_SESSION['usuario_logado'])){
     <!-- ======= Delivery Section ======= -->
     <?php if ($logado == 1) {?>
     <section id="delivery" class="book-a-table">
+      
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -255,51 +258,57 @@ if(isset($_SESSION['usuario_logado'])){
         </div>
 
         <form action="../controller/pedido/pedido-salvar.php" method="post" class="php-email-form menu" data-aos="fade-up" data-aos-delay="100">
-          <div class="row menu-container mb-2" data-aos="fade-up" data-aos-delay="200">
+          <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
             <?php foreach ($card as $key => $lista): ?>
-              <div class="col-lg-6 menu-item">
-                <div class="row">
-                  <div class="col-lg-2">
-                    <img src="assets/img/menu/lanche1.jpg" class="menu-img" alt="">
-                  </div>
-                  <div class="col-lg-10 row">
-                    <a href="" class="col-lg-6 item-nome">
-                      <?php echo $lista ['nome']?>
-                    </a>
-                    <div class="col-lg-6 text-right">
-                      <span class="item-preco">
-                        <?php echo 'R$' .$lista ['preco']?>
+              <div class="col-lg-6 menu-item p-2">
+                <div class="border border-primarycolor p-2 rounded">
+                  <div class="row item-delivery" data-toggle="collapse" data-target="#ingredientes<?php echo $key?>">
+                    <div class="col-lg-2">
+                      <img src="assets/img/menu/lanche1.jpg" class="menu-img" alt="">
+                    </div>
+                    <div class="col-lg-10 row">
+                      <span class="col-lg-6 item-nome text-uppercase font-weight-bold" style="font-size: 14pt;">
+                        <?php echo $lista ['nome']?>
                       </span>
-                    </div>
-                    <div class="col-lg-12">
-                      <p class="item-ingrediente">
-                        Selecione para ver os ingredientes
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <?php foreach($lista["ingredientes"] as $a){?>
-                    <div class="col-lg-6 p-2 text-center">
-                      <div class="w-100 bg-warning rounded d-flex justify-content-between p-2">
-                        <div>
-                          <?php echo $a['nome']?>
-                        </div>
-                        <div>
-                          <i class="far fa-trash"></i>
-                        </div>
+                      <div class="col-lg-6 text-right">
+                        <span class="item-preco">
+                          <?php echo 'R$' .$lista ['preco']?>
+                        </span>
+                      </div>
+                      <div class="col-lg-12">
+                        <p class="item-ingrediente">
+                          Selecione para ver os ingredientes
+                        </p>
                       </div>
                     </div>
-                  <?php } ?>
-                  <div class="col-12">
-                    <input type="number" placeholder="Qtd.: " class="w-75 m-auto form-control">
+                  </div>
+                  <div class="container collapse" id="ingredientes<?php echo $key ?>">
+                    <div class="row">
+                      <?php foreach($lista["ingredientes"] as $a){?>
+                        <div class="col-lg-6 p-2 text-center">
+                          <div class="w-100 bg-primarycolor rounded d-flex justify-content-between p-2">
+                            <div>
+                              <?php echo $a['nome']?>
+                            </div>
+                            <div>
+                              <?php if($a['retirar'] == "sim"){?>
+                              <a href="" class="text-light">
+                                <i class="far fa-trash"></i>
+                              </a>
+                              <?php } ?>
+                            </div>
+                          </div>
+                        </div>
+                      <?php } ?>
+                    </div>
+                    <div class="col-12">
+                      <input type="number" placeholder="Qtd.: " class="w-100 m-auto form-control rounded">
+                    </div>
                   </div>
                 </div>
               </div>
             <?php endforeach; ?>
           </div>
-          
-          <a class="button" href="#add_endereco" data-toggle="modal">Adicionar Endereço</a>
 
           <div class="mb-3">
             <div class="loading">Carregando</div>
@@ -307,7 +316,8 @@ if(isset($_SESSION['usuario_logado'])){
             <div class="sent-message">Aguarde, entregaremos assim que possivel</div>
           </div>
 
-          <div class="text-center"><button type="submit">Pedir</button></div>
+          <div class="text-center"><button type="button" data-toggle="modal" data-target="#deliverymodal">Continuar</button></div>
+          
         </form>
 
       </div>
@@ -349,6 +359,7 @@ if(isset($_SESSION['usuario_logado'])){
                       <div class="loading">Loading</div>
                       <div class="error-message"></div>
                     </div>
+
                     <div class="text-center"><button type="submit">Comentar</button></div>
 
                   </form>
