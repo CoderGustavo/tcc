@@ -9,8 +9,8 @@ class Endereco
 	public $referencia;
 	public $bairro;
 
- 	public function listar(){
-		$sql = "SELECT * FROM endereco WHERE id_Usuario = ".$this->id_Usuario.";";
+ 	public function listar($id){
+		$sql = "SELECT * FROM endereco WHERE id_Usuario = $id;";
 		$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
 		$resultado = $conexao->query($sql);
 		$lista = $resultado->fetchAll();

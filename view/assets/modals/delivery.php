@@ -1,7 +1,8 @@
 <?php
   require_once '../model/Endereco.php';
+  session_start();
   $endereco = new Endereco();
-  $lista = $endereco->listar();
+  $lista = $endereco->listar($_SESSION["id_usuario"]);
 ?>
 
 
