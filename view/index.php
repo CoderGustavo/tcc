@@ -6,7 +6,6 @@ $cardapio= new Cardapio();
 $card = $cardapio->listarCardapio();
 $avaliacao = new Avaliacao();
 $avaliacoes = $avaliacao->listar();
-session_start();
 $logado = 0;
 $admin = 1;
 if(isset($_SESSION['usuario_logado'])){
