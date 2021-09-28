@@ -25,7 +25,7 @@
 	
 		$pedido = new Pedido();
 
-		$pedido->idUsuario = $_SESSION["id_usuario"];
+		$pedido->idUsuario = $_SESSION["usuario"]["id"];
 		$pedido->idEndereco = 1;
 		$pedido->formaPagamento = "dinheiro";
 		$pedido->obs = $_POST['obs'];

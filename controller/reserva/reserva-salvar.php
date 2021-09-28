@@ -16,7 +16,7 @@
 		echo "<strong> ERRO </strong> Digite a hora corretamente!";
 	}
 
-	$reserva->idUsuario = $_SESSION['id_usuario'];
+	$reserva->idUsuario = $_SESSION['usuario']["id"];
 	$reserva->datahora = $data." ".$hora;
 	$reserva->numeropessoas = $_POST['numeropessoas'];
 	$reserva->obs = $_POST['obs'];

@@ -4,8 +4,8 @@
   $pedido = new Pedido();
   $lista = $pedido->listar();
   session_start();
-  $logado = $_SESSION['usuario_logado'];
-if ($logado == 1) {
+$logado = $_SESSION['usuario'];
+if (isset($logado["niveis_acesso"])) {
 ?>
 <html lang="en">
 <head>
@@ -18,7 +18,7 @@ if ($logado == 1) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
-  <link rel="stylesheet" href="https://static.fontawesome.com/css/fontawesome-app.css">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link href="../../assets/img/favicon1.png" rel="icon">
@@ -132,14 +132,14 @@ if ($logado == 1) {
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="../assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<script src="../assets/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>
 </html>
 
-<?php } else { header('Location: ../usuario-nao-logado.php'); } ?>
+<?php } else { $_SESSION["acesso_restrito"] = "Não logado";header('Location: /tcc'); } ?>

@@ -13,57 +13,6 @@
     font-size: 14pt;
 }
 
-.metodopagamento input{
-    display: none;
-}
-.metodopagamento ul{
-    list-style: none;
-}
-.metodopagamento li{
-    font-size: 15pt;
-    background-color: rgba(0, 0, 0, 0.096);
-}
-
-.metodopagamento .active{
-    background: #fcb94e !important;
-    border: 1px solid #ffffff;
-}
-.itempedido{
-    position: relative;
-    height: 10vh;
-    cursor: pointer;
-}
-.itempedido input[type='checkbox']{
-    display: none;
-}
-.pedido .active{
-    background-color: var(--warning);
-}
-.pedidoselect li{
-    list-style: none;
-    line-height: 10vh;
-}
-.precoDelivery, .qtds{
-    position: absolute;
-    right: 0;
-    width: 30%;
-    line-height: 10vh;
-    top: 0vh;
-}
-.precoDelivery, .qtds span{
-    font-size: 15pt;
-    line-height: 5vh;
-}
-.inqtds{
-    line-height: 5vh;
-    margin-bottom: 2.5vh;
-}
-.itempedido input[type='number']{
-    position: absolute;
-    z-index: 9999;
-    bottom: 0;
-    width: 50%;
-}
 .stars{
 	cursor: pointer;
 	transition: .5s;
@@ -115,8 +64,6 @@
     border: 1px solid #cda45e;
     transition: 1s linear;
 }
-
-
 #deliverymodal input[type='radio']:after {
     width: 15px;
     height: 15px;
@@ -130,7 +77,6 @@
     visibility: visible;
     border: 2px solid white;
 }
-
 #deliverymodal input[type='radio']:checked:after {
     width: 15px;
     height: 15px;
@@ -144,10 +90,27 @@
     visibility: visible;
     border: 2px solid white;
 }
+#deliverymodal label.container{
+    cursor: pointer;
+}
+.endereco-item:hover{
+    border: 2px solid #cda45e;
+    box-shadow: 0px 0px 10px 0px #CDA45E;
+}
 #addendereco_modal input{
     color: #fff;
 }
-#addendereco_modal input:focus{
-    background-color: transparent !important;
-    box-shadow: none;
+input, textarea{
+    background-color: #0c0b09 !important;
+    box-shadow: none !important;
+    border: 1px solid #0c0b09 !important;
+    box-sizing: border-box;
+}
+input:focus, input:hover, textarea:focus, textarea:hover{
+    background-color: #0c0b09 !important;
+    box-shadow: none !important;
+    border: 1px solid #cda45e !important;
+}
+.btn-formapagamento{
+    cursor: pointer;
 }

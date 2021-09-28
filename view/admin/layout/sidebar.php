@@ -1,20 +1,19 @@
  <?php
     require_once '../../model/Usuario.php';
-    $usuarioLogado = new Usuario();
-    $usuario = $usuarioLogado->ListarLogado($_SESSION['id_usuario']);
+    $usuario = $_SESSION['usuario'];
  ?> 
 
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link border-0">
+    <a href="index.php" class="brand-link border-0 text-center">
       <img src="../assets/img/favicon1.png" alt="AdminLTE Logo" class="brand-image">
-      <span class="brand-text font-weight-light">Administração</span>
+      <span class="brand-text font-weight-bold text-uppercase">Administração</span>
     </a>
     
     <a href="#" class="brand-link">
       <img src="dist/img/perfil.png" alt="AdminLTE Logo" class="brand-image">
-      <span class="brand-text text-light text-uppercase"><?php echo explode(" ", $usuario['nome'])[0] ?></span>
+      <span class="brand-text text-light text-capitalize"><?php echo explode(" ", $usuario['nome'])[0] ?></span>
     </a>
     
     <!-- Sidebar -->

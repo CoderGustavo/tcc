@@ -7,7 +7,7 @@
 
 	$avaliacao->estrela = $_POST['estrela'];
 	$avaliacao->avaliacao = $_POST['avaliacao'];
-	$avaliacao->idUsuario = $_SESSION['id_usuario'];
+	$avaliacao->idUsuario = $_SESSION['usuario']["id"];
 
 	$estrela = $_POST['estrela'];
 

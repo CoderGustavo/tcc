@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['usuario_logado'] = 0;
+$_SESSION['usuario'] = null;
 session_destroy();
 header('Location: ../../view/index.php');
 ?>

@@ -217,45 +217,16 @@
     aos_init();
   });
 
-  $('.itempedido .qtds').hide();
+  $(".btn-formapagamento.div-pix").find(".position-absolute").removeClass("d-none");
 
-  $('.itempedido label').on('click', function(){
-      $(this).closest('.itempedido').click();
-  });
-  $('.itempedido p').on('click', function(){
-      $(this).closest('.itempedido').click();
-  });
-  $('.itempedido').on('click', function(){
-    
-      if($(this).hasClass("active")){
-        
-        $(this).find("input[type='checkbox']").prop('checked', false);
-        $(this).removeClass("active");
-        $(this).find('.qtds input').val(0);
-        $(this).find('.qtds').hide(0);
-        $(this).find('.precoDelivery').show(0);
-      }else{
-        $(this).find("input[type='checkbox']").prop('checked',true);
-        $(this).addClass("active");
-        $(this).find('.qtds input').val(1);
-        $(this).find('.precoDelivery').hide(0);
-        $(this).find('.qtds').show(0);
-      }
-      
-  });
-
-  $('.list-metodo1').click(function(){
-    $(this).addClass("active");
-    $(".list-metodo2").removeClass("active")
-  });
-  
-  $('.list-metodo2').click(function(){
-    $(this).addClass("active");
-    $(".list-metodo1").removeClass("active")
+  $(".btn-formapagamento").on('click',function(){
+    $(".btn-formapagamento").find(".position-absolute").addClass("d-none");
+    $(this).find(".position-absolute").removeClass("d-none");
   });
 })(jQuery);
 
 $(document).ready(function(){
+
   $("#data").mask("99/99/9999");
   $("#hora").mask("99h99");
   

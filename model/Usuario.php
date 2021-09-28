@@ -24,14 +24,6 @@ class Usuario{
         return $lista;
     }
 
-    public function ListarLogado($id) { 
-        $sql = "SELECT * FROM usuario where id = '$id'";
-        $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
-        $resultado = $conexao->query($sql);
-        $lista = $resultado->fetch();
-        return $lista;
-    }   
-
     public function atualizar($id){
         $sql = "UPDATE usuario SET email = '$this->email' ,telefone =  '$this->telefone' ,endereco = '$this->endereco' WHERE id = $id ";
         $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
@@ -44,11 +36,14 @@ class Usuario{
         $conexao->exec($sql);
     }
 
-    public function LogarUsuario($email, $senha){
-        $query = "SELECT * FROM usuario WHERE email='$email' and senha='$senha'";
+    public function Logar($email, $senha){
         $conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
-        $resultado = $conexao->query($query);
-        $logado = $resultado->fetch();
+        $query = "SELECT usuario.id, usuario.nome, usuario.email, usuario.telefone, admin.niveis_acesso FROM usuario LEFT JOIN admin ON admin.id_usuario=usuario.id WHERE usuario.email=:email and usuario.senha=:senha";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':senha', $senha);
+        $stmt->execute();
+        $logado = $stmt->fetch();
         return $logado;
     }
 

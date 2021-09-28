@@ -10,6 +10,15 @@
 			$this->idDelivery = $idDelivery;
 		}
 	}
+		public function show($usuario){
+			$conexao = new PDO('mysql:host=127.0.0.1;dbname=lanchonete2', 'root', '');
+			$sql = "SELECT pedido.id, pedido.total, pedido.status FROM pedido INNER JOIN usuario ON pedido.id_usuario = usuario.id WHERE :id_usuario";
+			$stmt = $conexao->prepare($sql);
+			$stmt->bindValue(":id_usuario", $usuario["id"]);
+			$stmt->execute();
+			$lista = $stmt->fetchAll();
+			return $lista;
+		}
 
 		public function listar(){
 			$sql = "SELECT pedido.id, pedido.total, pedido.status, pedido.forma_pagamento, pedido.entrega, usuario.nome FROM pedido INNER JOIN usuario ON pedido.id_usuario = usuario.id WHERE STATUS <> 'Cancelado'";

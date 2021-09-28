@@ -1,15 +1,20 @@
-<?php 
+<?php
+session_start();
 require_once '../model/Avaliacao.php';
 require_once '../model/Cardapio.php';
-include_once 'assets/modals/delivery.php';
 $cardapio= new Cardapio();
 $card = $cardapio->listarCardapio();
 $avaliacao = new Avaliacao();
 $avaliacoes = $avaliacao->listar();
 $logado = 0;
-$admin = 1;
-if(isset($_SESSION['usuario_logado'])){
-  $logado = $_SESSION['usuario_logado'];
+$admin = 0;
+include_once 'assets/modals/nao-logado.php';
+if(isset($_SESSION['usuario'])){
+  $logado = $_SESSION['usuario'];
+  include_once 'assets/modals/delivery.php';
+  if(isset($_SESSION['usuario']["niveis_acesso"])){
+    $admin = 1;
+  }
 }
 ?> 
 <!DOCTYPE html>
@@ -39,7 +44,6 @@ if(isset($_SESSION['usuario_logado'])){
   <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css">
-  <link rel="stylesheet" href="assets/css/estrela.css">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -72,7 +76,7 @@ if(isset($_SESSION['usuario_logado'])){
         <ul>
           <li class="active"><a href="#hero">Inicio</a></li>
           <li><a href="#menu">Cardápio</a></li>
-          <?php if ($logado == 1) { ?>
+          <?php if ($logado != 0) { ?>
           <li><a href="#book-a-table">Reserva de Mesa</a></li>
             <li><a href="#delivery">Delivery</a></li>
           <li><a href="#about">Sobre</a></li>
@@ -81,8 +85,8 @@ if(isset($_SESSION['usuario_logado'])){
               Minha conta <i class="fas fa-chevron-down"></i>
             </a>
             <ul class="menu-conta">
-              <li><a href="#">Minha conta</a></li>
-              <li><a href="#">Meus Pedidos</a></li>
+              <li><a href="usuario/index.php">Minha conta</a></li>
+              <li><a href="usuario/meuspedidos.php">Meus Pedidos</a></li>
               <?php if ($admin == 1){?>
                 <li><a href="admin/index.php">Admin</a></li>
               <?php } ?>
@@ -108,7 +112,7 @@ if(isset($_SESSION['usuario_logado'])){
 
           <div class="btns">
             <a href="#menu" class="btn-menu animated fadeInUp scrollto">Cardápio</a>
-            <?php if ($logado == 1) { ?>
+            <?php if ($logado != 0) { ?>
                 <a href="#delivery" class="btn-book animated fadeInUp scrollto pd">Pedir Delivery</a>
                 <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Reserve uma mesa</a>
             <?php } ?>
@@ -130,7 +134,7 @@ if(isset($_SESSION['usuario_logado'])){
         </div>
 
 
-        <div class="row menu-container mb-2" data-aos="fade-up" data-aos-delay="200">
+        <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
             <?php foreach ($card as $lista): ?>
             <div class="col-lg-6 menu-item">
               <div class="row">
@@ -156,8 +160,11 @@ if(isset($_SESSION['usuario_logado'])){
                 </div>
               </div>
             </div>
-              <?php endforeach; ?>
-          </div>
+            <?php endforeach; ?>
+            <div class="col-12 mt-3 w-100 d-flex justify-content-center align-items-center">
+              <a href="#delivery" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg scrollto">Pedir Delivery</a>
+            </div>
+        </div>
       </div>
 
     </section><!-- Fim da  Sessão cardápio -->
@@ -204,7 +211,7 @@ if(isset($_SESSION['usuario_logado'])){
     <!-- Fim da sessão sobre -->
 
     <!-- ======= Sessão de reserva ======= -->
-    <?php if ($logado == 1) {?>
+    <?php if ($logado != 0) {?>
     <section id="book-a-table" class="book-a-table section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -237,7 +244,7 @@ if(isset($_SESSION['usuario_logado'])){
             <div class="error-message"></div>
             <div class="sent-message">Aguarde, entraremos em contato assim que possível!</div>
           </div>
-          <div class="text-center"><button type="submit">Reservar</button></div>
+          <div class="text-center"><button type="submit" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg">Reservar</button></div>
         </form>
 
       </div>
@@ -246,7 +253,7 @@ if(isset($_SESSION['usuario_logado'])){
     <!-- Fim da sessão de reserva -->
 
     <!-- ======= Delivery Section ======= -->
-    <?php if ($logado == 1) {?>
+    <?php if ($logado != 0) {?>
     <section id="delivery" class="book-a-table">
       
       <div class="container" data-aos="fade-up">
@@ -315,7 +322,7 @@ if(isset($_SESSION['usuario_logado'])){
             <div class="sent-message">Aguarde, entregaremos assim que possivel</div>
           </div>
 
-          <div class="text-center"><button type="button" data-toggle="modal" data-target="#deliverymodal">Continuar</button></div>
+          <div class="text-center"><button type="button" data-toggle="modal" data-target="#deliverymodal" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg">Continuar</button></div>
           
         </form>
 
@@ -325,7 +332,7 @@ if(isset($_SESSION['usuario_logado'])){
     <!-- End Delivery Section -->
 
     <!-- ======= Sessão avaliação ======= -->
-    <?php if ($logado == 1) {?>
+    <?php if ($logado != 0) {?>
       <section id="avaliacao" class="contact section-bg">
           <div class="container" data-aos="fade-up">
               <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
@@ -359,7 +366,7 @@ if(isset($_SESSION['usuario_logado'])){
                       <div class="error-message"></div>
                     </div>
 
-                    <div class="text-center"><button type="submit">Comentar</button></div>
+                    <div class="text-center"><button type="submit" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg">Comentar</button></div>
 
                   </form>
                 </div>

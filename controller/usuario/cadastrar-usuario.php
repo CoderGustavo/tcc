@@ -13,7 +13,7 @@
 		$usuario->email = $_POST['email'];
 		$usuario->senha = $_POST['senha'];
 		$usuario->telefone = $_POST['telefone'];
-		$usuario->InserirCliente();
+		$usuario->Inserir();
 		$_SESSION["sucesso"] = "Você acaba de se cadastrar!";
 		header('location: ../../view/login.php');
 	}
