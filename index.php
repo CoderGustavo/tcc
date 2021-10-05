@@ -1,5 +1,3 @@
 <?php
 
-header('location: view/index.php');
-
-?>
+require __DIR__."/vendor/autoload.php";

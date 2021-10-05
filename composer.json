@@ -1,0 +1,43 @@
+{
+    "name": "codergustavo/tcc",
+    "description": "Delicious Hamburgueria \u0000 um projeto tcc ETEC JMS 2021",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gustavo Ornaghi Antunes",
+            "email": "gustavoornaghiantunes@gmail.com",
+            "role": "developer",
+            "homepage": "https://codergustavo.github.io"
+        },
+        {
+            "name": "Guilherme",
+            "email": "",
+            "role": "worked in documentation"
+        },
+        {
+            "name": "Bárbara",
+            "email": "",
+            "role": "worked in documentation"
+        },
+        {
+            "name": "Júlia",
+            "email": "",
+            "role": "worked in documentation"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codergustavo\\Tcc\\": "src/"
+        },
+        "files": [
+            "src/config.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "require": {
+        ""
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    }
+}

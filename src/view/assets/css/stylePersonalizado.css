@@ -1,0 +1,116 @@
+.menu-conta{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #fcb94e;
+    width: 100%;
+    border-radius: 1rem;
+    top: 3rem;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.menu-conta li a{
+    line-height: 4rem;
+    font-size: 14pt;
+}
+
+.stars{
+	cursor: pointer;
+	transition: .5s;
+}
+
+.bg-primarycolor{
+    background-color: #cda45e;
+}
+
+.border-primarycolor{
+    border-color: #cda45e !important;
+}
+
+.item-delivery{
+    cursor: pointer;
+}
+
+#delivery button{
+    background: #cda45e;
+    border: 0;
+    padding: 10px 35px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+}
+.bg-darkdark{
+    background-color: #0c0b09;
+}
+#deliverymodal .modal-content{
+    border: 1px solid #cda45e;
+}
+.btn-primarycolor{
+    background-color: #cda45e;
+    color: #fff;
+}
+.btn-primarycolor:hover{
+    background-color: #fcb94e;
+    color: #fff;
+}
+.text-primarycolor{
+    color: #fcb94e;
+}
+.btn-add-end{
+    color: #cda45e;
+    border-bottom: 1px solid #cda45e;
+}
+.btn-add-end:hover{
+    color: #cda45e;
+    border: 1px solid #cda45e;
+    transition: 1s linear;
+}
+#deliverymodal input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+#deliverymodal input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ffa500;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+#deliverymodal label.container{
+    cursor: pointer;
+}
+.endereco-item:hover{
+    border: 2px solid #cda45e;
+    box-shadow: 0px 0px 10px 0px #CDA45E;
+}
+#addendereco_modal input{
+    color: #fff;
+}
+input, textarea{
+    background-color: #0c0b09 !important;
+    box-shadow: none !important;
+    border: 1px solid #0c0b09 !important;
+    box-sizing: border-box;
+}
+input:focus, input:hover, textarea:focus, textarea:hover{
+    background-color: #0c0b09 !important;
+    box-shadow: none !important;
+    border: 1px solid #cda45e !important;
+}
+.btn-formapagamento{
+    cursor: pointer;
+}
