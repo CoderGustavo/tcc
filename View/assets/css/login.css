@@ -1,0 +1,40 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #111;
+}
+  
+.form-signin{
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
+.form-signin input{
+  background-color: #222;
+  border: 1px solid #222;
+}
+
+.form-signin input:focus,.form-signin input:hover{
+  box-shadow: none;
+  outline: none;
+  background-color: #222;
+  border: 1px solid #cda45e;
+}
+
+.btn-primarycolor{
+    background-color: #cda45e;
+    color: #fff;
+}
+.btn-primarycolor:hover{
+    background-color: #fcb94e;
+    color: #fff;
+}
+.text-primarycolor{
+  color: #cda45e;
+}

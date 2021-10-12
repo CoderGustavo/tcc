@@ -11,31 +11,36 @@
         },
         {
             "name": "Guilherme",
-            "email": "",
+            "email": "delicious@gmail.com",
             "role": "worked in documentation"
         },
         {
             "name": "Bárbara",
-            "email": "",
+            "email": "delicious@gmail.com",
             "role": "worked in documentation"
         },
         {
             "name": "Júlia",
-            "email": "",
+            "email": "delicious@gmail.com",
             "role": "worked in documentation"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Codergustavo\\Tcc\\": "src/"
+            "Source\\": "source/"
         },
         "files": [
-            "src/config.php"
+            "source/Config.php"
         ]
     },
     "minimum-stability": "stable",
     "require": {
-        ""
+        "php": "^7.4",
+        "ext-pdo": "*",
+        "coffeecode/router": "1.0.*",
+        "coffeecode/datalayer": "1.1.*",
+        "league/plates": "v4.0.0-alpha",
+        "chillerlan/php-qrcode": "dev-main"
     },
     "config": {
         "vendor-dir": "vendor"
