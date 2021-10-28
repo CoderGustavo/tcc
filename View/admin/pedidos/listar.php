@@ -33,14 +33,30 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Tela Inicial</a></li>
+              <li class="breadcrumb-item"><a href="<?php url("admin") ?>">Tela Inicial</a></li>
               <li class="breadcrumb-item active">Todos os pedidos <?php echo $status ?></li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <div class="container">
+      <?php if (isset($_SESSION["erro"])):?>
+        <div class="alert alert-danger alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-ban mr-3"></i>
+          <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php elseif(isset($_SESSION["sucesso"])):?>
+        <div class="alert alert-success alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-check mr-3"></i>
+          <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php endif?>
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -53,7 +69,7 @@
                 <h3 class="card-title">Todos os pedidos <?php echo $status ?></h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0 table-responsive">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -67,7 +83,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach ($pedidos as $linha): ?>
+                    <?php if($pedidos): foreach ($pedidos as $linha): ?>
                     <tr>
                       <td><?php echo $linha->id ?></td>
                       <td><?php echo $linha->nome ?></td>
@@ -92,12 +108,12 @@
                         </td>
                       <?php }?>
                       <td>
-                        <a href="#" data-toggle="modal" data-target="#verPedido<?php echo $linha->id ?>"><i class="far fa-info text-info rounded-pill p-2"></i></a>
+                        <a href="<?= url("admin/pedido/informacoes/$linha->id/$status") ?>"><i class="far fa-info text-info rounded-pill p-2"></i></a>
                         <a href="#" data-toggle="modal" data-target="#editPedido<?php echo $linha->id ?>"><i class="far fa-edit text-warning rounded-pill p-2"></i></a>
                         <a href="#" data-toggle="modal" data-target="#atualizarPedido<?php echo $linha->id ?>"><i class="far fa-sync text-success rounded-pill p-2"></i></a>
                       </td>
                       </tr>
-                    <?php endforeach ?>
+                    <?php endforeach; endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -129,7 +145,7 @@
 <!-- Bootstrap 4 -->
 <script src="<?= url("View/assets/plugins/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
 <!-- AdminLTE App -->
-<script src="<?= url("View/assets/js/adminlte.js")?>"></script>
+<script src="<?= url("View/assets/js/adminlte.js")?>"></script><script src="<?= url("View/assets/js/mainAdmin.js")?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>

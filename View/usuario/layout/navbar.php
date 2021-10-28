@@ -4,7 +4,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li>
-        <a class="nav-link" href="../../controller/usuario/sair-usuario.php"><i class="fas fa-power-off"></i> Sair</a>
+        <a class="nav-link" href="<?= url("sair") ?>"><i class="fas fa-power-off"></i> Sair</a>
       </li>
     </ul>
   </nav>

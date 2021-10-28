@@ -25,7 +25,7 @@
   <link href="<?= url("View/assets/vendor/venobox/venobox.css")?>" rel="stylesheet">
   <link href="<?= url("View/assets/vendor/aos/aos.css")?>" rel="stylesheet">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css">
-
+  
   <!-- Template Main CSS File -->
   <link href="<?= url("View/assets/css/style.css") ?>" rel="stylesheet">
   <link href="<?= url("View/assets/css/stylePersonalizado.css") ?>" rel="stylesheet">
@@ -34,10 +34,6 @@
 </head>
 
 <body>
-  <?php
-    include_once 'View/assets/modals/nao-logado.php';
-    include_once 'View/assets/modals/delivery.php';
-  ?>
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">
@@ -59,18 +55,18 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="#hero">Inicio</a></li>
-          <li><a href="#menu">Cardápio</a></li>
+          <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
           <?php if ($logado != 0) { ?>
           <li><a href="#book-a-table">Reserva de Mesa</a></li>
-            <li><a href="#delivery">Delivery</a></li>
+            <li><a href="<?= url("delivery") ?>">Delivery</a></li>
           <li><a href="#about">Sobre</a></li>
           <li class="conta text-center">
             <a href="" class="btn-minhaconta">
               Minha conta <i class="fas fa-chevron-down"></i>
             </a>
             <ul class="menu-conta">
-              <li><a href="usuario/index.php">Minha conta</a></li>
-              <li><a href="usuario/meuspedidos.php">Meus Pedidos</a></li>
+              <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
+              <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
               <?php if ($admin == 1){?>
                 <li><a href="<?= url("admin") ?>">Admin</a></li>
               <?php } ?>
@@ -95,10 +91,10 @@
           <h2>Lanches feitos para aproveitar a gostosura gourmet</h2>
 
           <div class="btns">
-            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Cardápio</a>
+            <a href="<?= url("cardapio") ?>" class="btn-menu animated fadeInUp scrollto">Cardápio</a>
             <?php if ($logado != 0) { ?>
-                <a href="#delivery" class="btn-book animated fadeInUp scrollto pd">Pedir Delivery</a>
-                <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Reserve uma mesa</a>
+                <a href="<?= url("delivery") ?>" class="btn-book animated fadeInUp scrollto pd">Pedir Delivery</a>
+                <a href="#book-a-table" class="btn-book animated fadeInUp scrollto mt-2">Reserve uma mesa</a>
             <?php } ?>
           </div>
         </div>
@@ -120,21 +116,21 @@
 
         <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
             <?php foreach ($cardapio as $key => $value): ?>
-            <div class="col-lg-6 menu-item">
+            <div class="col-lg-6 menu-item mt-2">
               <div class="row">
-                <div class="col-lg-2">
-                  <img src="<?= url("View/assets/img/menu/lanche1.jpg") ?>" class="menu-img" alt="">
+                <div class="col-sm-2 col-3">
+                  <img src="<?= url("View/assets/img/cardapio/$value->imagem") ?>" class="menu-img" alt="">
                 </div>
-                <div class="col-lg-10 row">
-                  <a href="" class="col-lg-6 item-nome">
+                <div class="col-sm-10 col-9 row">
+                  <a href="" class="col-10 item-nome">
                     <?php echo $value->nome?>
                   </a>
-                  <div class="col-lg-6 text-right">
+                  <div class="col-2 text-right">
                     <span class="item-preco">
                       <?php echo 'R$' .$value->preco?>
                     </span>
                   </div>
-                  <div class="col-lg-12">
+                  <div class="col-12">
                     <p class="item-ingrediente text-truncate">
                     <?php foreach ($value->ingredientes() as $key => $a) {
                         echo $a->nome.", ";
@@ -146,9 +142,9 @@
             </div>
             <?php endforeach; ?>
             <div class="col-12 mt-3 w-100 d-flex justify-content-center align-items-center">
-              <a href="#delivery" class="btn btn-outline-primarycolor rounded p-2 pr-4 pl-4 btn-lg scrollto mr-3">Ver Cardápio</a>
+              <a href="<?= url("cardapio") ?>" class="btn btn-outline-primarycolor rounded p-2 pr-4 pl-4 btn-lg scrollto mr-3">Ver Cardápio</a>
               <?php if($logado != 0):?>
-              <a href="#delivery" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg scrollto">Pedir Delivery</a>
+              <a href="<?= url("delivery") ?>" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg scrollto">Pedir Delivery</a>
               <?php endif; ?>
             </div>
         </div>
@@ -167,24 +163,24 @@
 
         <div class="row">
 
-          <div class="col-lg-4">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-md-4 col-sm-6">
+            <div class="box p-3 p-sm-4" data-aos="zoom-in" data-aos-delay="100">
               <span>01</span>
               <h4>Oferecemos confiança</h4>
               <p>Pode confiar na gente em questão das entregas serem rápidas e os lanches serem a 8ª maravilha do mundo.</p>
             </div>
           </div>
 
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-md-4 col-sm-6 mt-4 mt-sm-0">
+            <div class="box p-3 p-sm-4" data-aos="zoom-in" data-aos-delay="200">
               <span>02</span>
               <h4>Temos um ótimo lugar</h4>
               <p>Temos um lugar confortável e aconchegante, onde você pode comer seu lanche com amigos ou até mesmo sozinho.</p>
             </div>
           </div>
 
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="300">
+          <div class="col-md-4 col-sm-6 mt-4 mt-md-0">
+            <div class="box p-3 p-sm-4" data-aos="zoom-in" data-aos-delay="300">
               <span>03</span>
               <h4> E, por fim, os lanches</h4>
               <p>Possuímos os melhores lanches da região, oferecendo qualidade, sabor e um ótimo custo.</p>
@@ -239,92 +235,13 @@
     <?php } else { } ?>
     <!-- Fim da sessão de reserva -->
 
-    <!-- ======= Delivery Section ======= -->
-    <?php if ($logado != 0) {?>
-    <section id="delivery" class="book-a-table">
-      
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Delivery</h2>
-          <p>Peça seu delivery agora mesmo</p>
-        </div>
-
-        <form action="../controller/pedido/pedido-salvar.php" method="post" class="php-email-form menu" data-aos="fade-up" data-aos-delay="100">
-          <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
-            <?php foreach ($cardapio as $key => $lista): ?>
-              <div class="col-lg-6 menu-item p-2">
-                <div class="border border-primarycolor p-2 rounded">
-                  <div class="row item-delivery" data-toggle="collapse" data-target="#ingredientes<?php echo $key?>">
-                    <div class="col-lg-2">
-                      <img src="<?= url("View/assets/img/menu/lanche1.jpg") ?>" class="menu-img" alt="">
-                    </div>
-                    <div class="col-lg-10 row">
-                      <span class="col-lg-6 item-nome text-uppercase font-weight-bold" style="font-size: 14pt;">
-                        <?php echo $lista->nome?>
-                      </span>
-                      <div class="col-lg-6 text-right">
-                        <span class="item-preco">
-                          <?php echo 'R$' .$lista->preco?>
-                        </span>
-                      </div>
-                      <div class="col-lg-12">
-                        <p class="item-ingrediente">
-                          Selecione para ver os ingredientes
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="container collapse" id="ingredientes<?php echo $key ?>">
-                    <div class="row">
-                      <?php foreach($lista->ingredientes() as $a){?>
-                        <div class="col-lg-6 p-2 text-center">
-                          <div class="w-100 bg-primarycolor rounded d-flex justify-content-between p-2">
-                            <div>
-                              <?php echo $a->nome?>
-                            </div>
-                            <div>
-                              <?php if($a->retirar == "sim"){?>
-                              <a href="" class="text-light">
-                                <i class="far fa-trash"></i>
-                              </a>
-                              <?php } ?>
-                            </div>
-                          </div>
-                        </div>
-                      <?php } ?>
-                    </div>
-                    <div class="col-12">
-                      <input type="number" placeholder="Qtd.: " class="w-100 m-auto form-control">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <?php endforeach; ?>
-          </div>
-
-          <div class="mb-3">
-            <div class="loading">Carregando</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Aguarde, entregaremos assim que possivel</div>
-          </div>
-
-          <div class="text-center"><button type="button" data-toggle="modal" data-target="#deliverymodal" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg">Continuar</button></div>
-          
-        </form>
-
-      </div>
-    </section>
-    <?php } else { } ?>
-    <!-- End Delivery Section -->
-
     <!-- ======= Sessão avaliação ======= -->
     <?php if ($logado != 0) {?>
       <section id="avaliacao" class="contact section-bg">
           <div class="container" data-aos="fade-up">
               <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
                 <div class="row book-a-table" data-aos="fade-up">
-                  <div class="section-title">
+                  <div class="section-title text-left">
                     <h2>Avaliar</h2>
 
                     <p>Dê sua avaliação sobre nossa lanchonete!</p>
@@ -442,7 +359,7 @@
 
         <div class="row no-gutters">
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-9.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-9.jpg") ?>" alt="" class="img-fluid">
@@ -450,7 +367,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-2.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-2.jpg") ?>" alt="" class="img-fluid">
@@ -458,7 +375,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-3.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-3.jpg") ?>" alt="" class="img-fluid">
@@ -466,7 +383,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-4.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-4.jpg") ?>" alt="" class="img-fluid">
@@ -474,7 +391,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-5.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-5.jpg") ?>" alt="" class="img-fluid">
@@ -482,7 +399,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-6.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-6.jpg") ?>" alt="" class="img-fluid">
@@ -490,7 +407,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-7.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-7.jpg") ?>" alt="" class="img-fluid">
@@ -498,7 +415,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4">
+          <div class="col-lg-3 col-sm-4 col-6">
             <div class="gallery-item">
               <a href="<?= url("View/assets/img/gallery/gallery-8.jpg") ?>" class="venobox" data-gall="gallery-item">
                 <img src="<?= url("View/assets/img/gallery/gallery-8.jpg") ?>" alt="" class="img-fluid">

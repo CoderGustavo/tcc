@@ -179,7 +179,7 @@
   // Testimonials carousel (uses the Owl Carousel library)
   $(".testimonials-carousel").owlCarousel({
     autoplay: true,
-    dots: true,
+    dots: false,
     loop: true,
     autoplayTimeout: 6000,
     responsive: {
@@ -292,5 +292,58 @@ $(document).ready(function(){
       $('.btn-minhaconta i').removeClass('fa-chevron-up')
       $('.btn-minhaconta i').addClass('fa-chevron-down')
     }
+  });
+
+
+  var valor = "fechado";
+  $('.texto').on('click', function(e){
+    e.preventDefault();
+    if(valor == "fechado"){
+      $('.pedido-sacola').addClass("abrir-menu").delay(1000);
+      valor = "aberto";
+      $('.texto p').text("Esconder Pedido");
+    }else{
+      $('.pedido-sacola').removeClass("abrir-menu");
+      valor = "fechado";
+      $('.texto p').text("Ver Pedido");
+    }
+  });
+  
+  $(".somarqtd").on('click', function(e){
+    e.preventDefault();
+    let valor = $(this).parent().find("input").val();
+    let calculo = parseInt(valor)+1; 
+    if(calculo>50){
+      $(this).parent().find("input").val(valor);
+    }else{
+      $(this).parent().find("input").val(calculo);
+    }
+  });
+
+  $(".subtrairqtd").on('click', function(e){
+    e.preventDefault();
+    let valor = $(this).parent().find("input").val();
+    let calculo = parseInt(valor)-1;
+    if(calculo<1){
+      $(this).parent().find("input").val(valor);
+    }else{
+      $(this).parent().find("input").val(calculo);
+    }
+  });
+
+  $(".retirar_ingrediente").on('click', function(e){
+    e.preventDefault();
+    let nome = $(this).parent().parent().find(".nome_ingrediente").text().trim();
+    let obs = $(this).parent().parent().parent().parent().parent().find("input[name='obs']").val();
+    if(obs != " "){
+      $(this).parent().parent().parent().parent().parent().find("input[name='obs']").val(obs+nome+",");
+      console.log($(this).parent().parent().parent().parent().parent().find("input[name='obs']").val());
+    }else{
+      $(this).parent().parent().parent().parent().parent().find("input[name='obs']").val("Sem ");
+      obs = $(this).parent().parent().parent().parent().parent().find("input[name='obs']").val();
+      $(this).parent().parent().parent().parent().parent().find("input[name='obs']").val(obs+nome+",");
+      console.log($(this).parent().parent().parent().parent().parent().find("input[name='obs']").val());
+    }
+    $(this).parent().parent().parent().remove();
   });
 });

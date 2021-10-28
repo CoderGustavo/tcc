@@ -43,7 +43,23 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <div class="container">
+      <?php if (isset($_SESSION["erro"])):?>
+        <div class="alert alert-danger alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-ban mr-3"></i>
+          <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php elseif(isset($_SESSION["sucesso"])):?>
+        <div class="alert alert-success alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-check mr-3"></i>
+          <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php endif?>
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -52,7 +68,7 @@
           <div class="col-md-12">
             <!-- /.card -->
             <div class="card">
-              <div class="card-body p-0">
+              <div class="card-body p-0 table-responsive">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -65,16 +81,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <?php foreach($admins as $linha){ ?>
+                  <?php if($admins): foreach($admins as $linha): ?>
                     <tr>
                       <td><?php echo $linha->id ?></td>
                       <td><?php echo $linha->nome ?></td>
                       <td><?php echo $linha->email ?></td>
                       <td><?php echo $linha->telefone ?></td>
                       <td><?php echo $linha->nivel_acesso ?></td>
-                      <td><a href="#"  data-toggle="modal" data-target="#excluirUsuario<?php echo $linha->id ?>"><i class="fas fa-times text-danger rounded-pill p-2"></i></a></td>
+                      <td><a href="#"  data-toggle="modal" data-target="#excluirAdmin<?php echo $linha->id ?>"><i class="far fa-trash text-danger rounded-pill p-2"></i></a></td>
                     </tr>
-                    <?php } ?>
+                    <?php endforeach; endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -106,7 +122,7 @@
 <!-- Bootstrap 4 -->
 <script src="<?= url("View/assets/plugins/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
 <!-- AdminLTE App -->
-<script src="<?= url("View/assets/js/adminlte.js")?>"></script>
+<script src="<?= url("View/assets/js/adminlte.js")?>"></script><script src="<?= url("View/assets/js/mainAdmin.js")?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>

@@ -67,10 +67,77 @@ class Avaliacao
         $avaliacoes = new modelAvaliacao();
         $avaliacoes = $avaliacoes->find("status=:status", "status={$data["status"]}")->fetch(true);
         $usuario = $_SESSION["usuario"];
-        foreach ($avaliacoes as $key => $avaliacao) {
-            $avaliacao->nome = $_SESSION["usuario"]->nome;
+        if($avaliacoes){
+            foreach ($avaliacoes as $key => $avaliacao) {
+                $avaliacao->nome = $_SESSION["usuario"]->nome;
+            }
         }
         $status = $data["status"];
         echo $this->view->render("admin/avaliacoes/listar", ["avaliacoes" => $avaliacoes, "usuario" => $usuario, "status" => $status]);
+    }
+
+    public function aprovar($data){
+        session_start();
+        $id = $data["id"];
+        $avaliacoes = new modelAvaliacao();
+        $status = $data["status"];
+        if($id && $status != "Aprovado"){
+            $avaliacao = $avaliacoes->findById($id);
+            $avaliacao->status = "Aprovado";
+            $avaliacao->save();
+            if($avaliacao->fail()){
+                $_SESSION["erro"] = $avaliacao->fail()->getMessage();
+            }else{
+                $_SESSION["sucesso"] = "Avaliação aprovado com sucesso!";
+            }
+        }else{
+            $_SESSION["erro"] = "Id informado incorreto!";
+        }
+        
+        switch ($status) {
+            case 'Aprovado':
+                return $this->router->redirect("admin/listar/avaliacoes/Aprovado");
+            break;
+
+            case 'Pendente':
+                return $this->router->redirect("admin/listar/avaliacoes/Pendente");
+            break;
+            
+            default:
+                return $this->router->redirect("admin/listar/avaliacoes");
+            break;
+        }
+    }
+
+    public function destroy($data){
+        session_start();
+        $id = $data["id"];
+        $avaliacoes = new modelAvaliacao();
+        $status = $data["status"];
+        if($id){
+            $avaliacao = $avaliacoes->findById($id);
+            $avaliacao->destroy();
+            if($avaliacao->fail()){
+                $_SESSION["erro"] = $avaliacao->fail()->getMessage();
+            }else{
+                $_SESSION["sucesso"] = "Avaliação deletada com sucesso!";
+            }
+        }else{
+            $_SESSION["erro"] = "Id informado incorreto!";
+        }
+
+        switch ($status) {
+            case 'Aprovado':
+                return $this->router->redirect("admin/listar/avaliacoes/Aprovado");
+            break;
+
+            case 'Pendente':
+                return $this->router->redirect("admin/listar/avaliacoes/Pendente");
+            break;
+            
+            default:
+                return $this->router->redirect("admin/listar/avaliacoes");
+            break;
+        }
     }
 }

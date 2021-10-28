@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<?php
-  require_once '../../model/Pedido.php';
-  $pedido = new Pedido();
-  $lista = $pedido->listarCancelado();
-  session_start();
-$logado = $_SESSION['usuario'];
-if (isset($logado["niveis_acesso"])) {
-?>
 <html lang="en">
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Todos os Pedidos Em Cancelados</title>
+  <title>Listar Ingredientes</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -24,21 +15,11 @@ if (isset($logado["niveis_acesso"])) {
   <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
 </head>
 <body class="hold-transition sidebar-mini">
-
-  <?php
-    include("layout/modalAtualizarPedido.php");
-  ?>
-
 <div class="wrapper">
-  <!-- Navbar -->
   <?php
-    include("layout/navbar.php");
-   ?>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <?php
-    include("layout/sidebar.php");
+    include("modalExcluir.php");
+    include("View/admin/layout/navbar.php");
+    include("View/admin/layout/sidebar.php");
    ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -48,18 +29,34 @@ if (isset($logado["niveis_acesso"])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Todos os pedidos cancelados</h1>
+            <h1>Listar Ingredientes</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Administração</a></li>
-              <li class="breadcrumb-item active">Todos os pedidos cancelados</li>
+              <li class="breadcrumb-item"><a href="<?php url("admin") ?>">Tela Inicial</a></li>
+              <li class="breadcrumb-item active">Listar Ingredientes</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <div class="container">
+      <?php if (isset($_SESSION["erro"])):?>
+        <div class="alert alert-danger alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-ban mr-3"></i>
+          <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php elseif(isset($_SESSION["sucesso"])):?>
+        <div class="alert alert-success alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-check mr-3"></i>
+          <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php endif?>
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -69,37 +66,33 @@ if (isset($logado["niveis_acesso"])) {
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Todos os pedidos cancelados</h3>
+                <h3 class="card-title">Listar Ingredientes</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0 table-responsive">
                 <table class="table table-striped">
                   <thead>
                     <tr>
                       <th>ID</th>
                       <th>Nome</th>
-                      <th>Forma de Pagamento</th>
-                      <th>Total</th>
-                      <th>Entrega?</th>
-                      <th>Status</th>
+                      <th>Pode retirar?</th>
                       <th>Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($lista as $linha): ?>
+                    <?php if($ingredientes): foreach ($ingredientes as $linha): ?>
                     <tr>
-                      <td><?php echo $linha['id'] ?></td>
-                      <td><?php echo $linha['nome'] ?></td>
-                      <td><?php echo $linha['forma_pagamento'] ?></td>
-                      <td>R$<?php echo $linha['total'] ?></td>
-                      <td><?php echo $linha['entrega'] ?></td>
-                        <td class="badge badge-pill bg-danger p-2"> <?php echo $linha['status'] ?> </td>
-                      <td>
-                        <a href="#"><i class="taman far fa-info atualizar text-light bg-info rounded-circle border border-dark p-1"></i></a>
-                        <a href="#" data-toggle="modal" data-target="#atualizarDelivery<?php echo $linha['id'] ?>"><i class="taman far fa-sync atualizar text-light bg-success rounded-circle border border-dark p-1"></i></a>
+                      <td class="align-middle"><?php echo $linha->id ?></td>
+                      <td class="align-middle"><?php echo $linha->nome ?></td>
+                      <td class="align-middle"><?php echo $linha->retirar ?></td>
+                      <td class="align-middle">
+                        <p>
+                          <a href="<?= url("admin/edit/ingrediente/$linha->id") ?>"><i class="far fa-edit text-warning rounded-pill p-2"></i></a>
+                          <a href="#" data-toggle="modal" data-target="#excluirIngrediente<?php echo $linha->id ?>"><i class="far fa-trash text-danger rounded-pill p-2"></i></a>
+                        </p>
                       </td>
                       </tr>
-                    <?php endforeach ?>
+                    <?php endforeach; endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -131,10 +124,8 @@ if (isset($logado["niveis_acesso"])) {
 <!-- Bootstrap 4 -->
 <script src="<?= url("View/assets/plugins/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
 <!-- AdminLTE App -->
-<script src="<?= url("View/assets/js/adminlte.js")?>"></script>
+<script src="<?= url("View/assets/js/adminlte.js")?>"></script><script src="<?= url("View/assets/js/mainAdmin.js")?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>
 </html>
-
-<?php } else { $_SESSION["acesso_restrito"] = "Não logado";header('Location: /tcc'); } ?>

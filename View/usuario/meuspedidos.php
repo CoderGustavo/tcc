@@ -1,13 +1,3 @@
-<?php
-  require_once'../../model/Usuario.php';
-  require_once'../../model/Pedido.php';
-  session_start();
-  $usuario = 0;
-  $usuario = $_SESSION['usuario'];
-  if ($usuario != 0) {
-    $pedidos = new Pedido();
-    $pedidos = $pedidos->show($_SESSION['usuario']);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +11,7 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.0/css/all.css">
 
   <!-- Theme style -->
-  <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css") ?>">
   <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
 
 
@@ -30,14 +20,8 @@
 <div class="wrapper">
   <!-- Navbar -->
   <?php 
-    include("layout/navbarCliente.php");
-  ?>
-  
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <?php 
-    include("layout/sidebarCliente.php");
+    include("View/usuario/layout/navbar.php");
+    include("View/usuario/layout/sidebar.php");
   ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -58,26 +42,26 @@
       <div class="container-fluid">
         <div class="row p-3">
             <?php foreach($pedidos as $pedido):?>
-                    <?php if($pedido["status"] == "Pendente"){?>
+                    <?php if($pedido->status == "Pendente"){?>
                         <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0 border-warning" style="background-color: #222; border-width: 8px !important;">
-                    <?php }else if($pedido["status"] == "Em Preparo"){?>
+                    <?php }else if($pedido->status == "Em Preparo"){?>
                         <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0 border-primary" style="background-color: #222; border-width: 8px !important;">
-                    <?php } else if($pedido["status"] == "Entregue"){?>
+                    <?php } else if($pedido->status == "Entregue"){?>
                         <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0 border-success" style="background-color: #222; border-width: 8px !important;">
                     <?php } ?>
                 <div class="d-flex justify-content-between">
-                    <h2 class="text-light">Pedido #<?php echo $pedido["id"]?></h2>
-                    <?php if($pedido["status"] == "Pendente"){?>
-                        <p class="h4 text-warning"><?php echo $pedido["status"]?></p>
-                    <?php }else if($pedido["status"] == "Em Preparo"){?>
-                        <p class="h4 text-pimary"><?php echo $pedido["status"]?></p>
-                    <?php } else if($pedido["status"] == "Entregue"){?>
-                        <p class="h4 text-success"><?php echo $pedido["status"]?></p>
+                    <h2 class="text-light">Pedido #<?php echo $pedido->id?></h2>
+                    <?php if($pedido->status == "Pendente"){?>
+                        <p class="h4 text-warning"><?php echo $pedido->status?></p>
+                    <?php }else if($pedido->status == "Em Preparo"){?>
+                        <p class="h4 text-pimary"><?php echo $pedido->status?></p>
+                    <?php } else if($pedido->status == "Entregue"){?>
+                        <p class="h4 text-success"><?php echo $pedido->status?></p>
                     <?php } ?>
                 </div>
                 <div class="d-flex justify-content-between pt-5 mt-5 align-items-center">
                     <a href="" class="btn btn-outline-info btn-lg text-uppercase">Ver Detalhes</a>
-                    <p class="h4 text-light">Total: <strong>R$<?php echo $pedido["total"]?></strong></p>
+                    <p class="h4 text-light">Total: <strong>R$<?php echo $pedido->total?></strong></p>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -110,4 +94,3 @@
 <script src="<?= url("View/assets/js/adminlte.js")?>"></script>
 </body>
 </html>
-<?php } else { $_SESSION["acesso_restrito"] = "Não logado";header('Location: /tcc'); } ?>

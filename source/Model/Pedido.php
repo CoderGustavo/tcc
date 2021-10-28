@@ -8,7 +8,7 @@ class Pedido extends DataLayer
 {
 	public function __construct()
 	{
-		parent::__construct("pedidos", ["id_endereco", "id_usuario", "total", "status", "forma_pagamento", "obs", "entrega"], "id", false);
+		parent::__construct("pedidos", ["id_usuario", "status", "entrega"], "id", false);
 	}
 
 }

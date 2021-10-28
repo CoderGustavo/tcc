@@ -6,7 +6,7 @@
     </a>
     
     <a href="#" class="brand-link">
-      <img src="<?= url("View/assets/img/favicon1.png") ?>" alt="AdminLTE Logo" class="brand-image">
+      <img src="<?= url("View/assets/img/perfil.png") ?>" alt="AdminLTE Logo" class="brand-image">
       <span class="brand-text text-light text-capitalize"><?php echo explode(" ", $usuario->nome)[0] ?></span>
     </a>
     
@@ -104,6 +104,45 @@
           </li>
           <li class="nav-item
             <?php if(
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/ingrediente" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/ingredientes"
+              ){
+              echo "menu-open";
+              }
+            ?>
+            ">
+            <a href="#" class="nav-link callout bg-transparent
+            <?php if(
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/ingrediente" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/ingredientes"
+              ){
+                echo "callout-light";
+              }else{
+              echo "callout-transparent";
+              }
+            ?>
+            ">
+              <i class="nav-icon fas fa-steak"></i>
+              <p>
+                Ingredientes
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item text-center">
+                <a href="<?= url("admin/cadastrar/ingrediente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/ingrediente"){ echo "callout-warning bg-warning";}else{echo "callout-transparent";}?>">
+                  <p>Cadastrar Ingrediente</p>
+                </a>
+              </li>
+              <li class="nav-item text-center">
+                <a href="<?= url("admin/listar/ingredientes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/ingredientes"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                  <p>Listar Ingredientes</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item
+            <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cardapio" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/cardapio"
               ){
@@ -122,7 +161,7 @@
               }
             ?>
             ">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-cheeseburger"></i>
               <p>
                 Cardápio
                 <i class="fas fa-angle-left right"></i>
@@ -135,7 +174,7 @@
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/cardapio") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/cardapio"){ echo "callout-primary bg-primary";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/cardapio") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/cardapio"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
                   <p>Listar Cardápio</p>
                 </a>
               </li>
@@ -144,7 +183,7 @@
           <li class="nav-item
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Livre" ||
-              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Feita" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizado" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Utilizada" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas"
               ){
@@ -155,7 +194,7 @@
             <a href="#" class="nav-link callout bg-transparent
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Livre" ||
-              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Feita" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizado" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Utilizada" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas"
               ){
@@ -175,8 +214,8 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/reservas/Feita") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Feita"){ echo "callout-primary bg-primary";}else{echo "callout-transparent";}?>">
-                  <p>Reservas Feitas</p>
+                <a href="<?= url("admin/listar/reservas/Realizado") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizado"){ echo "callout-primary bg-primary";}else{echo "callout-transparent";}?>">
+                  <p>Reservas Realizadas</p>
                 </a>
               </li>
               <li class="nav-item text-center">

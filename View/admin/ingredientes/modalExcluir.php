@@ -1,14 +1,14 @@
-<?php if($usuarios): foreach($usuarios as $linha): ?>
-<div id="excluirCliente<?php echo $linha->id ?>" class="modal" tabindex="-1">
+<?php if($ingredientes): foreach ($ingredientes as $linha): ?>
+<div id="excluirIngrediente<?php echo $linha->id ?>" class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Excluindo usuario</h5>
+        <h5 class="modal-title">Excluindo ingrediente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= url("admin/deletar/clientes") ?>" method="post">
+      <form action="<?= url("admin/deletar/ingredientes") ?>" method="post">
       <input type="hidden" name="id" value="<?php echo $linha->id ?>">
         <div class="modal-body">
           <p>Você deseja excluir o(a) <?php echo $linha->nome ?>?</p>
@@ -21,4 +21,4 @@
     </div>
   </div>
 </div>
-<?php endforeach; endif; ?>
+<?php endforeach; endif;?>

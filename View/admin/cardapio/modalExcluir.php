@@ -1,17 +1,17 @@
-<?php if($usuarios): foreach($usuarios as $linha): ?>
-<div id="excluirCliente<?php echo $linha->id ?>" class="modal" tabindex="-1">
+<?php if($cardapio): foreach($cardapio as $linha): ?>
+<div id="deleteCardapio<?php echo $linha->id ?>" class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Excluindo usuario</h5>
+        <h5 class="modal-title">Excluindo item cardapio</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= url("admin/deletar/clientes") ?>" method="post">
-      <input type="hidden" name="id" value="<?php echo $linha->id ?>">
+      <form action="<?= url("admin/deletar/cardapio") ?>" method="post">
         <div class="modal-body">
-          <p>Você deseja excluir o(a) <?php echo $linha->nome ?>?</p>
+          <p>Você deseja excluir o <?php echo $linha->nome ?>?</p>
+          <input type="hidden" name="id" value="<?php echo $linha->id?>">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Não, deixa aí</button>

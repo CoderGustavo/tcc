@@ -1,4 +1,4 @@
-<?php foreach($avaliacoes as $linha): ?>
+<?php if($avaliacoes): foreach($avaliacoes as $linha): ?>
 <div id="excluirAvaliacao<?php echo $linha->id ?>" class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -9,13 +9,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Você deseja excluir?</p>
+        <p>Você deseja excluir a avaliação <?php echo $linha->id?>?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Não, deixa aí</button>
-        <a href="../../controller/avaliacao/avaliacao-excluir.php?id=<?php echo $linha->id ?>&link=../../view/admin/avaliacaoTotal.php" class="btn btn-success"> Sim, desejo </a>
+        <a href="<?= url("admin/avaliacao/apagar/$linha->id/$status") ?>" class="btn btn-success"> Sim, desejo </a>
       </div>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
+<?php endforeach; endif; ?>

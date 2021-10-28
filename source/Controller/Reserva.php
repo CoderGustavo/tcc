@@ -61,7 +61,7 @@ class Reserva
         ]);
         $qrcode = new QRCode($options);
         for ($i=1; $i <= 10 ; $i++) { 
-            $url = "localhost/mesa/$i";
+            $url = URL_BASE."/mesa/$i";
             $qrcodes[$i] = $qrcode->render($url);
         }
 
@@ -73,9 +73,11 @@ class Reserva
         $reservas = new modelReserva();
         $reservas = $reservas->find("status=:status", "status={$data["status"]}")->fetch(true);
         $usuario = $_SESSION["usuario"];
-        foreach ($reservas as $key => $reserva) {
-            $reserva->nome = $_SESSION["usuario"]->nome;
-            $reserva->telefone = $_SESSION["usuario"]->telefone;
+        if($reservas){
+            foreach ($reservas as $key => $reserva) {
+                $reserva->nome = $_SESSION["usuario"]->nome;
+                $reserva->telefone = $_SESSION["usuario"]->telefone;
+            }
         }
         $status = $data["status"];
 
@@ -91,6 +93,129 @@ class Reserva
         }
         
         echo $this->view->render("admin/reservas/listar", ["reservas" => $reservas, "usuario" => $usuario, "status" => $status, "qrcodes" => $qrcodes]);
+    }
+
+    public function reservar($data){
+        session_start();
+        $id = $data["id"];
+        $numeropessoas = $data["numeropessoas"];
+        $reservas = new modelReserva();
+        $status = $data["status"];
+        $datahora = date('d/m/Y H:i');
+        if($id && $numeropessoas){
+            $reserva = $reservas->findById($id);
+            if($reserva->status == "Livre"){
+                $reserva->status = "Realizado";
+                $reserva->numero_pessoas = $numeropessoas;
+                $reserva->nome = "Local";
+                $reserva->datahora = $datahora;
+                $reserva->save();
+                if($reserva->fail()){
+                    $_SESSION["erro"] = $reserva->fail()->getMessage();
+                }else{
+                    $_SESSION["sucesso"] = "Mesa reservada com sucesso!";
+                }
+            }else{
+                $_SESSION["erro"] = "Esta mesa não esta livre!";
+            }
+        }else{
+            $_SESSION["erro"] = "Id informado incorreto!";
+        }
+        switch ($status) {
+            case 'Livre':
+                return $this->router->redirect("admin/listar/reservas/Livre");
+            break;
+
+            case 'Realizado':
+                return $this->router->redirect("admin/listar/reservas/Realizado");
+            break;
+            
+            case 'Utilizada':
+                return $this->router->redirect("admin/listar/reservas/Feita");
+            break;
+            
+            default:
+                return $this->router->redirect("admin/listar/reservas");
+            break;
+        }
+    }
+
+    public function ocupar($data){
+        session_start();
+        $id = $data["id"];
+        $reservas = new modelReserva();
+        $status = $data["status"];
+        $datahora = date('d/m/Y H:i');
+        if($id){
+            $reserva = $reservas->findById($id);
+            $reserva->status = "Utilizada";
+            $reserva->nome = "Local";
+            $reserva->datahora = $datahora;
+            $reserva->save();
+            if($reserva->fail()){
+                $_SESSION["erro"] = $reserva->fail()->getMessage();
+            }else{
+                $_SESSION["sucesso"] = "A mesa $id está ocupada a partir de agora!";
+            }
+        }else{
+            $_SESSION["erro"] = "Id informado incorreto!";
+        }
+        switch ($status) {
+            case 'Livre':
+                return $this->router->redirect("admin/listar/reservas/Livre");
+            break;
+
+            case 'Realizado':
+                return $this->router->redirect("admin/listar/reservas/Realizado");
+            break;
+            
+            case 'Utilizada':
+                return $this->router->redirect("admin/listar/reservas/Feita");
+            break;
+            
+            default:
+                return $this->router->redirect("admin/listar/reservas");
+            break;
+        }
+    }
+
+    public function livrar($data){
+        session_start();
+        $id = $data["id"];
+        $reservas = new modelReserva();
+        $status = $data["status"];
+        if($id){
+            $reserva = $reservas->findById($id);
+            $reserva->status = "Livre";
+            $reserva->numero_pessoas = null;
+            $reserva->nome = " ";
+            $reserva->datahora = " ";
+            $reserva->save();
+            if($reserva->fail()){
+                $_SESSION["erro"] = $reserva->fail()->getMessage();
+            }else{
+                $_SESSION["sucesso"] = "A mesa $id foi desocupada!";
+            }
+        }else{
+            $_SESSION["erro"] = "Id informado incorreto!";
+        }
+        switch ($status) {
+            case 'Livre':
+                return $this->router->redirect("admin/listar/reservas/Livre");
+            break;
+
+            case 'Realizado':
+                return $this->router->redirect("admin/listar/reservas/Realizado");
+            break;
+            
+            case 'Utilizada':
+                return $this->router->redirect("admin/listar/reservas/Utilizada");
+            break;
+            
+            default:
+                return $this->router->redirect("admin/listar/reservas");
+            break;
+        }
     }
 
 

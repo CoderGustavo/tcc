@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Todas as avaliações <?php echo $status ?></title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -40,7 +41,23 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <div class="container">
+      <?php if (isset($_SESSION["erro"])):?>
+        <div class="alert alert-danger alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-ban mr-3"></i>
+          <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php elseif(isset($_SESSION["sucesso"])):?>
+        <div class="alert alert-success alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-check mr-3"></i>
+          <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?></h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <?php endif?>
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -53,7 +70,7 @@
                 <h3 class="card-title">Todos as avaliações <?php echo $status ?></h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0 table-responsive">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -66,7 +83,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach ($avaliacoes as $linha): ?>
+                    <?php if($avaliacoes): foreach ($avaliacoes as $linha): ?>
                     <tr>
                       <td> <?php echo $linha->id ?> </td>
                       <td> <?php echo $linha->nome ?> </td>
@@ -96,7 +113,7 @@
                       <?php } ?>
                       </td>
                     </tr>
-                    <?php endforeach ?>
+                    <?php endforeach; endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -128,7 +145,7 @@
 <!-- Bootstrap 4 -->
 <script src="<?= url("View/assets/plugins/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
 <!-- AdminLTE App -->
-<script src="<?= url("View/assets/js/adminlte.js")?>"></script>
+<script src="<?= url("View/assets/js/adminlte.js")?>"></script><script src="<?= url("View/assets/js/mainAdmin.js")?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>

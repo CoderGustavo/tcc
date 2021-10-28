@@ -57,7 +57,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="d-flex justify-content-center align-items-center w-100" style="height: 80vh;">
-            <form class="form-signin border p-4 shadow rounded w-50" style="border-top: 5px solid #cda45e !important;" method="POST" enctype="multipart/form-data" action="<?= url("admin/cadastrar/cardapio/cadastrar") ?>">
+            <form class="form-signin border p-4 shadow rounded w-50" style="border-top: 5px solid #cda45e !important;" method="POST" action="<?= url("admin/editar/cardapio") ?>">
               
               <?php if (isset($_SESSION["erro"])):?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -75,36 +75,19 @@
                 </div>
               <?php endif?>  
               
-              <h1 class="mb-5">Cadastrar Item</h1>
+              <h1 class="mb-5">Editar Item</h1>
+              <input type="hidden" name="id" value="<?php echo $cardapio->id?>">
               <label for="inputEmail">Nome:</label>
-              <input type="text" name="nome" id="inputEmail" required="required" class="form-control mb-3 border-0 shadow" placeholder="Ex: X-Tudo" />
+              <input type="text" name="nome" id="inputEmail" required="required" class="form-control mb-3 border-0 shadow" placeholder="Ex: X-Tudo" value="<?php echo $cardapio->nome?>"/>
 
               <label for="inputPreco">Preço:</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text border-0 shadow">R$</span>
                 </div>
-                <input type="text" name="preco" id="inputPreco" required="required" class="form-control border-0 shadow" placeholder="Ex: 1.99" />
+                <input type="text" name="preco" id="inputPreco" required="required" class="form-control border-0 shadow" placeholder="Ex: 1.99" value="<?php echo $cardapio->preco?>"/>
               </div>
-              
-              <label for="inputImagem">Imagem:</label>
-                <div class="custom-file shadow border-0 mb-3 rounded">
-                  <input type="file" name="imagem" class="custom-file-inpu border-0" id="inputImagem">
-                  <label class="custom-file-label border-0" for="inputImagem">Escolher Arquivo</label>
-                </div>
-              <div class="row">
-                <?php if($ingredientes): foreach ($ingredientes as $key => $ingrediente):?>
-                  <div class="col-md-6 p-2">
-                    <label for="check<?php echo $ingrediente->nome?>" class="w-100 p-2 rounded shadow" style="cursor: pointer;">
-                      <input type="checkbox" style="cursor: pointer;" name="ingredientes[<?php echo $key?>]" id="check<?php echo $ingrediente->nome?>" value="<?php echo $ingrediente->id?>" <?php if($ingrediente->retirar == "nao"){echo "checked";}?>>
-                      <span class="ml-3">
-                        <?php echo $ingrediente->nome?>
-                      </span>
-                    </label>
-                  </div>
-                <?php endforeach; endif; ?>
-              </div>
-              <input type="submit" class="btn btn-lg btn-block btn-primarycolor mt-5" value="Cadastrar" />
+              <input type="submit" class="btn btn-lg btn-block btn-primarycolor mt-5" value="Editar" />
             </form>     
           </div>
         </div>

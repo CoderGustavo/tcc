@@ -1,10 +1,3 @@
-<?php
-  require_once'../../model/Usuario.php';
-  session_start();
-  $usuario = 0;
-  $usuario = $_SESSION['usuario'];
-  if ($usuario != 0) {
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +11,7 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.0/css/all.css">
 
   <!-- Theme style -->
-  <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css") ?>">
   <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
 
 </head>
@@ -26,60 +19,51 @@
 <div class="wrapper">
   <!-- Navbar -->
   <?php 
-    include("layout/navbarCliente.php");
-  ?>
-  
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <?php 
-    include("layout/sidebarCliente.php");
+    include("View/usuario/layout/navbar.php");
+    include("View/usuario/layout/sidebar.php");
   ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-12 text-center">
-            <h1>Meus dados</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <!-- /.col -->
-          <div class="offset-md-4 col-md-4">
-
-            <?php
-              if (isset($_SESSION["erro"])) {
-            ?>
-              <div class="bg-danger w-100 p-3 mt-2 text-center"><?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></div>
-            <?php } ?>
-
-            <form class="form-signin1" method="POST" action="../usuario-atualizar.php">
-
+          <div class="d-flex justify-content-center align-items-center w-100" style="height: 80vh;">
+            <form class="form-signin border p-4 shadow rounded w-50" style="border-top: 5px solid #cda45e !important;" method="POST" action="<?= url("conta/atualizar") ?>">
+              <?php if (isset($_SESSION["erro"])):?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <?php elseif(isset($_SESSION["sucesso"])):?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <?php endif?> 
+              <h1 class="mb-5 text-center">Minha Conta</h1>
               <label for="inputEmail" >Nome</label> 
               
-              <p><?php echo $usuario['nome']?></p>
+              <p><?php echo $usuario->nome?></p>
 
               <label for="inputEmail" >E-mail</label>
-              <input type="text" name="email" id="email" required="required" value= "<?php echo $usuario['email']?>" class="form-control mb-3"  />
+              <input type="email" name="email" id="email" required="required" value= "<?php echo $usuario->email?>" class="form-control mb-3"  />
 
               <label for="inputEmail" >Telefone</label>
-              <input type="text" name="telefone" id="telefone" required="required" value= "<?php echo $usuario['telefone']?>" class="form-control mb-3" />
+              <input type="text" name="telefone" id="telefone" required="required" value= "<?php echo $usuario->telefone?>" class="form-control mb-3" />
 
               <label for="inputPassword" >Confirmar Senha</label>
-              <input type="password" name="confirmarsenha" id="confirmarsenha" required="required" data-msg="Preencha o campo confirmar senha" class="form-control mb-3" />  
+              <input type="password" name="senha" id="inputPassword" required="required" class="form-control mb-3" />  
 
-              <input type="submit" class="btn btn-lg btn-success btn-block mt-5" value="Salvar" />
+              <input type="submit" class="btn btn-lg btn-primarycolor btn-block mt-5" value="Salvar" />
               
-            </form>    
+            </form>     
           </div>
 
         </div>
@@ -111,4 +95,3 @@
 <script src="<?= url("View/assets/js/adminlte.js")?>"></script>
 </body>
 </html>
-<?php } else { $_SESSION["acesso_restrito"] = "Não logado";header('Location: /tcc'); } ?>
