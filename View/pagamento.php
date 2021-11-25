@@ -12,10 +12,9 @@
   <!-- Favicons -->
   <link href="<?= url("View/assets/img/favicon1.png") ?>" rel="icon">
   <link href="<?= url("View/assets/img/apple-touch-icon.png") ?>" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+  
   <!-- Vendor CSS Files -->
   <link href="<?= url("View/assets/vendor/bootstrap/css/bootstrap.min.css")?>" rel="stylesheet">
   <link href="<?= url("View/assets/vendor/icofont/icofont.min.css")?>" rel="stylesheet">
@@ -25,13 +24,16 @@
   <link href="<?= url("View/assets/vendor/venobox/venobox.css")?>" rel="stylesheet">
   <link href="<?= url("View/assets/vendor/aos/aos.css")?>" rel="stylesheet">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css">
-
+  
   <!-- Template Main CSS File -->
   <link href="<?= url("View/assets/css/style.css") ?>" rel="stylesheet">
   <link href="<?= url("View/assets/css/stylePersonalizado.css") ?>" rel="stylesheet">
+
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 
 <body>
+    <?php include_once("modais_pagamento.php") ?>
     <!-- ======= Header ======= -->
     <header class="fixed-top" style="background-color: #55360069;">
         <div class="container-xl d-flex align-items-center p-3">
@@ -63,17 +65,26 @@
                                 <th>Qtd</th>
                                 <th>Obs</th>
                                 <th>Preço uni.</th>
+                                <th>Preço Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($pedido as $key => $lista): ?>
                             <tr>
-                                <th><?php echo $lista->nome?></th>
+                                <td><?php echo $lista->nome?></td>
                                 <td><?php echo $lista->qtd?></td>
                                 <td><?php echo $lista->obs?></td>
-                                <td>R$<?php echo $lista->preco?></td>
+                                <td>R$<?php echo $lista->preco;?></td>
+                                <td>R$<?php echo $lista->preco*$lista->qtd;?></td>
                             </tr>
                             <?php endforeach; ?>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total: R$<?php echo $soma ?></strong></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -92,28 +103,22 @@
                 <p>Selecione sua forma de pagamento</p>
             </div>
             <div class="row" data-aos="fade-up">
-                <div class="col-lg-6">
-                    <div class="m-2 p-2 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento div-pix rounded position-relative" style="height: 10rem;">   
+                <form action="<?= url("checkout/pagamento/pix") ?>" method="POST" class="col-lg-6">
+                    <button class="text-light m-2 p-2 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento div-pix rounded position-relative" style="height: 10rem;">   
                         <div class="text-center">
                             <img src="<?= url("View/assets/img/pix.png")?>" alt="pix" width="60%">
                         </div> 
-                        <div class="position-absolute d-none" style="right: -0.6rem; bottom: -0.6rem;">
-                        <i class="fas fa-check bg-primarycolor p-2 rounded-pill"></i>
-                        </div>
-                    </div>
-                </div>
+                    </button>
+                </form>
                 <div class="col-lg-6">
-                    <div class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
+                    <a href="#modal_credito" data-toggle="modal" class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
                         <div style="margin-bottom: -1rem; margin-top:3rem;">
                             <h4 class="text-primarycolor" style="font-family: Arial, Helvetica, sans-serif; margin-bottom: -5rem;">Cartão de Crédito</h4>
                         </div>
                         <div>
                             <img src="<?= url("View/assets/img/credit-card.png")?>" alt="cartao de credito" width="100%">
                         </div>
-                        <div class="position-absolute d-none" style="right: -0.6rem; bottom: -0.6rem;">
-                        <i class="fas fa-check bg-primarycolor p-2 rounded-pill"></i>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-6">
                     <div class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
@@ -122,9 +127,6 @@
                         </div>
                         <div>
                             <img src="<?= url("View/assets/img/table.png")?>" alt="cartao de credito" width="100%">
-                        </div>
-                        <div class="position-absolute d-none" style="right: -0.6rem; bottom: -0.6rem;">
-                        <i class="fas fa-check bg-primarycolor p-2 rounded-pill"></i>
                         </div>
                     </div>
                 </div>
@@ -136,14 +138,8 @@
                         <div>
                             <i class="fas fa-money-bill-alt" style="font-size: 40pt;"></i>
                         </div>
-                        <div class="position-absolute d-none" style="right: -0.6rem; bottom: -0.6rem;">
-                        <i class="fas fa-check bg-primarycolor p-2 rounded-pill"></i>
-                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="text-center w-100 mt-3">
-                <button href="" class="btn btn-primarycolor">Finalizar</button>
             </div>
         </div>
     </section>
@@ -161,5 +157,11 @@
 
     <!-- Template Main JS File -->
     <script src="<?= url("View/assets/js/main.js") ?>"></script>
+
+    <?php 
+    if($response){
+        echo "<script>$('#modal_pix').modal('show');</script>";
+    }
+    ?>
 </body>
 </html>

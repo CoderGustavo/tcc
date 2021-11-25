@@ -13,7 +13,6 @@
   <body class="text-center">
     <form class="form-signin" method="post" action="<?= url("acessar") ?>">
         <?php
-          session_start();
           if(isset($_SESSION["sucesso"])){
         ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -34,13 +33,14 @@
 
         <?php } session_destroy(); ?>
 
-
-      <img class="mb-4" src="<?= url("View/assets/img/favicon1.png") ?>" alt="" width="72" height="72">
+      <a href="<?= url("") ?>">
+        <img class="mb-4" src="<?= url("View/assets/img/favicon1.png") ?>" alt="" width="72" height="72">
+      </a>
 
       <h1 class="h3 mb-5 font-weight-normal text-light text-uppercase">ACESSAR</h1>
 
-      <input type="email" name="email" id="" class="form-control mb-3" placeholder="Email:" />
-      <input type="password" name="senha" id="" class="form-control" placeholder="Senha:" />  
+      <input type="email" name="email" id="" class="form-control mb-3 text-light" placeholder="Email:" value="<?php if(isset($_SESSION["valores"]["email"])){echo $_SESSION["valores"]["email"];} ?>" />
+      <input type="password" name="senha" id="" class="form-control text-light" placeholder="Senha:" />  
 
       <button type="submit" class="btn btn-lg btn-primarycolor btn-block mt-4 mb-2">Acessar</button>
       <a href="<?= url("cadastro") ?>" class="btn text-light">Ainda não possue uma conta? <span class="text-primarycolor">Crie aqui!</span></a>

@@ -1,49 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Administradores</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.0/css/all.css">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css")?>">
-  <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
-
-  <style>
-    input[type='checkbox']:after {
-        width: 15px;
-        height: 15px;
-        top: -4px;
-        left: -1px;
-        position: relative;
-        background-color: #d1d3d1;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
-    }
-
-    input[type='checkbox']:checked:after {
-        width: 15px;
-        height: 15px;
-        top: -4px;
-        left: -1px;
-        position: relative;
-        background-color: #ffa500;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
-    }
-  </style>
-
-</head>
+<?php include_once("View/admin/layout/header.php")?>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <?php 
@@ -56,8 +13,8 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="d-flex justify-content-center align-items-center w-100" style="height: 80vh;">
-            <form class="form-signin border p-4 shadow rounded w-50" style="border-top: 5px solid #cda45e !important;" method="POST" enctype="multipart/form-data" action="<?= url("admin/cadastrar/cardapio/cadastrar") ?>">
+          <div class="d-flex justify-content-center align-items-center w-100" style="height: 100vh;">
+            <form class="form-signin border p-4 shadow rounded" style="border-top: 5px solid #cda45e !important;" method="POST" enctype="multipart/form-data" action="<?= url("admin/cadastrar/cardapio/cadastrar") ?>">
               
               <?php if (isset($_SESSION["erro"])):?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -85,6 +42,15 @@
                   <span class="input-group-text border-0 shadow">R$</span>
                 </div>
                 <input type="text" name="preco" id="inputPreco" required="required" class="form-control border-0 shadow" placeholder="Ex: 1.99" />
+              </div>
+
+              <div class="mb-3">
+              <label for="inputCategoria">Categoria:</label>
+              <select class="custom-select border-0 shadow" id="inputCategoria" name="categoria">
+                <?php if($categorias): foreach($categorias as $key => $categoria): ?>
+                <option value="<?php echo $categoria->id ?>"><?php echo $categoria->nome ?></option>
+                <?php endforeach; endif; ?>
+              </select>
               </div>
               
               <label for="inputImagem">Imagem:</label>
@@ -114,12 +80,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control mb-3-sidebar control mb-3-sidebar-dark">

@@ -10,6 +10,10 @@ class Avaliacao extends DataLayer
 	{
 		parent::__construct("avaliacoes", ["id_usuario", "avaliacao", "status", "datahora","estrela"], "id", false);
 	}
+
+	public function usuario(){
+		return (new Usuario())->find("id=:userid","userid={$this->id_usuario}")->fetch();
+	}
 }
 
 ?>

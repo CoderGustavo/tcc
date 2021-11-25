@@ -1,0 +1,20 @@
+.form-signin{
+    width: 50%;
+}
+.border-3{
+    border-width: 3px !important;
+}
+.icon{
+    font-weight: normal !important;
+}
+.bg-primarycolor{
+    background-color: #cda45e;
+}
+.color-primarycolor{
+    color: #cda45e !important;
+}
+@media (max-width: 1000px) {
+    .form-signin{
+        width: 100%;
+    }
+}

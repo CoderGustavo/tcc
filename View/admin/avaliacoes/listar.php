@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Todas as avaliações <?php echo $status ?></title>
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.0/css/all.css">
-
-  <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css")?>">
-</head>
+<?php include_once("View/admin/layout/header.php")?>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
@@ -86,7 +74,7 @@
                     <?php if($avaliacoes): foreach ($avaliacoes as $linha): ?>
                     <tr>
                       <td> <?php echo $linha->id ?> </td>
-                      <td> <?php echo $linha->nome ?> </td>
+                      <td> <?php echo $linha->usuario()->nome ?> </td>
                       <td> <?php echo $linha->avaliacao ?> </td>
                       <td> <?php echo $linha->datahora ?> </td>
 
@@ -125,12 +113,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

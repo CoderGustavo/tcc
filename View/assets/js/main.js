@@ -220,9 +220,6 @@
 })(jQuery);
 
 $(document).ready(function(){
-
-  $("#data").mask("99/99/9999");
-  $("#hora").mask("99:99");
   
   $('.stars').on('click', function(){
     var id = $(this).attr('id');
@@ -294,18 +291,47 @@ $(document).ready(function(){
     }
   });
 
+  $('.btn-fechar-appbar').on('click', function(e){
+    e.preventDefault();
+    $('.baixar-app').remove();
+  })
+
 
   var valor = "fechado";
   $('.texto').on('click', function(e){
     e.preventDefault();
     if(valor == "fechado"){
+      $(".headerDelivery").addClass("aparecer-top");
       $('.pedido-sacola').addClass("abrir-menu").delay(1000);
       valor = "aberto";
       $('.texto p').text("Esconder Pedido");
+      if(window.innerWidth < 1000){
+        $('.div-texto').toggleClass("d-none").delay(1000);
+      }
     }else{
+      $('.headerDelivery').removeClass("aparecer-top");
       $('.pedido-sacola').removeClass("abrir-menu");
       valor = "fechado";
       $('.texto p').text("Ver Pedido");
+      if(window.innerWidth < 1000){
+        $('.div-texto').toggleClass("d-none").delay(1000);
+      }
+    }
+  });
+  $('.btn-fecharpedido').on('click', function(e){
+    e.preventDefault();
+    if(valor == "fechado"){
+      $(".headerDelivery").addClass("aparecer-top");
+      $('.pedido-sacola').addClass("abrir-menu").delay(1000);
+      valor = "aberto";
+      $('.texto p').text("Esconder Pedido");
+      $('.div-texto').toggleClass("d-none").delay(1000);
+    }else{
+      $(".headerDelivery").removeClass("aparecer-top");
+      $('.pedido-sacola').removeClass("abrir-menu");
+      valor = "fechado";
+      $('.texto p').text("Ver Pedido");
+      $('.div-texto').toggleClass("d-none").delay(1000);
     }
   });
   
@@ -346,4 +372,26 @@ $(document).ready(function(){
     }
     $(this).parent().parent().parent().remove();
   });
+
+});
+$(document).ready(function(){
+  setTimeout(function(){
+    $(".autohide").hide(100);
+  }, 5000);
+  $('#menu-flters li').on('click', function(e){
+    e.preventDefault();
+    $(this).addClass("filter-active");
+    $(this).siblings().removeClass("active");
+
+    if($(this).attr("filtro") == "todos"){
+        $(".menu .menu-item").fadeIn(100);
+    }else{
+        var filtro = $(this).attr("filtro");
+        console.log(filtro);
+        $(".menu .menu-item").fadeOut(100);
+        $(".menu .menu-item[filtrar="+filtro+"]").fadeIn(100);
+    }
+  });
+  
+  $('#menu-flters li[filtrar="todos"]').click();
 });

@@ -8,7 +8,7 @@ class Reserva extends DataLayer
 {
 	public function __construct()
 	{
-		parent::__construct("reservas", ["status"], "id", false);
+		parent::__construct("reservas", [], "id", false);
 	}
 
 	public function usuario(){

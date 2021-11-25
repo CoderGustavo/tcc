@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css") ?>">
   <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
 
+  <link rel="stylesheet" href="<?= url("View/assets/css/styleAdminPersonalizado.css") ?>">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -30,8 +32,8 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="d-flex justify-content-center align-items-center w-100" style="height: 80vh;">
-            <form class="form-signin border p-4 shadow rounded w-50" style="border-top: 5px solid #cda45e !important;" method="POST" action="<?= url("conta/atualizar") ?>">
+          <div class="d-flex justify-content-center align-items-center w-100" style="height: 100vh;">
+            <form class="form-signin border p-4 shadow rounded" style="border-top: 5px solid #cda45e !important;" method="POST" action="<?= url("conta/atualizar") ?>">
               <?php if (isset($_SESSION["erro"])):?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                   <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?>
@@ -71,19 +73,6 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control mb-3-sidebar control mb-3-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control mb-3-sidebar -->
 </div>
 <!-- ./wrapper -->
 

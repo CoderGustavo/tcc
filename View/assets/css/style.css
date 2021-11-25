@@ -147,9 +147,14 @@ h1, h2, h3, h4, h5, h6 {
   background: #2d1912;
   border-bottom: 1px solid rgba(12, 11, 9, 0.6);
   transition: all 0.5s;
-  z-index: 997;
+  z-index: 10;
   padding: 15px 0;
-  top: 40px;
+  top: 2.5rem;
+}
+
+.headerDelivery {
+  top: 0 !important;
+  z-index: 5 !important;
 }
 
 #header.header-scrolled {
@@ -159,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo {
-  font-size: 28px;
+  font-size: 16pt;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -412,6 +417,23 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
+#book-a-table {
+  background: url("../img/book-a-table.jpg") center center;
+  background-size: cover;
+  position: relative;
+  padding: 80px 0;
+}
+
+#book-a-table:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .mobile-nav .book-a-table a:hover {
   background: #cda45e;
   color: #fff;
@@ -462,7 +484,7 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   background: url("../img/hamburg.jpg") top center;
   background-size: cover;
   position: relative;
@@ -491,7 +513,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero h1 {
   margin: 0;
-  font-size: 48px;
+  font-size: 35pt;
   font-weight: 700;
   line-height: 56px;
   color: #fff;
@@ -702,8 +724,8 @@ section {
   margin: 0;
   margin: 0;
   font-size: 36px;
-  font-weight: 700;
-  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
   color: #cda45e;
 }
 
@@ -763,7 +785,7 @@ section {
 # About
 --------------------------------------------------------------*/
 .about {
-  background: url("../img/fundo.jpg") center center;
+  background: url("../img/about-bg.jpg") center center;
   background-size: cover;
   position: relative;
   padding: 80px 0;

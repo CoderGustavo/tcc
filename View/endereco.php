@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
   <meta charset=utf-8 />
@@ -62,6 +62,29 @@
 </head>
 
 <body>
+    <div class="modal" id="addendereco" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-darkdark border border-primarycolor shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Endereço</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= url("checkout/pagamento") ?>" method="POST">
+                    <div class="modal-body">
+                        <input type="text" name="logradouro" id="" class="form-control mb-3 shadow bg-dark" placeholder="Logradouro: Ex: Rua joãozinho" required/>
+                        <input type="text" name="bairro" id="" class="form-control mb-3 shadow bg-dark" placeholder="Bairro: Ex: Flamboyan"required />
+                        <input type="text" name="numero" id="" class="form-control mb-3 shadow bg-dark" placeholder="Número: Ex: 898" required/>
+                        <input type="text" name="referencia" id="" class="form-control mb-3 shadow bg-dark" placeholder="Referência: Ex: Próximo a Rayontex"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primarycolor">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- ======= Header ======= -->
     <header class="fixed-top" style="background-color: #55360069;">
         <div class="container-xl d-flex align-items-center p-3">
@@ -93,6 +116,7 @@
                                 <th>Qtd</th>
                                 <th>Obs</th>
                                 <th>Preço uni.</th>
+                                <th>Preço Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,14 +125,16 @@
                                 <td><?php echo $lista->nome?></td>
                                 <td><?php echo $lista->qtd?></td>
                                 <td><?php echo $lista->obs?></td>
-                                <td>R$<?php echo $lista->preco; $soma =$soma+$lista->preco?></td>
+                                <td>R$<?php echo $lista->preco;?></td>
+                                <td>R$<?php echo $lista->preco*$lista->qtd;?></td>
                             </tr>
                             <?php endforeach; ?>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>Total: R$<?php echo $soma ?></td>
+                                <td></td>
+                                <td><strong>Total: R$<?php echo $soma ?></strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -120,7 +146,23 @@
                 <p>Escolha seu endereço de entrega!</p>
             </div>
             <form class="row p-2" data-aos="fade-up" action="<?= url("checkout/pagamento") ?>" method="post">
-                <?php foreach($enderecos as $key => $endereco):?>
+                <?php if (isset($_SESSION["erro"])):?>
+                    <div class="alert alert-danger alert-dismissible fade show autohide w-100" role="alert"><h5 class="m-0"><i class="fas fa-ban mr-3"></i>
+                        <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></h5>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php elseif(isset($_SESSION["sucesso"])):?>
+                    <div class="alert alert-success alert-dismissible fade show autohide w-100" role="alert"><h5 class="m-0"><i class="fas fa-check mr-3"></i>
+                        <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?></h5>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php endif?>
+
+                <?php if($enderecos): foreach($enderecos as $key => $endereco):?>
                     <label class="col-md-6 p-2" for="endereco<?php echo $key?>" style="cursor: pointer;">
                         <div class="p-2 border border-primarycolor rounded d-flex">
                             <input type="radio" class="m-2" name="endereco" id="endereco<?php echo $key?>" value="<?php echo $endereco->id ?>" <?php if($key == 0){echo "checked";}?>>
@@ -148,7 +190,19 @@
                             </div>
                         </div>
                     </label>
-                <?php endforeach ?>
+                <?php endforeach; ?>
+                
+                <label class="col-md-6 p-2" style="cursor: pointer;" data-target="#addendereco" data-toggle="modal">
+                    <div class="p-2 h-100 text-primarycolor border border-primarycolor rounded d-flex justify-content-center align-items-center">
+                        <h2 class="h1"><i class="far fa-plus"></i></h2>
+                    </div>
+                </label>
+                <?php else: ?>
+                    <input type="text" name="logradouro" id="" class="form-control mb-3 shadow bg-dark" placeholder="Logradouro: Ex: Rua joãozinho" required/>
+                    <input type="text" name="bairro" id="" class="form-control mb-3 shadow bg-dark" placeholder="Bairro: Ex: Flamboyan"required />
+                    <input type="text" name="numero" id="" class="form-control mb-3 shadow bg-dark" placeholder="Número: Ex: 898" required/>
+                    <input type="text" name="referencia" id="" class="form-control mb-3 shadow bg-dark" placeholder="Referência: Ex: Próximo a Rayontex"/>
+                <?php endif; ?>
                 <div class="col-12 text-center mt-2">
                     <button type="subtmit" class="btn btn-primarycolor">Confirmar Endereço</button>
                 </div>

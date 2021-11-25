@@ -1,3 +1,27 @@
+body::-webkit-scrollbar {
+    width: 8px;
+    /* width of the entire scrollbar */
+    position: absolute;
+    right: 0; 
+}
+body::-webkit-scrollbar-track {
+    background: #222;
+    /* color of the tracking area */
+    position: absolute;
+    right: 0; 
+}
+body::-webkit-scrollbar-thumb {
+    position: absolute;
+    right: 0;
+    background-color: #fcb94e;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #fcb94e;
+    /* creates padding around scroll thumb */
+    margin: 1px; 
+}
+
 .menu-conta{
     position: absolute;
     left: 50%;
@@ -21,6 +45,30 @@
 .stars{
 	cursor: pointer;
 	transition: .5s;
+}
+
+.btn-abaixar-hero{
+    position: absolute;
+    width: 100%;
+    top: 55vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    animation: pular-seta 1s 0.5s infinite linear alternate;
+    font-size: 25pt;
+}
+.btn-abaixar-hero > i:nth-of-type(1){
+    font-size: 13pt;
+    margin-bottom: -10px;
+}
+
+@keyframes pular-seta {
+    0%{
+        margin-top: 0;
+    }
+    100%{
+        margin-top: 20px;
+    }
 }
 
 .bg-primarycolor{
@@ -81,6 +129,9 @@
     border: 1px solid #cda45e;
     transition: 1s linear;
 }
+.bg-dark{
+    background-color: #1b1a18 !important;
+}
 #deliverymodal input[type='radio']:after {
     width: 15px;
     height: 15px;
@@ -117,13 +168,13 @@
 #addendereco_modal input{
     color: #fff;
 }
-input, textarea{
+input, textarea, select{
     background-color: #0c0b09 !important;
     box-shadow: none !important;
-    border: 1px solid #0c0b09 !important;
+    border: 1px solid #92918e !important;
     box-sizing: border-box;
 }
-input:focus, input:hover, textarea:focus, textarea:hover{
+input:focus, input:hover, textarea:focus, textarea:hover, select:focus, select:hover{
     background-color: #0c0b09 !important;
     box-shadow: none !important;
     border: 1px solid #cda45e !important;
@@ -144,11 +195,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .loading span {
     flex: 1;
     margin: 5px;
-    height: 25px;
-    background-color: #cda45e;
+    height: 10px;
+    background-color: #EDA45EFF;
     animation: girar .5s linear infinite;
     animation-direction: alternate;
-    border-radius: 20px;
 }
 .loading span:nth-of-type(1){
     animation-delay: .1s;
@@ -169,19 +219,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @keyframes girar {
     100%{
         padding: 50% 0;
-        background-color: #ffa500;
     }
 }
 
 
-
+.aparecer-top{
+    z-index: 0 !important;
+}
 .pedido-sacola{
     position: fixed;
     top: 0;
     right: -46.5rem;
     width: 50rem;
     height: 100vh;
-    z-index: 99999;
+    z-index: 4;
     display: flex;
     transition: 1s;
 }
@@ -221,9 +272,106 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center;
     padding: 3rem;
     border-left: 4px solid #cda45e;
+    z-index: 11 !important;
 }
 .pedidos-sacola h3{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-size: 30pt;
+}
+.logo-mesa{
+    font-size: 28pt;
+}
+.form-signin{
+    width: 50%;
+}
+#menu-flters {
+  padding: 0;
+  margin: 0 auto 0 auto;
+  list-style: none;
+  text-align: center;
+  border-radius: 50px;
+}
+#menu-flters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 12px 10px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: all ease-in-out 0.3s;
+  border-radius: 50px;
+  font-family: "Playfair Display", serif;
+}
+#menu-flters li:hover, #menu-flters li.filter-active {
+  color: #cda45e;
+}
+#menu-flters li:last-child {
+  margin-right: 0;
+}
+.baixar-app{
+    display: none;
+}
+.form-control, .form-control:focus, .form-control:hover{
+    color: #fff;
+}
+@media (max-width: 990px) {
+    .logo-mesa{
+        font-size: 20pt;
+    }
+    .btn-fecharpedido{
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+    }
+    .btn-fecharpedido:hover{
+        color: #ffa500;
+    }
+    .btn-fecharpedido:focus{
+        box-shadow: none;
+    }
+    .pedido-sacola{
+        right: -47.8rem;
+        width: 50rem;
+    }
+    .div-texto{
+        width: 2.5rem;
+    }
+    .div-texto .texto{
+    }
+    .div-texto .texto p{
+        margin: .4rem;
+    }
+
+    .pedidos-sacola{
+        border-left: none;
+    }
+    .abrir-menu{
+        right: 0 !important;
+        width: 100%;
+    }
+    .form-signin{
+        width: 100%;
+    }
+    .baixar-app{
+        display: block;
+        width: 100%;
+        background-color: #1b1a18;
+        position: fixed;
+        top: 0;
+        z-index: 1040;
+        padding-top: 1.5rem;
+    }
+    .baixar-app button{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+@media (max-width: 420px) {
+    .logo-mesa{
+        font-size: 17pt;
+    }
 }

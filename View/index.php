@@ -34,21 +34,60 @@
 </head>
 
 <body>
+
+  <!-- ======= App Bar ======= -->
+  <div class="baixar-app text-center">
+      <div class="d-flex justify-content-end">
+        <button class="btn text-primarycolor h3 btn-fechar-appbar"><i class="fas fa-times"></i></button>
+      </div>
+      <h3 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 18pt;">Instale nosso Aplicativo</h3>
+      <a href="https://play.google.com/store/apps/details?id=io.kodular.gustavoornaghiantunes.DeliciousHamburgueria">
+        <img src="<?= url("View/assets/img/play_store_br.png") ?>" alt="img-playstore" width="200px">
+      </a>
+  </div><!-- End App Bar -->
+
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex">
+    <div class="container d-flex align-items-center">
       <div class="contact-info mr-auto">
-        <i class="icofont-phone"></i> +55 19 3863-0823
-        <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Qua-Dom: 18:00 - 00:00</span>
+        <i class="icofont-phone"></i> <a href="tel:1938630823" class="text-light">+55 19 3863-0823</a>
+        <i class="ml-3 fab fa-whatsapp d-none d-md-inline-block"></i> <a href="https://api.whatsapp.com/send/?phone=551938630823"class="text-light d-none d-md-inline-block">+55 19 3863-0823</a>
+        <span class="ml-3 d-none d-md-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Sexta-Domingo: 18:00 - 00:00</span>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="text-light p-1 pl-4 pr-4 rounded d-flex justify-content-between align-items-center w-100 dropdown-toggle" data-toggle="dropdown">
+          <div>
+            <img src="<?= url("View/assets/img/br_flag.jpg") ?>" alt="pt_br" height="25px" width="25px" class="rounded-circle">
+          </div>
+        </a>
+
+        <div class="dropdown-menu bg-dark">
+          <a href="#" class="text-light bg-dark p-1 pl-4 pr-4 rounded d-flex justify-content-between align-items-center w-100 dropdown-item" data-toggle="dropdown">
+            <div>
+              <img src="<?= url("View/assets/img/br_flag.jpg") ?>" alt="pt_br" height="25px" width="25px" class="rounded-circle">
+            </div>
+            <div>
+              <span>PT_BR</span>
+            </div>
+          </a>
+          <a href="#" class="text-light bg-dark p-1 pl-4 pr-4 rounded d-flex justify-content-between align-items-center w-100 dropdown-item" data-toggle="dropdown">
+            <div>
+              <img src="<?= url("View/assets/img/eua_flag.jpg") ?>" alt="eng" height="25px" width="25px" class="rounded-circle">
+            </div>
+            <div>
+              <span>ENG</span>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+  </div><!-- End Top Bar -->
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.php">Delicious Hamburgueria</a></h1>
+      <h1 class="logo mr-auto"><a href="<?= url("") ?>">Delicious Hamburgueria</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -67,6 +106,7 @@
             <ul class="menu-conta">
               <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
               <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
+              <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
               <?php if ($admin == 1){?>
                 <li><a href="<?= url("admin") ?>">Admin</a></li>
               <?php } ?>
@@ -83,10 +123,10 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative text-center text-lg-right" data-aos="zoom-in" data-aos-delay="100">
+  <section id="hero" class="d-flex align-items-center position-relative">
+    <div class="container text-center text-lg-right" data-aos="zoom-in" data-aos-delay="100">
       <div class="row">
-        <div class="offset-lg-6 col-lg-6">
+        <div class="offset-lg-5 col-lg-7">
           <h1>Bem vindo ao <span>Delicious Hamburgueria</span></h1>
           <h2>Lanches feitos para aproveitar a gostosura gourmet</h2>
 
@@ -98,7 +138,10 @@
             <?php } ?>
           </div>
         </div>
-
+        <div class="btn-abaixar-hero">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </div>
     </div>
   </section><!-- End Hero -->
@@ -106,7 +149,7 @@
   <main id="main">
     <!-- ======= Sessão cardápio ======= -->
     <section id="menu" class="menu section-bg">
-      <div class="container" data-aos="fade-up">
+      <div class="container">
 
         <div class="section-title">
           <h2>Cardápio</h2>
@@ -115,7 +158,7 @@
 
 
         <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
-            <?php foreach ($cardapio as $key => $value): ?>
+            <?php if($cardapio): foreach ($cardapio as $key => $value): ?>
             <div class="col-lg-6 menu-item mt-2">
               <div class="row">
                 <div class="col-sm-2 col-3">
@@ -140,7 +183,7 @@
                 </div>
               </div>
             </div>
-            <?php endforeach; ?>
+            <?php endforeach; endif; ?>
             <div class="col-12 mt-3 w-100 d-flex justify-content-center align-items-center">
               <a href="<?= url("cardapio") ?>" class="btn btn-outline-primarycolor rounded p-2 pr-4 pl-4 btn-lg scrollto mr-3">Ver Cardápio</a>
               <?php if($logado != 0):?>
@@ -194,7 +237,7 @@
     <!-- Fim da sessão sobre -->
 
     <!-- ======= Sessão de reserva ======= -->
-    <?php if ($logado != 0) {?>
+    <?php if ($logado != 0): ?>
     <section id="book-a-table" class="book-a-table section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -232,56 +275,56 @@
 
       </div>
     </section>
-    <?php } else { } ?>
+    <?php endif; ?>
     <!-- Fim da sessão de reserva -->
 
     <!-- ======= Sessão avaliação ======= -->
-    <?php if ($logado != 0) {?>
-      <section id="avaliacao" class="contact section-bg">
-          <div class="container" data-aos="fade-up">
-              <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
-                <div class="row book-a-table" data-aos="fade-up">
-                  <div class="section-title text-left">
-                    <h2>Avaliar</h2>
+    <?php if ($logado != 0):?>
+    <section id="avaliacao" class="contact">
+        <div class="container" data-aos="fade-up">
+            <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
+              <div class="row book-a-table" data-aos="fade-up">
+                <div class="section-title text-left">
+                  <h2>Avaliar</h2>
 
-                    <p>Dê sua avaliação sobre nossa lanchonete!</p>
-                  </div>
-               
-                
-                  <form action="<?= url("salvar/avaliacao") ?>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-                    <div class="form-row">
-                      <div class="col-12">
-                        <div class="mb-5 h3">
-                              <i class="far fa-star stars text-warning" id="star-1"></i>
-                              <i class="far fa-star stars text-warning" id="star-2"></i>
-                              <i class="far fa-star stars text-warning" id="star-3"></i>
-                              <i class="far fa-star stars text-warning" id="star-4"></i>
-                              <i class="far fa-star stars text-warning" id="star-5"></i>
-                        </div>
-                        <input type="hidden" value="0" name="estrela" id="estrela">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <textarea class="form-control" id="avaliacao" name="avaliacao" rows="5" placeholder="Digite seu avaliação aqui!"></textarea>
-                      <div class="validate"></div>
-                    </div>
-                    <div class="mb-3">
-                      <div class="loading">Loading</div>
-                      <div class="error-message"></div>
-                    </div>
-
-                    <div class="text-center"><button type="submit" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg">Comentar</button></div>
-
-                  </form>
+                  <p>Dê sua avaliação sobre nossa lanchonete!</p>
                 </div>
+              
+              
+                <form action="<?= url("salvar/avaliacao") ?>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+                  <div class="form-row">
+                    <div class="col-12">
+                      <div class="mb-5 h3">
+                            <i class="far fa-star stars text-warning" id="star-1"></i>
+                            <i class="far fa-star stars text-warning" id="star-2"></i>
+                            <i class="far fa-star stars text-warning" id="star-3"></i>
+                            <i class="far fa-star stars text-warning" id="star-4"></i>
+                            <i class="far fa-star stars text-warning" id="star-5"></i>
+                      </div>
+                      <input type="hidden" value="0" name="estrela" id="estrela">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" id="avaliacao" name="avaliacao" rows="5" placeholder="Digite seu avaliação aqui!"></textarea>
+                    <div class="validate"></div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                  </div>
+
+                  <div class="text-center"><button type="submit" class="btn btn-primarycolor rounded p-2 pr-4 pl-4 btn-lg">Comentar</button></div>
+
+                </form>
               </div>
-          </div>
-      </section>
-    <?php } else { } ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
     <!-- Fim da sessão avaliação -->
 
     <!-- ======= Sessão Lista de Avaliações ======= -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -301,7 +344,7 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>                
               </p>
               <div class="img-data">
-                <img src="<?= url("View/assets/img/testimonials/testimonials-2.png") ?>" class="testimonial-img" alt="">
+                <img src="<?= url("View/assets/img/perfil.png") ?>" class="testimonial-img" alt="">
                 <span class="testimonial-data-estrela">
                   <?php echo $linha->datahora  ?>
                   <br>
@@ -346,7 +389,7 @@
     <!-- Fim da sessão avaliaçãos  -->
 
     <!-- ======= Sessão Fotos ======= -->
-    <section id="gallery" class="gallery section-bg">
+    <section id="gallery" class="gallery">
 
       <div class="container" data-aos="fade-up">
         <div class="section-title">
@@ -501,7 +544,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-        Desenvolvido por <a href="">Time Delicious</a>
+        Desenvolvido por <a href="" class="text-primarycolor">Time Delicious</a>
       </div>
     </div>
   </footer><!-- End Footer -->
@@ -530,6 +573,7 @@
 
   <!-- Template Main JS File -->
   <script src="<?= url("View/assets/js/main.js") ?>"></script>
+  <script src="<?= url("View/assets/js/mask.js") ?>"></script>
 
 </body>
 

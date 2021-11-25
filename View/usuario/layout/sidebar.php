@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link border-0 text-center">
+    <a href="<?= url("conta/minhaconta") ?>" class="brand-link border-0 text-center">
       <img src="<?= url("View/assets/img/favicon1.png") ?>" alt="AdminLTE Logo" class="brand-image">
       <span class="brand-text font-weight-bold text-uppercase">Minha Conta</span>
     </a>
@@ -42,6 +42,21 @@
               ">
                 <i class="fas fa-shopping-bag nav-icon"></i>
                 <p>Meus Pedidos</p>
+              </a>
+          </li>
+          <li class="nav-item text-center">
+              <a href="<?= url("conta/minhasreservas") ?>" class="nav-link
+              <?php if(
+              $_SERVER["REQUEST_URI"] == "/tcc/conta/minhasreservas"
+              ){
+              echo "active";
+              }
+              ?>
+              ">
+                <i class="nav-icon">
+                  <img src="<?= url("View/assets/img/table.png") ?>" alt="" width="25px">
+                </i>
+                <p>Minhas Reservas</p>
               </a>
           </li>
           <li class="nav-item text-center">

@@ -40,7 +40,8 @@
         "coffeecode/router": "1.0.*",
         "coffeecode/datalayer": "1.1.*",
         "league/plates": "v4.0.0-alpha",
-        "chillerlan/php-qrcode": "dev-main"
+        "chillerlan/php-qrcode": "dev-main",
+        "mercadopago/dx-php": "^2.4"
     },
     "config": {
         "vendor-dir": "vendor"

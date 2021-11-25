@@ -8,7 +8,7 @@ class Endereco extends DataLayer
 {
 	public function __construct()
 	{
-		parent::__construct("enderecos", ["id_usuario", "logradouro", "numero", "referencia", "bairro"], "id", false);
+		parent::__construct("enderecos", ["id_usuario", "logradouro", "numero", "bairro"], "id", false);
 	}
 }
 

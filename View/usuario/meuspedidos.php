@@ -40,49 +40,59 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row p-3">
-            <?php foreach($pedidos as $pedido):?>
-                    <?php if($pedido->status == "Pendente"){?>
-                        <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0 border-warning" style="background-color: #222; border-width: 8px !important;">
-                    <?php }else if($pedido->status == "Em Preparo"){?>
-                        <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0 border-primary" style="background-color: #222; border-width: 8px !important;">
-                    <?php } else if($pedido->status == "Entregue"){?>
-                        <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0 border-success" style="background-color: #222; border-width: 8px !important;">
-                    <?php } ?>
-                <div class="d-flex justify-content-between">
-                    <h2 class="text-light">Pedido #<?php echo $pedido->id?></h2>
-                    <?php if($pedido->status == "Pendente"){?>
-                        <p class="h4 text-warning"><?php echo $pedido->status?></p>
-                    <?php }else if($pedido->status == "Em Preparo"){?>
-                        <p class="h4 text-pimary"><?php echo $pedido->status?></p>
-                    <?php } else if($pedido->status == "Entregue"){?>
-                        <p class="h4 text-success"><?php echo $pedido->status?></p>
-                    <?php } ?>
-                </div>
-                <div class="d-flex justify-content-between pt-5 mt-5 align-items-center">
-                    <a href="" class="btn btn-outline-info btn-lg text-uppercase">Ver Detalhes</a>
-                    <p class="h4 text-light">Total: <strong>R$<?php echo $pedido->total?></strong></p>
-                </div>
+        <div class="container">
+          <?php if (isset($_SESSION["erro"])):?>
+            <div class="alert alert-danger alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-ban mr-3"></i>
+              <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?></h5>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <?php endforeach; ?>
+          <?php elseif(isset($_SESSION["sucesso"])):?>
+            <div class="alert alert-success alert-dismissible fade show autohide" role="alert"><h5 class="m-0"><i class="fas fa-check mr-3"></i>
+              <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?></h5>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php endif?>
+        </div>
+        <div class="row p-3">
+          <?php foreach($pedidos as $pedido):?>
+            <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0
+            <?php
+            if($pedido->status == "Pendente"){
+                echo "border-warning";
+            }else if($pedido->status == "Em Preparo"){
+              echo "border-primary";
+            }else{
+              echo "border-success";
+            }
+            
+            ?>
+            " style="background-color: #222; border-width: 8px !important;">
+                  <div class="d-flex justify-content-between">
+                      <h2 class="text-light">Pedido #<?php echo $pedido->id?></h2>
+                      <?php if($pedido->status == "Pendente"){?>
+                          <p class="h4 text-warning"><?php echo $pedido->status?></p>
+                      <?php }else if($pedido->status == "Em Preparo"){?>
+                          <p class="h4 text-primary"><?php echo $pedido->status?></p>
+                      <?php } else if($pedido->status == "Entregue"){?>
+                          <p class="h4 text-success"><?php echo $pedido->status?></p>
+                      <?php } ?>
+                  </div>
+                  <div class="d-flex justify-content-between pt-5 mt-5 align-items-center">
+                      <a href="<?= url("conta/meuspedidos/$pedido->id") ?>" class="btn btn-outline-info btn-lg text-uppercase">Ver Detalhes</a>
+                      <p class="h4 text-light">Total: <strong>R$<?php echo $pedido->total?></strong></p>
+                  </div>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control mb-3-sidebar control mb-3-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control mb-3-sidebar -->
 </div>
 <!-- ./wrapper -->
 
@@ -92,5 +102,8 @@
 <script src="<?= url("View/assets/plugins/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= url("View/assets/js/adminlte.js")?>"></script>
+
+<script src="<?= url("View/assets/js/mainAdmin.js")?>"></script>
+
 </body>
 </html>

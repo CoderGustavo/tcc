@@ -16,17 +16,22 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item text-center">
-              <a href="<?= url("admin") ?>" class="nav-link callout bg-transparent callout-transparent">
+          <li class="nav-item text-center          ">
+              <a href="<?= url("admin") ?>" class="nav-link callout bg-transparent          
+            <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin"){
+                echo "callout-light";
+              }else{
+                echo "callout-transparent";
+              }
+            ?>
+          ">
                 <i class="fas fa-cogs nav-icon"></i>
                 <p>Informações gerais</p>
               </a>
           </li>
+          <?php if($admin->nivel_acesso <= 2):?>
           <li class="nav-item
             <?php if(
-              $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cliente" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/clientes"
               ){
               echo "menu-open";
@@ -35,7 +40,6 @@
             ">
             <a href="#" class="nav-link callout bg-transparent
               <?php if(
-                $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cliente" ||
                 $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/clientes"
                 ){
                 echo "callout-light";
@@ -52,17 +56,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item text-center">
-                <a href="<?= url("admin/cadastrar/cliente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cliente"){ echo "callout-primary bg-primary";}else{echo "callout-transparent";}?>">
-                  <p>Cadastrar Cliente</p>
-                </a>
-              </li>
-              <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/clientes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/clientes"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/clientes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/clientes"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Listar Clientes</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; if($admin->nivel_acesso <= 1):?>
           <li class="nav-item
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/admins" ||
@@ -91,17 +91,18 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item text-center">
-                <a href="<?= url("admin/cadastrar/admin") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/admin"){ echo "callout-danger bg-danger";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/cadastrar/admin") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/admin"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Cadastrar administrador</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/admins") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/admins"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/admins") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/admins"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Listar administradores</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; if($admin->nivel_acesso <= 3):?>
           <li class="nav-item
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/ingrediente" ||
@@ -129,18 +130,21 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item text-center">
-                <a href="<?= url("admin/cadastrar/ingrediente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/ingrediente"){ echo "callout-warning bg-warning";}else{echo "callout-transparent";}?>">
+              <?php if($admin->nivel_acesso <= 1):?>
+              <li class="nav-item text-center">
+                <a href="<?= url("admin/cadastrar/ingrediente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/ingrediente"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Cadastrar Ingrediente</p>
                 </a>
               </li>
+              <?php endif; ?>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/ingredientes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/ingredientes"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/ingredientes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/ingredientes"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Listar Ingredientes</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; if($admin->nivel_acesso <= 3):?>
           <li class="nav-item
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cardapio" ||
@@ -168,22 +172,65 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item text-center">
-                <a href="<?= url("admin/cadastrar/cardapio") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cardapio"){ echo "callout-success bg-success";}else{echo "callout-transparent";}?>">
+              <?php if($admin->nivel_acesso <= 1):?>
+              <li class="nav-item text-center">
+                <a href="<?= url("admin/cadastrar/cardapio") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/cardapio"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Cadastrar Item</p>
                 </a>
               </li>
+              <?php endif; ?>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/cardapio") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/cardapio"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/cardapio") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/cardapio"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Listar Cardápio</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; if($admin->nivel_acesso <= 1):?>
+          <li class="nav-item
+            <?php if(
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/categoria" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/categorias"
+              ){
+              echo "menu-open";
+              }
+            ?>
+            ">
+            <a href="#" class="nav-link callout bg-transparent
+              <?php if(
+                $_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/categoria" ||
+                $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/categorias"
+                ){
+                echo "callout-light";
+                }else{
+                echo "callout-transparent";
+                }
+              ?>
+            ">
+              <i class="nav-icon fas fa-filter"></i>
+              <p>
+                Categorias
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item text-center">
+                <a href="<?= url("admin/cadastrar/categoria") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/cadastrar/categoria"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
+                  <p>Cadastrar Categoria</p>
+                </a>
+              </li>
+              <li class="nav-item text-center">
+                <a href="<?= url("admin/listar/categorias") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/categorias"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
+                  <p>Listar Categorias</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php endif; if($admin->nivel_acesso <= 2 || $admin->nivel_acesso == 4):?>
           <li class="nav-item
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Livre" ||
-              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizado" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizada" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Utilizada" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas"
               ){
@@ -194,7 +241,7 @@
             <a href="#" class="nav-link callout bg-transparent
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Livre" ||
-              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizado" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizada" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Utilizada" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas"
               ){
@@ -214,27 +261,28 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/reservas/Realizado") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizado"){ echo "callout-primary bg-primary";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/reservas/Realizada") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Realizada"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Reservas Realizadas</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/reservas/Livre") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Livre"){ echo "callout-success bg-success";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/reservas/Livre") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Livre"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Mesas Livres</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/reservas/Utilizada") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Utilizada"){ echo "callout-warning bg-warning";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/reservas/Utilizada") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas/Utilizada"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Mesas sendo utilizadas</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/reservas") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/reservas") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/reservas"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Todas as Mesas</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; if($admin->nivel_acesso <= 4):?>
           <li class="nav-item
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes/Pendente" ||
@@ -265,22 +313,23 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/avaliacoes/Pendente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes/Pendente"){ echo "callout-warning bg-warning";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/avaliacoes/Pendente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes/Pendente"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Avaliações pendentes</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/avaliacoes/Aprovado") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes/Aprovado"){ echo "callout-success bg-success";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/avaliacoes/Aprovado") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes/Aprovado"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Avaliações aprovados</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/avaliacoes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/avaliacoes") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/avaliacoes"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Todas avaliações</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; if($admin->nivel_acesso <= 3):?>
           <li class="nav-item 
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Pendente" ||
@@ -315,32 +364,33 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/pedidos/Pendente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Pendente"){ echo "callout-warning bg-warning";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/pedidos/Pendente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Pendente"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Pedidos pendentes</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/pedidos/Em Preparo") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Em%20Preparo"){ echo "callout-primary bg-primary";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/pedidos/Em Preparo") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Em%20Preparo"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Pedidos em preparo</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/pedidos/Entregue") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Entregue"){ echo "callout-success bg-success";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/pedidos/Entregue") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Entregue"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Pedidos entregues</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/pedidos/Cancelado") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Cancelado"){ echo "callout-danger bg-danger";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/pedidos/Cancelado") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Cancelado"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Pedidos cancelados</p>
                 </a>
               </li>
               <li class="nav-item text-center">
-                <a href="<?= url("admin/listar/pedidos") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos"){ echo "callout-dark bg-light";}else{echo "callout-transparent";}?>">
+                <a href="<?= url("admin/listar/pedidos") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Todos pedidos</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; ?>
           <li class="nav-item text-center">
             <a href="<?= url("") ?>" class="nav-link callout bg-transparent callout-transparent">
               <i class="nav-icon fas fa-home"></i>
