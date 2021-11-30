@@ -78,11 +78,11 @@ class Admin
         if($admin && $admin->nivel_acesso == 1){
             $usuarios = new Usuario();
             $admins = $admins->find()->fetch(true);
-            foreach ($admins as $key => $admin) {
-                $usuarios = $usuarios->findById($admin->id_usuario);
-                $admin->nome = $usuarios->nome;
-                $admin->email = $usuarios->email;
-                $admin->telefone = $usuarios->telefone;
+            foreach ($admins as $key => $a) {
+                $usuarios = $usuarios->findById($a->id_usuario);
+                $a->nome = $usuarios->nome;
+                $a->email = $usuarios->email;
+                $a->telefone = $usuarios->telefone;
             }
             $usuario = $_SESSION["usuario"];
             echo $this->view->render("admin/admins/listar",["admins" => $admins, "usuario" => $usuario, "admin" => $admin]);

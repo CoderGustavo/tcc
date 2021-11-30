@@ -13,6 +13,8 @@ $router->group(null);
 $router->get("/teste", "Web:teste");
 
 $router->get("/", "Web:home");
+$router->get("/eng", "Web:english");
+$router->get("/pt", "Web:portuguese");
 $router->get("/login", "Web:login");
 $router->get("/cadastro", "Web:register");
 $router->get("/naologado", "Web:naologado");
@@ -27,6 +29,7 @@ $router->get("/delivery", "Web:delivery");
 $router->get("/delivery/excluir/{id}", "Pedido:destroyItem");
 $router->post("/delivery/adicionar", "Pedido:adicionar");
 $router->get("/mesa/{numero}", "Web:mesalocal");
+$router->get("/mesa/{numero}/{senha}", "Web:mesalocal");
 $router->get("/mesa/{numero}/excluir/{id}", "Reserva:destroyItem");
 $router->post("/mesa/{numero}/adicionar", "Reserva:adicionar");
 $router->get("/mesa/{numero}/preparar", "Reserva:adicionarAguardo");
@@ -37,6 +40,11 @@ $router->get("/endereco", "Web:endereco");
 $router->post("/pagamento", "Web:pagamento");
 $router->post("/pagamento/pix", "Pagamento:pagarPix");
 $router->post("/pagamento/credito", "Pagamento:pagarCredito");
+$router->post("/pagamento/balcao", "Pagamento:pagarBalcao");
+$router->post("/pagamento/entrega", "Pagamento:pagarEntrega");
+$router->post("/pagamento/checkPagamento", "Pagamento:checkPagamento");
+$router->get("/pagamento/aprovado/{idpedido}", "Pagamento:aprovado");
+$router->get("/pagamento/cancelado/{idpedido}", "Pagamento:cancelado");
 
 $router->group("/salvar"); //grupo salvar
 $router->post("/reserva", "Reserva:update");
@@ -111,6 +119,8 @@ $router->post("/cadastrar/ingrediente/cadastrar", "Ingrediente:create");
 $router->get("/edit/ingrediente/{id}", "Ingrediente:show");
 $router->post("/editar/ingrediente", "Ingrediente:edit");
 $router->post("/deletar/ingredientes", "Ingrediente:delete");
+
+$router->get("/teste", "Web:teste");
 
 
 

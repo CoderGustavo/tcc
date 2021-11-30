@@ -304,7 +304,11 @@ $(document).ready(function(){
       $(".headerDelivery").addClass("aparecer-top");
       $('.pedido-sacola').addClass("abrir-menu").delay(1000);
       valor = "aberto";
-      $('.texto p').text("Esconder Pedido");
+      if($('.texto').hasClass("texto-eng")){
+        $('.texto p').text("Hide Order");
+      }else{
+        $('.texto p').text("Esconder Pedido");
+      }
       if(window.innerWidth < 1000){
         $('.div-texto').toggleClass("d-none").delay(1000);
       }
@@ -312,7 +316,11 @@ $(document).ready(function(){
       $('.headerDelivery').removeClass("aparecer-top");
       $('.pedido-sacola').removeClass("abrir-menu");
       valor = "fechado";
-      $('.texto p').text("Ver Pedido");
+      if($('.texto').hasClass("texto-eng")){
+        $('.texto p').text("Show Order");
+      }else{
+        $('.texto p').text("Ver Pedido");
+      }
       if(window.innerWidth < 1000){
         $('.div-texto').toggleClass("d-none").delay(1000);
       }

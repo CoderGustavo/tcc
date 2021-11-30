@@ -1,29 +1,53 @@
-<div class="modal fade" id="modal_pix">
+<div class="modal fade" id="modal_pix" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-body text-center">
                 <h3 class="modal-title mb-3" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Pagamento pix</h3>
+                <form action="<?= url("checkout/pagamento") ?>" method="post" style="position: absolute; right: 0; top: 0; margin: 1rem;">
+                    <button type="submit" class="btn text-danger"><i class="fas fa-times"></i></button>
+                </form>
                 <p class="text-danger">Faça o pagamento e aguarde na página! <br> NÂO RECARREGUE A PÁGINA</p>
                 <img src="data:image/jpeg;base64, <?php echo $response["qrcode"] ?>" alt="" width="100%">
                 <div class="d-flex mt-4">
-                    <p id="codigopix" class="text-truncate">
+                    <p id="codigopix" class="text-truncate m-0">
                         <?php echo $response["pixcode"]?>
                     </p>
                     <a href="#" onclick="copiarTexto()" class="text-primarycolor"><i class="fas fa-copy"></i></a>
                 </div>
                 <p class="copiado text-success"></p>
+                <p>
+                    checagem de pagamento <span class="qtdvez">1</span> / 5 <br>
+                    <span class="text-primarycolor"><span class="cronometro">60</span> segundos</span>
+                </p>
+                <button class="btn btn-primarycolor rounded-pill">Checar pagamento</button>
             </div>
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="modal_cpf_pix">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-body text-center">
+                <h3 class="modal-title mb-3" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Pagamento no Pix</h3>
+                <form action="<?= url("checkout/pagamento/pix") ?>" method="post">
+                    <div>
+                        <label for="#cpf" class="text-left w-100">
+                            CPF: 
+                            <input type="text" name="cpf" class="form-control" placeholder="Seu CPF">
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primarycolor rounded-pill mb-3">Confirmar e gerar QrCode</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="modal_credito">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-body text-center">
                 <h3 class="modal-title mb-3" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Pagamento no cartão de crédito</h3>
-                <form id="form-checkout">
-                    <progress value="0" class="progress-bar m-auto">Carregando...</progress>
+                <form id="form-checkout" method="post" action="<?= url("checkout/pagamento/credito") ?>">
                     <div>
                         <label for="form-checkout__identificationNumber" class="w-100">
                             CPF:
@@ -46,10 +70,11 @@
                             <input type="text" name="securityCode" id="form-checkout__securityCode" class="form-control"/>
                         </label>
                     </div>
-                    <select name="identificationType" type="hidden" id="form-checkout__identificationType"></select>
+                    
+                     <select name="identificationType" id="form-checkout__identificationType" style="display: none"></select>
                     <select name="issuer" id="form-checkout__issuer" type="hidden" class="form-control"></select>
                     <div>
-                        <p class="m-0">Expiração do cartão:</p>
+                        <p class="m-0">Vencimento do cartão:</p>
                         <label for="form-checkout__cardExpirationMonth">
                             Mês:
                             <input type="text" name="cardExpirationMonth" id="form-checkout__cardExpirationMonth" class="form-control"/>
@@ -72,12 +97,38 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal_balcao">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-body text-center">
+                <h3 class="modal-title mb-3" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Pagamento no Pix</h3>
+                <form action="<?= url("checkout/pagamento/balcao") ?>" method="post">
+                    <p>Você deseja mesmo retirar seu pedido no balcão?</p>
+                    <button type="submit" class="btn btn-primarycolor rounded-pill mb-3">sim, confirmar pedido!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_entrega">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-body text-center">
+                <h3 class="modal-title mb-3" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Pagamento no Pix</h3>
+                <form action="<?= url("checkout/pagamento/entrega") ?>" method="post">
+                    <p>Você deseja mesmo pagar na entrega?</p>
+                    <button type="submit" class="btn btn-primarycolor rounded-pill mb-3">sim, confirmar pedido!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
     const mp = new MercadoPago('<?php echo PUBLIC_KEY_MP ?>');
     const cardForm = mp.cardForm({
-        amount: "100.5",
+        amount: "<?php echo $soma?>",
         autoMount: true,
         form: {
             id: "form-checkout",
@@ -121,54 +172,8 @@
         callbacks: {
             onFormMounted: error => {
             if (error) return console.warn("Form Mounted handling error: ", error);
-            console.log("Form mounted");
-            },
-            onSubmit: event => {
-            event.preventDefault();
-
-            const {
-                paymentMethodId: payment_method_id,
-                issuerId: issuer_id,
-                cardholderEmail: email,
-                amount,
-                token,
-                installments,
-                identificationNumber,
-                identificationType,
-            } = cardForm.getCardFormData();
-
-            fetch("/tcc/checkout/pagamento/pagar", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                token,
-                issuer_id,
-                payment_method_id,
-                transaction_amount: Number(amount),
-                installments: Number(installments),
-                description: "Descrição do produto",
-                    payer: {
-                        email,
-                        identification: {
-                        type: identificationType,
-                        number: identificationNumber,
-                        },
-                    },
-                }),
-            });
             },
             onFetching: (resource) => {
-            console.log("Fetching resource: ", resource);
-
-            // Animate progress bar
-            const progressBar = document.querySelector(".progress-bar");
-            progressBar.removeAttribute("value");
-
-            return () => {
-                progressBar.setAttribute("value", "0");
-            };
             },
         },
     });
@@ -195,4 +200,38 @@
             document.querySelector(".copiado").innerHTML = " ";
         },3000);
     };
-    </script>
+</script>
+<script>
+    let valcronometro = parseInt(document.querySelector(".cronometro").innerHTML);
+    let qtdvez = parseInt(document.querySelector(".qtdvez").innerHTML);
+    function seg(ini){
+        valcronometro = ini;
+        setInterval(() => {
+            if(valcronometro > 0){
+                document.querySelector(".cronometro").innerHTML = valcronometro;
+                valcronometro -= 1;
+            }else{
+                vez();
+            }
+        }, 1000);
+    }
+    function vez(){
+        if(qtdvez <= 5){
+            $.post("/tcc/checkout/pagamento/checkPagamento", {
+                nome: "gustavo"
+            },function(msg){
+                console.log(msg);
+                if(msg == "approved"){
+                    document.location.replace("/tcc/checkout/pagamento/aprovado/<?php echo $idpedido ?>");
+                }else{
+                    qtdvez += 1;
+                    document.querySelector(".qtdvez").innerHTML = qtdvez
+                    seg(10);
+                }
+            })
+        }else{
+            document.location.replace("/tcc/delivery");
+        }
+    }
+    seg(10);
+</script>

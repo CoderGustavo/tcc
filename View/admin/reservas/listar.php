@@ -120,7 +120,7 @@
                           <i class="far fa-users text-light rounded-pill p-2"></i>
                           <i class="far fa-sign-out text-light rounded-pill p-2"></i>
                           <a href="#"  data-toggle="modal" data-target="#mesa<?php echo $linha->id ?>"><i class="fas fa-qrcode text-dark rounded-pill p-2"></i></a>
-                          <a href="<?= url("mesa/$linha->id") ?>"><i class="fas fa-link text-maroon"></i></a>
+                          <a href="<?= url("mesa/$linha->id/$linha->senha") ?>"><i class="fas fa-link text-maroon"></i></a>
                         </td>
                         <td>
                           <a href="#"  data-toggle="modal" data-target="#pagamento<?php echo $linha->id ?>" class="btn btn-light bg-purple text-light rounded-pill shadow border">Realizar Pagamento</a>

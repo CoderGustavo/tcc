@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Minhas Reservas</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.0/css/all.css">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css") ?>">
-  <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
-
-
-</head>
+<?php include_once("layout/header.php")?>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->

@@ -73,7 +73,11 @@
                       <td><?php echo $linha->email ?></td>
                       <td><?php echo $linha->telefone ?></td>
                       <td><?php echo $linha->nivel_acesso ?></td>
-                      <td><a href="#"  data-toggle="modal" data-target="#excluirAdmin<?php echo $linha->id ?>"><i class="far fa-trash text-danger rounded-pill p-2"></i></a></td>
+                      <?php if($linha->id_usuario != $usuario->id && $linha->nivel_acesso > 1):?>
+                        <td><a href="#"  data-toggle="modal" data-target="#excluirAdmin<?php echo $linha->id ?>"><i class="far fa-trash text-danger rounded-pill p-2"></i></a></td>
+                      <?php else: ?>
+                          <td><i class="far fa-trash text-light rounded-pill p-2"></i></td>
+                      <?php endif; ?>
                     </tr>
                     <?php endforeach; endif; ?>
                   </tbody>

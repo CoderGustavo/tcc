@@ -30,6 +30,11 @@ class Web
         $cardapio = new Cardapio();
         $conn = Connect::getInstance();
         $error = Connect::getError();
+        if(isset($_SESSION["traduzir"])){
+            $traduzir = $_SESSION["traduzir"];
+        }else{
+            $traduzir = NULL;
+        }
 
         
         $logado = 0;
@@ -56,6 +61,7 @@ class Web
             "logado" => $logado,
             "usuario" => $usuario,
             "admin" => $admin,
+            "traduzir" => $traduzir
         ]);
     }
 
@@ -83,6 +89,11 @@ class Web
         $cardapio = new Cardapio();
         $categorias = new Categoria_cardapio();
         $categorias = $categorias->find()->fetch(true);
+        if(isset($_SESSION["traduzir"])){
+            $traduzir = $_SESSION["traduzir"];
+        }else{
+            $traduzir = NULL;
+        }
 
         $logado = 0;
         $usuario = 0;
@@ -104,6 +115,7 @@ class Web
             "usuario" => $usuario,
             "categorias" => $categorias,
             "admin" => $admin,
+            "traduzir" => $traduzir
         ]);
     }
 
@@ -116,6 +128,11 @@ class Web
             $pedido = new Pedido();
             $categorias = new Categoria_cardapio();
             $categorias = $categorias->find()->fetch(true);
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
 
             $logado = 0;
             $usuario = 0;
@@ -146,6 +163,7 @@ class Web
                 "pedido" => $pedido,
                 "categorias" => $categorias,
                 "admin" => $admin,
+                "traduzir" => $traduzir
             ]);
         }else{
             return $this->router->redirect(" ");
@@ -159,10 +177,15 @@ class Web
             $conn = Connect::getInstance();
             $error = Connect::getError();
 
-            $pedido = new Pedido();
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
 
-            $logado = 0;
+            $pedido = new Pedido();
             $usuario = 0;
+            $admin = 0;
             $enderecos = 0;
             $somaprecos = 0;
 
@@ -170,6 +193,9 @@ class Web
 
             $logado = 1;
             $usuario = $_SESSION["usuario"];
+            if(isset($usuario->admin)){
+                $admin = 1;
+            }
 
             $pedidoMesa = $pedido->find("id_usuario=:uid AND status=:status","uid=$usuario->id&status=$status")->fetch();
 
@@ -194,7 +220,9 @@ class Web
                 "usuario" => $usuario,
                 "pedido" => $pedido,
                 "enderecos" => $enderecos,
-                "soma" => $somaprecos
+                "soma" => $somaprecos,
+                "admin" => $admin,
+                "traduzir" => $traduzir
             ]);
 
         }else{
@@ -208,49 +236,43 @@ class Web
             $conn = Connect::getInstance();
             $error = Connect::getError();
 
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
+
             $pedido = new Pedido();
 
-            $logado = 0;
             $usuario = 0;
+            $admin = 0;
             $status = "sacola";
             $endereco = null;
-            $logradouro = null;
-            $numero = null;
-            $bairro = null;
-            $referencia = null;
             $somaprecos = 0;
-
-            if(isset($data["endereco"])){
-                $endereco = $data["endereco"];
-            }else if($data["logradouro"] && $data["numero"] && $data["bairro"]){
-                $logradouro = $data["logradouro"];
-                $numero = $data["numero"];
-                $bairro = $data["bairro"];
-                $referencia = $data["referencia"];
-            }else{
-                $_SESSION["erro"] = "Algum campo nao foi preenchido!";
-                return $this->router->redirect("checkout/endereco");
-            }
 
 
             $logado = 1;
             $usuario = $_SESSION["usuario"];
+            if(isset($usuario->admin)){
+                $admin = 1;
+            }
 
             $pedidoMesa = $pedido->find("id_usuario=:uid AND status=:status","uid=$usuario->id&status=$status")->fetch();
 
             $enderecos = new Endereco();
-            if($logradouro && $numero && $bairro){
+            if(isset($data["logradouro"]) && isset($data["numero"]) && isset($data["bairro"])){
                 $enderecos->id_usuario = $usuario->id;
-                $enderecos->logradouro = $logradouro;
-                $enderecos->numero = $numero;
-                $enderecos->bairro = $bairro;
-                $enderecos->referencia = $referencia;
+                $enderecos->logradouro = $data["logradouro"];
+                $enderecos->numero = $data["numero"];
+                $enderecos->bairro = $data["bairro"];
+                $enderecos->referencia = $data["referencia"];
                 $enderecos->save();
                 $_SESSION["sucesso"] = "Endereço salvo, agora selecione-o!";
                 return $this->router->redirect("checkout/endereco");
-            }else if($endereco){
+            }else if(isset($data["endereco"])){
+                $endereco = $data["endereco"];
                 if($pedidoMesa){
-                    $endereco = $enderecos->find("id=:endid","endid=$endereco")->fetch();
+                    $endereco = $enderecos->findById($endereco);
                     if($endereco){
                         $pedido = $pedido->findById($pedidoMesa->id);
                         $pedido->id_endereco = $endereco->id;
@@ -280,6 +302,8 @@ class Web
                 }else{
                     return $this->router->redirect("delivery");
                 }
+            }else if(isset($pedidoMesa->id_endereco)){
+                $endereco = $enderecos->findById($pedidoMesa->id_endereco);
             }else{
                 $_SESSION["erro"] = "Selecione um endereço!";
             }
@@ -289,7 +313,9 @@ class Web
                 "usuario" => $usuario,
                 "pedido" => $pedido,
                 "endereco" => $endereco,
-                "soma" => $somaprecos
+                "soma" => $somaprecos,
+                "admin" => $admin,
+                "traduzir" => $traduzir
             ]);
         }else{
             return $this->router->redirect(" ");
@@ -321,6 +347,12 @@ class Web
 
         $idmesa = $data["numero"];
         $pedidoMesa = $reserva->findById($idmesa);
+
+        if(isset($data["senha"])){
+            $senha = $data["senha"];
+        }else{
+            $senha = NULL;
+        }
 
         if($pedidoMesa){
             if($pedidoMesa->status == "Utilizada"){
@@ -355,7 +387,8 @@ class Web
                     "pedidoPronto" => $pedidoPronto,
                     "categorias" => $categorias,
                     "admin" => $admin,
-                    "idmesa" => $idmesa
+                    "idmesa" => $idmesa,
+                    "senha" => $senha
                 ]);
             }else{
                 echo "Você só pode fazer algum pedido se a mesa estiver sendo utilizada!";
@@ -367,17 +400,38 @@ class Web
     }
 
     public function teste($data){
-        $reservas = new Reserva();
-        $reservas = $reservas->find()->fetch(true);
-        foreach ($reservas as $key => $reserva) {
-            if($reserva->id_usuario){
-                echo $reserva->usuario()->nome;
+        session_start();
+        $usuario = 0;
+        $admin = 0;
+        $logado = 0;
+        if(isset($_SESSION["usuario"])){
+            $logado = 1;
+            $usuario = $_SESSION["usuario"];
+            if(isset($usuario->admin)){
+                $admin = 1;
             }
+
         }
+        echo $this->view->render("teste", [
+            "logado" => $logado,
+            "usuario" => $usuario,
+            "admin" => $admin
+        ]);
     }
 
     public function naologado($data){
         echo "você nao tem permissão ou nao está logado!";
+    }
+
+    public function english($data){
+        session_start();
+        $_SESSION["traduzir"] = "sim";
+        return $this->router->redirect(" ");
+    }
+    public function portuguese($data){
+        session_start();
+        unset($_SESSION["traduzir"]);
+        return $this->router->redirect(" ");
     }
 
     public function error($data): void

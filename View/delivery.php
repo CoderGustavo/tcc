@@ -41,28 +41,47 @@
         <a href="<?= url("") ?>" class="logo mr-auto"><img src="<?= url("View/assets/img/favicon1.png") ?>" alt="" class="img-fluid"></a>
 
         <nav class="nav-menu d-none d-lg-block">
-            <ul>
-            <li><a href="<?= url("") ?>">Inicio</a></li>
-            <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
-            <?php if ($logado != 0): ?>
-                <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
-                <li class="conta text-center">
+            <?php if(isset($traduzir)): ?>
+                <ul>
+                    <li><a href="<?= url("") ?>">Home</a></li>
+                    <li><a href="<?= url("cardapio") ?>">Menu</a></li>
+                    <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
+                    <li class="conta text-center">
                     <a href="" class="btn-minhaconta">
-                    Minha conta <i class="fas fa-chevron-down"></i>
+                        My Account <i class="fas fa-chevron-down"></i>
                     </a>
                     <ul class="menu-conta">
-                    <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
-                    <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
-                    <?php if ($admin == 1){?>
+                        <li><a href="<?= url("conta/minhaconta") ?>">My Account</a></li>
+                        <li><a href="<?= url("conta/meuspedidos") ?>">My Orders</a></li>
+                        <li><a href="<?= url("conta/minhasreservas") ?>">My Reservations</a></li>
+                        <?php if ($admin == 1){?>
                         <li><a href="<?= url("admin") ?>">Admin</a></li>
-                    <?php } ?>
-                    <li><a href="<?= url("sair") ?>">Sair</a></li>
+                        <?php } ?>
+                        <li><a href="<?= url("sair") ?>">Log Out</a></li>
                     </ul>
-                </li>
+                    </li>
+                </ul>
             <?php else: ?>
-                <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">Entrar</a></li>
+                <ul>
+                    <li><a href="<?= url("") ?>">Início</a></li>
+                    <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
+                    <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
+                    <li class="conta text-center">
+                    <a href="" class="btn-minhaconta">
+                        Minha conta <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="menu-conta">
+                        <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
+                        <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
+                        <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
+                        <?php if ($admin == 1){?>
+                        <li><a href="<?= url("admin") ?>">Admin</a></li>
+                        <?php } ?>
+                        <li><a href="<?= url("sair") ?>">Sair</a></li>
+                    </ul>
+                    </li>
+                </ul>
             <?php endif; ?>
-            </ul>
         </nav><!-- .nav-menu -->
 
         </div>
@@ -71,11 +90,17 @@
     <section id="delivery" class="book-a-table mt-5">
         
         <div class="container-xl" data-aos="fade-up">
-
-            <div class="section-title pb-0 pb-md-3">
-                <h2>Delivery</h2>
-                <p class="d-none d-md-block">Escolha seu pedido!</p>
-            </div>
+            <?php if(isset($traduzir)): ?>
+                <div class="section-title pb-0 pb-md-3">
+                    <h2>Delivery</h2>
+                    <p class="d-none d-md-block">Choose your order!</p>
+                </div>
+            <?php else: ?>
+                <div class="section-title pb-0 pb-md-3">
+                    <h2>Delivery</h2>
+                    <p class="d-none d-md-block">Escolha seu pedido!</p>
+                </div>
+            <?php endif; ?>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="menu-flters">
@@ -106,7 +131,11 @@
                                 </div>
                                 <div class="col-12">
                                 <p class="item-ingrediente">
-                                    Selecione para ver os ingredientes
+                                    <?php if(isset($traduzir)): ?>
+                                        Select to see the ingredients
+                                    <?php else: ?>
+                                        Selecione para ver os ingredientes
+                                    <?php endif; ?>
                                 </p>
                                 </div>
                             </div>
@@ -153,9 +182,14 @@
 
     <div class="pedido-sacola">
         <div class="div-texto">
-            <button class="texto btn btn-primarycolor">
+            <button class="texto btn btn-primarycolor texto-eng">
             <p>
-                Ver Pedido
+                <?php if(isset($traduzir)): ?>
+                    Show Order
+                <?php else: ?>
+                    Ver Pedido
+                <?php endif; ?>
+                
             </p>
             </button>
         </div>

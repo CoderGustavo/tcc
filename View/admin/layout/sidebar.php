@@ -395,7 +395,7 @@
             <a href="<?= url("") ?>" class="nav-link callout bg-transparent callout-transparent">
               <i class="nav-icon fas fa-home"></i>
               <p>
-                Inicio
+                Início
               </p>
             </a>
           </li>

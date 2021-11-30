@@ -30,26 +30,64 @@
   <link href="<?= url("View/assets/css/stylePersonalizado.css") ?>" rel="stylesheet">
 
   <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <script src="<?= url("View/assets/vendor/jquery/jquery.min.js") ?>"></script>
 </head>
 
 <body>
     <?php include_once("modais_pagamento.php") ?>
     <!-- ======= Header ======= -->
-    <header class="fixed-top" style="background-color: #55360069;">
-        <div class="container-xl d-flex align-items-center p-3">
+    <header id="header" class="fixed-top headerDelivery" style="background-color: #55360069;">
+        <div class="container d-flex align-items-center">
 
-            <a href="<?= url("") ?>" class="logo mr-auto"><img src="<?= url("View/assets/img/favicon1.png")?>" alt="" width="50px"></a>
+        <a href="<?= url("") ?>" class="logo mr-auto"><img src="<?= url("View/assets/img/favicon1.png") ?>" alt="" class="img-fluid"></a>
 
-            <nav class="nav-menu">
-            <ul>
-                <li><a href="<?= url("") ?>">Inicio</a></li>
-                <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
-                <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
-            </ul>
-            </nav><!-- .nav-menu -->
+        <nav class="nav-menu d-none d-lg-block">
+            <?php if(isset($traduzir)): ?>
+                <ul>
+                    <li><a href="<?= url("") ?>">Home</a></li>
+                    <li><a href="<?= url("cardapio") ?>">Menu</a></li>
+                    <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
+                    <li class="conta text-center">
+                    <a href="" class="btn-minhaconta">
+                        My Account <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="menu-conta">
+                        <li><a href="<?= url("conta/minhaconta") ?>">My Account</a></li>
+                        <li><a href="<?= url("conta/meuspedidos") ?>">My Orders</a></li>
+                        <li><a href="<?= url("conta/minhasreservas") ?>">My Reservations</a></li>
+                        <?php if ($admin == 1){?>
+                        <li><a href="<?= url("admin") ?>">Admin</a></li>
+                        <?php } ?>
+                        <li><a href="<?= url("sair") ?>">Log Out</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            <?php else: ?>
+                <ul>
+                    <li><a href="<?= url("") ?>">Início</a></li>
+                    <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
+                    <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
+                    <li class="conta text-center">
+                    <a href="" class="btn-minhaconta">
+                        Minha conta <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="menu-conta">
+                        <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
+                        <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
+                        <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
+                        <?php if ($admin == 1){?>
+                        <li><a href="<?= url("admin") ?>">Admin</a></li>
+                        <?php } ?>
+                        <li><a href="<?= url("sair") ?>">Sair</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </nav><!-- .nav-menu -->
 
         </div>
     </header><!-- End Header -->
+
 
     <section id="delivery" class="book-a-table mt-5">
         
@@ -104,11 +142,11 @@
             </div>
             <div class="row" data-aos="fade-up">
                 <form action="<?= url("checkout/pagamento/pix") ?>" method="POST" class="col-lg-6">
-                    <button class="text-light m-2 p-2 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento div-pix rounded position-relative" style="height: 10rem;">   
+                    <a href="#modal_cpf_pix" data-toggle="modal" class="text-light m-2 p-2 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento div-pix rounded position-relative" style="height: 10rem;">   
                         <div class="text-center">
                             <img src="<?= url("View/assets/img/pix.png")?>" alt="pix" width="60%">
                         </div> 
-                    </button>
+                    </a>
                 </form>
                 <div class="col-lg-6">
                     <a href="#modal_credito" data-toggle="modal" class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
@@ -121,24 +159,24 @@
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <div class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
+                    <a href="#modal_balcao" data-toggle="modal" class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
                         <div>
                             <h4 class="text-primarycolor" style="font-family: Arial, Helvetica, sans-serif;">Retirar no Balcão</h4>
                         </div>
                         <div>
                             <img src="<?= url("View/assets/img/table.png")?>" alt="cartao de credito" width="100%">
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-6">
-                    <div class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
+                    <a href="#modal_entrega" data-toggle="modal" class="m-2 p-5 border border-primarycolor d-flex justify-content-center align-items-center btn-formapagamento flex-column rounded position-relative" style="height: 10rem;">
                         <div>
                             <h4 class="text-primarycolor" style="font-family: Arial, Helvetica, sans-serif;">Dinheiro na entrega</h4>
                         </div>
                         <div>
-                            <i class="fas fa-money-bill-alt" style="font-size: 40pt;"></i>
+                            <i class="fas fa-money-bill-alt text-light" style="font-size: 40pt;"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -159,7 +197,7 @@
     <script src="<?= url("View/assets/js/main.js") ?>"></script>
 
     <?php 
-    if($response){
+    if(isset($response)){
         echo "<script>$('#modal_pix').modal('show');</script>";
     }
     ?>

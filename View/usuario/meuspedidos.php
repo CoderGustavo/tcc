@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Meus Pedidos</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.0/css/all.css">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= url("View/assets/css/adminlte.min.css") ?>">
-  <link href="<?= url("View/assets/img/favicon1.png")?>" rel="icon">
-
-
-</head>
+<?php include_once("layout/header.php")?>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -61,25 +46,46 @@
           <?php foreach($pedidos as $pedido):?>
             <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0
             <?php
-            if($pedido->status == "Pendente"){
-                echo "border-warning";
-            }else if($pedido->status == "Em Preparo"){
-              echo "border-primary";
-            }else{
-              echo "border-success";
-            }
-            
+              switch ($pedido->status) {
+                case 'Pendente':
+                  echo "border-warning";
+                break;
+
+                case 'Aguardo':
+                  echo "border-warning";
+                break;
+
+                case 'Em Preparo':
+                  echo "border-primary";
+                break;
+                
+                default:
+                echo "border-success";
+                break;
+              }
             ?>
             " style="background-color: #222; border-width: 8px !important;">
                   <div class="d-flex justify-content-between">
                       <h2 class="text-light">Pedido #<?php echo $pedido->id?></h2>
-                      <?php if($pedido->status == "Pendente"){?>
-                          <p class="h4 text-warning"><?php echo $pedido->status?></p>
-                      <?php }else if($pedido->status == "Em Preparo"){?>
-                          <p class="h4 text-primary"><?php echo $pedido->status?></p>
-                      <?php } else if($pedido->status == "Entregue"){?>
-                          <p class="h4 text-success"><?php echo $pedido->status?></p>
-                      <?php } ?>
+                      <?php
+                        switch ($pedido->status) {
+                          case 'Pendente':
+                            echo "<p class='h4 text-warning'>$pedido->status </p>";
+                          break;
+          
+                          case 'Aguardo':
+                            echo "<p class='h4 text-warning'>$pedido->status </p>";
+                          break;
+          
+                          case 'Em Preparo':
+                            echo "<p class='h4 text-primary'>$pedido->status </p>";
+                          break;
+                          
+                          default:
+                          echo "<p class='h4 text-success'>$pedido->status </p>";
+                          break;
+                        }
+                      ?>
                   </div>
                   <div class="d-flex justify-content-between pt-5 mt-5 align-items-center">
                       <a href="<?= url("conta/meuspedidos/$pedido->id") ?>" class="btn btn-outline-info btn-lg text-uppercase">Ver Detalhes</a>

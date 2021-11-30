@@ -154,7 +154,7 @@ class Usuario
         session_start();
         $usuario = $_SESSION["usuario"];
         $pedidos = new Pedido();
-        $pedidos = $pedidos->find("id_usuario=:userid AND status <> :status","userid={$usuario->id}&status=sacola")->fetch(true);
+        $pedidos = $pedidos->find("id_usuario=:userid AND status <> :status AND status <> :status2","userid={$usuario->id}&status=sacola&status2=cancelado")->fetch(true);
         echo $this->view->render("usuario/meuspedidos",["usuario" => $usuario, "pedidos" => $pedidos]);
     }
     

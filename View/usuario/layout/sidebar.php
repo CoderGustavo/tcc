@@ -63,7 +63,7 @@
             <a href="<?= url("") ?>" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
-                Inicio
+                Início
               </p>
             </a>
           </li>

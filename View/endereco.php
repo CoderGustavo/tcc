@@ -86,18 +86,54 @@
         </div>
     </div>
     <!-- ======= Header ======= -->
-    <header class="fixed-top" style="background-color: #55360069;">
-        <div class="container-xl d-flex align-items-center p-3">
+    <header id="header" class="fixed-top headerDelivery" style="background-color: #55360069;">
+        <div class="container d-flex align-items-center">
 
-            <a href="<?= url("") ?>" class="logo mr-auto"><img src="<?= url("View/assets/img/favicon1.png")?>" alt="" width="50px"></a>
+        <a href="<?= url("") ?>" class="logo mr-auto"><img src="<?= url("View/assets/img/favicon1.png") ?>" alt="" class="img-fluid"></a>
 
-            <nav class="nav-menu">
-            <ul>
-                <li><a href="<?= url("") ?>">Inicio</a></li>
-                <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
-                <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
-            </ul>
-            </nav><!-- .nav-menu -->
+        <nav class="nav-menu d-none d-lg-block">
+            <?php if(isset($traduzir)): ?>
+                <ul>
+                    <li><a href="<?= url("") ?>">Home</a></li>
+                    <li><a href="<?= url("cardapio") ?>">Menu</a></li>
+                    <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
+                    <li class="conta text-center">
+                    <a href="" class="btn-minhaconta">
+                        My Account <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="menu-conta">
+                        <li><a href="<?= url("conta/minhaconta") ?>">My Account</a></li>
+                        <li><a href="<?= url("conta/meuspedidos") ?>">My Orders</a></li>
+                        <li><a href="<?= url("conta/minhasreservas") ?>">My Reservations</a></li>
+                        <?php if ($admin == 1){?>
+                        <li><a href="<?= url("admin") ?>">Admin</a></li>
+                        <?php } ?>
+                        <li><a href="<?= url("sair") ?>">Log Out</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            <?php else: ?>
+                <ul>
+                    <li><a href="<?= url("") ?>">Início</a></li>
+                    <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
+                    <li class="active"><a href="<?= url("delivery") ?>">Delivery</a></li>
+                    <li class="conta text-center">
+                    <a href="" class="btn-minhaconta">
+                        Minha conta <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="menu-conta">
+                        <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
+                        <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
+                        <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
+                        <?php if ($admin == 1){?>
+                        <li><a href="<?= url("admin") ?>">Admin</a></li>
+                        <?php } ?>
+                        <li><a href="<?= url("sair") ?>">Sair</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </nav><!-- .nav-menu -->
 
         </div>
     </header><!-- End Header -->
