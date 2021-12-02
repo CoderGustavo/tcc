@@ -33,7 +33,27 @@
 </head>
 
 <body>
-  <div id="google_translate_element"></div>
+  <?php if(isset($_SESSION["naologado"]) && $_SESSION["naologado"] == "sim_delivery"): ?>
+  <div class="modal fade" id="modal_naologado">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-body text-center">
+          <h4 class="modal-title" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 25pt;">
+            Não Logado
+          </h4>
+          <button type="button" class="close btn" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 1rem; top: 1rem;">
+            <span aria-hidden="true" class="text-primarycolor">&times;</span>
+          </button>
+          <p>Para acessar está área, você precisa estar logado!</p>
+          <div class="d-flex justify-content-around">
+            <a href="<?= url("login") ?>" class="btn btn-primarycolor rounded-pill">Acessar Conta</a>
+            <a href="<?= url("cadastro") ?>" class="btn btn-primarycolor rounded-pill">Criar Conta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php endif; unset($_SESSION["naologado"])?>
   <!-- ======= App Bar ======= -->
   <div class="baixar-app text-center">
       <div class="d-flex justify-content-end">
@@ -109,9 +129,9 @@
           <ul>
             <li class="active"><a href="#hero">Home</a></li>
             <li><a href="<?= url("cardapio") ?>">Menu</a></li>
+            <li><a href="<?= url("delivery") ?>">Delivery</a></li>
             <?php if ($logado != 0) { ?>
             <li><a href="#book-a-table">Book a Table</a></li>
-              <li><a href="<?= url("delivery") ?>">Delivery</a></li>
             <li><a href="#about">About Us</a></li>
             <li class="conta text-center">
               <a href="" class="btn-minhaconta">
@@ -128,32 +148,33 @@
               </ul>
             </li>
             <?php } else { ?>
-              <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">Entrar</a></li>
+              <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">Log In</a></li>
             <?php } ?>
           </ul>
         <?php else: ?>
           <ul>
             <li class="active"><a href="#hero">Início</a></li>
             <li><a href="<?= url("cardapio") ?>">Cardápio</a></li>
+            <li><a href="<?= url("delivery") ?>">Delivery</a></li>
             <?php if ($logado != 0) { ?>
-            <li><a href="#book-a-table">Reserve uma mesa</a></li>
-              <li><a href="<?= url("delivery") ?>">Delivery</a></li>
-            <li><a href="#about">Sobre nós</a></li>
-            <li class="conta text-center">
-              <a href="" class="btn-minhaconta">
-                Minha conta <i class="fas fa-chevron-down"></i>
-              </a>
-              <ul class="menu-conta">
-                <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
-                <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
-                <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
-                <?php if ($admin == 1){?>
-                  <li><a href="<?= url("admin") ?>">Admin</a></li>
-                <?php } ?>
-                <li><a href="<?= url("sair") ?>">Sair</a></li>
-              </ul>
-            </li>
+              <li><a href="#book-a-table">Reserve uma mesa</a></li>
+              <li><a href="#about">Sobre nós</a></li>
+              <li class="conta text-center">
+                <a href="" class="btn-minhaconta">
+                  Minha conta <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="menu-conta">
+                  <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
+                  <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
+                  <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
+                  <?php if ($admin == 1){?>
+                    <li><a href="<?= url("admin") ?>">Admin</a></li>
+                  <?php } ?>
+                  <li><a href="<?= url("sair") ?>">Sair</a></li>
+                </ul>
+              </li>
             <?php } else { ?>
+              <li><a href="#about">Sobre nós</a></li>
               <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">Entrar</a></li>
             <?php } ?>
           </ul>
@@ -862,6 +883,10 @@
   <!-- Template Main JS File -->
   <script src="<?= url("View/assets/js/main.js") ?>"></script>
   <script src="<?= url("View/assets/js/mask.js") ?>"></script>
+
+  <script>
+    $("#modal_naologado").modal("show");
+  </script>
 
 
 </body>

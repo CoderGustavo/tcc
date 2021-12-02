@@ -18,14 +18,14 @@
         <div class="row">
           <div class="d-flex justify-content-center align-items-center w-100" style="height: 100vh;">
             <form class="form-signin border p-4 shadow rounded" style="border-top: 5px solid #cda45e !important;" method="POST" action="<?= url("conta/atualizar") ?>">
-              <?php if (isset($_SESSION["erro"])):?>
+              <?php if (isset($_SESSION["erro"])): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                   <?php echo $_SESSION["erro"]; unset($_SESSION["erro"]); ?>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-              <?php elseif(isset($_SESSION["sucesso"])):?>
+              <?php elseif(isset($_SESSION["sucesso"])): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                   <?php echo $_SESSION["sucesso"]; unset($_SESSION["sucesso"]); ?>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -33,21 +33,39 @@
                   </button>
                 </div>
               <?php endif?> 
-              <h1 class="mb-5 text-center">Minha Conta</h1>
-              <label for="inputEmail" >Nome</label> 
-              
-              <p><?php echo $usuario->nome?></p>
+              <?php if(isset($traduzir)): ?>
+                <h1 class="mb-3 text-center">My Account</h1>
 
-              <label for="inputEmail" >E-mail</label>
-              <input type="email" name="email" id="email" required="required" value= "<?php echo $usuario->email?>" class="form-control mb-3"  />
+                <label for="nome">Name</label>
+                <input type="email" name="email" id="nome" required="required" value= "<?php echo $usuario->nome?>" class="form-control mb-3"  />
 
-              <label for="inputEmail" >Telefone</label>
-              <input type="text" name="telefone" id="telefone" required="required" value= "<?php echo $usuario->telefone?>" class="form-control mb-3" />
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" required="required" value= "<?php echo $usuario->email?>" class="form-control mb-3"  />
 
-              <label for="inputPassword" >Confirmar Senha</label>
-              <input type="password" name="senha" id="inputPassword" required="required" class="form-control mb-3" />  
+                <label for="telefone" >Phone Number</label>
+                <input type="text" name="telefone" id="telefone" required="required" value= "<?php echo $usuario->telefone?>" class="form-control mb-3" />
 
-              <input type="submit" class="btn btn-lg btn-primarycolor btn-block mt-5" value="Salvar" />
+                <label for="senha" >Confirm Password</label>
+                <input type="password" name="senha" id="senha" required="required" class="form-control mb-3" />  
+
+                <input type="submit" class="btn btn-lg btn-primarycolor btn-block mt-5" value="Salvar" />
+              <?php else: ?>
+                <h1 class="mb-3 text-center">Minha Conta</h1>
+
+                <label for="nome">Nome</label>
+                <input type="email" name="email" id="nome" required="required" value= "<?php echo $usuario->nome?>" class="form-control mb-3"  />
+  
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" required="required" value= "<?php echo $usuario->email?>" class="form-control mb-3"  />
+  
+                <label for="telefone" >Telefone</label>
+                <input type="text" name="telefone" id="telefone" required="required" value= "<?php echo $usuario->telefone?>" class="form-control mb-3" />
+  
+                <label for="senha" >Confirmar Senha</label>
+                <input type="password" name="senha" id="senha" required="required" class="form-control mb-3" />  
+  
+                <input type="submit" class="btn btn-lg btn-primarycolor btn-block mt-5" value="Salvar" />
+              <?php endif;?>
               
             </form>     
           </div>

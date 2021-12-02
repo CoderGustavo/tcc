@@ -18,6 +18,7 @@ body{
 .form-signin input{
   background-color: #222;
   border: 1px solid #222;
+  margin: 2rem 0;
 }
 
 .form-signin input:focus,.form-signin input:hover{
@@ -25,6 +26,14 @@ body{
   outline: none;
   background-color: #222;
   border: 1px solid #cda45e;
+}
+.form-signin p.label{
+  text-align: left !important;
+  margin: 0;
+  margin-top: -1.5rem;
+  background-color: #cda45e;
+  padding: 0 1rem;
+  position: absolute;
 }
 
 .btn-primarycolor{
@@ -37,4 +46,11 @@ body{
 }
 .text-primarycolor{
   color: #cda45e;
+}
+
+.btn-view-pass{
+  position: absolute;
+  z-index: 999;
+  right: 1rem;
+  top: 20%;
 }

@@ -334,6 +334,7 @@
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Pendente" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Em%20Preparo" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Aguardo" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Entregue" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Cancelado" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos"
@@ -346,6 +347,7 @@
             <?php if(
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Pendente" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Em%20Preparo" ||
+              $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Aguardo" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Entregue" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Cancelado" ||
               $_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos"
@@ -366,6 +368,11 @@
               <li class="nav-item text-center">
                 <a href="<?= url("admin/listar/pedidos/Pendente") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Pendente"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
                   <p>Pedidos pendentes</p>
+                </a>
+              </li>
+              <li class="nav-item text-center">
+                <a href="<?= url("admin/listar/pedidos/Aguardo") ?>" class="nav-link callout bg-transparent <?php if($_SERVER["REQUEST_URI"] == "/tcc/admin/listar/pedidos/Aguardo"){ echo "callout-warning color-primarycolor";}else{echo "callout-transparent";}?>">
+                  <p>Pedidos em aguardo</p>
                 </a>
               </li>
               <li class="nav-item text-center">

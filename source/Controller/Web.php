@@ -61,7 +61,7 @@ class Web
             "logado" => $logado,
             "usuario" => $usuario,
             "admin" => $admin,
-            "traduzir" => $traduzir
+            "traduzir" => $traduzir,
         ]);
     }
 
@@ -71,7 +71,14 @@ class Web
         if(isset($_SESSION["usuario"])){
             return $this->router->redirect(" ");
         }else{
-            echo $this->view->render("login");
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
+            echo $this->view->render("login", [
+                "traduzir" => $traduzir
+            ]);
         }
     }
 
@@ -80,7 +87,14 @@ class Web
         if(isset($_SESSION["usuario"])){
             return $this->router->redirect(" ");
         }else{
-            echo $this->view->render("cadastro");
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
+            echo $this->view->render("cadastro", [
+                "traduzir" => $traduzir
+            ]);
         }
     }
     
@@ -166,6 +180,7 @@ class Web
                 "traduzir" => $traduzir
             ]);
         }else{
+            $_SESSION["naologado"] = "sim_delivery";
             return $this->router->redirect(" ");
         }
 

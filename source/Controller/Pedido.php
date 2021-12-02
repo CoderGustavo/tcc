@@ -167,23 +167,49 @@ class Pedido
             $pedido = $pedidos->findById($id);
             switch ($pedido->status) {
                 case 'Pendente':
+                    $pedido->status = "Aguardo";
+                    $pedido->save();
+                    if(isset($status)){
+                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    }else{
+                        return $this->router->redirect("admin/listar/pedidos");
+                    }
+                break;
+
+                case 'Aguardo':
                     $pedido->status = "Em Preparo";
                     $pedido->save();
-                    return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    if(isset($status)){
+                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    }else{
+                        return $this->router->redirect("admin/listar/pedidos");
+                    }
                 break;
     
                 case 'Em Preparo':
                     $pedido->status = "Entregue";
                     $pedido->save();
-                    return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    if(isset($status)){
+                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    }else{
+                        return $this->router->redirect("admin/listar/pedidos");
+                    }
                 break;
     
                 case 'Entregue':
-                    return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    if(isset($status)){
+                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    }else{
+                        return $this->router->redirect("admin/listar/pedidos");
+                    }
                 break;
     
                 case 'Cancelado':
-                    return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    if(isset($status)){
+                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                    }else{
+                        return $this->router->redirect("admin/listar/pedidos");
+                    }
                 break;
     
                 default:

@@ -228,7 +228,7 @@
                     <div class="modal-body text-center">
                         <form action="<?= url("mesa/verificar") ?>" method="post">
                             <h5 class="modal-title" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 15pt;">Insira a senha da mesa <?php echo $idmesa?>:</h5>
-                            <input type="text" class="form-control" name="senha" placeholder="Insira a senha:" value="<?php if(isset($_SESSION["valor"])){echo $_SESSION["valor"];unset($_SESSION["valor"]);}else if(isset($senha)){echo $senha;} ?>">
+                            <input type="text" class="form-control" name="senha" placeholder="Insira a senha:" value="<?php if(isset($senha)){echo $senha;} else if(isset($_SESSION["valor"])){echo $_SESSION["valor"];unset($_SESSION["valor"]);}  ?>">
                             <input type="hidden" name="id" value="<?php echo $idmesa?>">
                             <?php if(isset($_SESSION["erro"])):?>
                                 <p class="text-danger"><?php echo $_SESSION["erro"]?></p>

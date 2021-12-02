@@ -41,6 +41,7 @@ class Usuario
             return $this->router->redirect('/');
         }else{
             $_SESSION["erro"] = "Algumas de suas credenciais estão incorretas!";
+            $_SESSION["valores"] = $data;
             return $this->router->redirect('/login');
         }
     }
@@ -122,8 +123,7 @@ class Usuario
 
     public function logout($data){
         session_start();
-        $_SESSION["usuario"] = null;
-        session_destroy();
+        unset($_SESSION["usuario"]);
         return $this->router->redirect("/");
     }
 
@@ -147,7 +147,12 @@ class Usuario
     public function myAccount($data){
         session_start();
         $usuario = $_SESSION["usuario"];
-        echo $this->view->render("usuario/minhaconta",["usuario" => $usuario]);
+        if(isset($_SESSION["traduzir"])){
+            $traduzir = $_SESSION["traduzir"];
+        }else{
+            $traduzir = NULL;
+        }
+        echo $this->view->render("usuario/minhaconta",["usuario" => $usuario, "traduzir" => $traduzir]);
     }
 
     public function myOrders($data){
@@ -155,15 +160,25 @@ class Usuario
         $usuario = $_SESSION["usuario"];
         $pedidos = new Pedido();
         $pedidos = $pedidos->find("id_usuario=:userid AND status <> :status AND status <> :status2","userid={$usuario->id}&status=sacola&status2=cancelado")->fetch(true);
-        echo $this->view->render("usuario/meuspedidos",["usuario" => $usuario, "pedidos" => $pedidos]);
+        if(isset($_SESSION["traduzir"])){
+            $traduzir = $_SESSION["traduzir"];
+        }else{
+            $traduzir = NULL;
+        }
+        echo $this->view->render("usuario/meuspedidos",["usuario" => $usuario, "pedidos" => $pedidos, "traduzir" => $traduzir]);
     }
     
-    public function myBooks($data){
+    public function myReservations($data){
         session_start();
         $usuario = $_SESSION["usuario"];
         $reservas = new Reserva();
         $reservas = $reservas->find("id_usuario=:userid AND status<>:status","userid={$usuario->id}&status=Livre")->fetch(true);
-        echo $this->view->render("usuario/minhasreservas",["usuario" => $usuario, "reservas" => $reservas]);
+        if(isset($_SESSION["traduzir"])){
+            $traduzir = $_SESSION["traduzir"];
+        }else{
+            $traduzir = NULL;
+        }
+        echo $this->view->render("usuario/minhasreservas",["usuario" => $usuario, "reservas" => $reservas, "traduzir" => $traduzir]);
     }
 
     public function showOrder($data){

@@ -61,7 +61,7 @@
                             </ul>
                         </li>
                     <?php else: ?>
-                        <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">Entrar</a></li>
+                        <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">LOG IN</a></li>
                     <?php endif; ?>
                 </ul>
             <?php else: ?>
@@ -69,20 +69,24 @@
                     <li><a href="<?= url("") ?>">Início</a></li>
                     <li class="active"><a href="<?= url("cardapio") ?>">Cardápio</a></li>
                     <li><a href="<?= url("delivery") ?>">Delivery</a></li>
-                    <li class="conta text-center">
-                    <a href="" class="btn-minhaconta">
-                        Minha conta <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <ul class="menu-conta">
-                        <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
-                        <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
-                        <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
-                        <?php if ($admin == 1){?>
-                        <li><a href="<?= url("admin") ?>">Admin</a></li>
-                        <?php } ?>
-                        <li><a href="<?= url("sair") ?>">Sair</a></li>
-                    </ul>
-                    </li>
+                    <?php if ($logado != 0): ?>
+                        <li class="conta text-center">
+                            <a href="" class="btn-minhaconta">
+                                Minha conta <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="menu-conta">
+                                <li><a href="<?= url("conta/minhaconta") ?>">Minha conta</a></li>
+                                <li><a href="<?= url("conta/meuspedidos") ?>">Meus Pedidos</a></li>
+                                <li><a href="<?= url("conta/minhasreservas") ?>">Minhas Reservas</a></li>
+                                <?php if ($admin == 1){?>
+                                <li><a href="<?= url("admin") ?>">Admin</a></li>
+                                <?php } ?>
+                                <li><a href="<?= url("sair") ?>">Sair</a></li>
+                            </ul>
+                        </li>
+                    <?php else: ?>
+                        <li class="conta text-center"><a href="<?= url("login") ?>" class="btn-entrar">ENTRAR</a></li>
+                    <?php endif; ?>
                 </ul>
             <?php endif; ?>
         </nav><!-- .nav-menu -->

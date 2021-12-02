@@ -80,6 +80,10 @@
                         <td>
                           <span class="badge badge-pill bg-warning p-2"> <?php echo $linha->status ?> </span>
                         </td>
+                      <?php }else if($linha->status == 'Aguardo'){?>
+                        <td>
+                          <span class="badge badge-pill bg-primarycolor p-2"> <?php echo $linha->status ?> </span>
+                        </td>
                       <?php }else if($linha->status == 'Em Preparo'){?>
                         <td>
                           <span class="badge badge-pill bg-primary p-2"> <?php echo $linha->status ?> </span>
@@ -94,13 +98,15 @@
                         </td>
                       <?php }?>
                       <td>
-                        <?php if(isset($status)): ?>
-                          <a href="<?= url("admin/pedido/informacoes/$linha->id/$status") ?>"><i class="far fa-info text-info rounded-pill p-2"></i></a>
-                        <?php else: ?>
-                            <a href="<?= url("admin/pedido/informacoes/$linha->id") ?>"><i class="far fa-info text-info rounded-pill p-2"></i></a>
-                        <?php endif; ?>
-                        <a href="#" data-toggle="modal" data-target="#editPedido<?php echo $linha->id ?>"><i class="far fa-edit text-warning rounded-pill p-2"></i></a>
-                        <a href="#" data-toggle="modal" data-target="#atualizarPedido<?php echo $linha->id ?>"><i class="far fa-sync text-success rounded-pill p-2"></i></a>
+                        <a href="<?= url("admin/pedido/informacoes/$linha->id") ?>"><i class="far fa-info text-info rounded-pill p-2"></i></a>
+                        <?php switch ($linha->status):
+                          case 'Cancelado': ?>
+                          
+                          <?php break; case 'entregue': ?>
+                          <?php break; default: ?>
+                            <a href="#" data-toggle="modal" data-target="#atualizarPedido<?php echo $linha->id ?>"><i class="far fa-sync text-success rounded-pill p-2"></i></a>
+                          <?php break; ?>
+                        <?php endswitch; ?>
                       </td>
                       </tr>
                     <?php endforeach; endif; ?>

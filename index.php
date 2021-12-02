@@ -55,7 +55,7 @@ $router->get("/minhaconta", "Usuario:myAccount");
 $router->post("/atualizar", "Usuario:update");
 $router->get("/meuspedidos", "Usuario:myOrders");
 $router->get("/meuspedidos/{idpedido}", "Usuario:showOrder");
-$router->get("/minhasreservas", "Usuario:myBooks");
+$router->get("/minhasreservas", "Usuario:myReservations");
 $router->get("/minhasreservas/{idreserva}", "Usuario:showBook");
 
 $router->group("/admin"); //grupo admin
@@ -93,10 +93,7 @@ $router->get("/listar/pedidos", "Pedido:read");
 $router->get("/listar/pedidos/{status}", "Pedido:readStatus");
 $router->get("/pedido/atualizar/{id}/", "Pedido:update");
 $router->get("/pedido/atualizar/{id}/{status}", "Pedido:update");
-$router->get("/pedido/editar/{id}", "Pedido:edit");
-$router->get("/pedido/editar/{id}/{status}", "Pedido:edit");
 $router->get("/pedido/informacoes/{id}", "Pedido:show");
-$router->get("/pedido/informacoes/{id}/{status}", "Pedido:show");
 
 $router->get("/listar/cardapio", "Cardapio:read");
 $router->get("/cadastrar/cardapio", "Cardapio:add");
