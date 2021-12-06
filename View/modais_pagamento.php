@@ -33,7 +33,7 @@
                     <div>
                         <label for="#cpf" class="text-left w-100">
                             CPF: 
-                            <input type="text" name="cpf" class="form-control" placeholder="Seu CPF">
+                            <input type="text" name="cpf" class="form-control" placeholder="Seu CPF" required>
                         </label>
                     </div>
                     <button type="submit" class="btn btn-primarycolor rounded-pill mb-3">Confirmar e gerar QrCode</button>
@@ -226,12 +226,12 @@
                 }else{
                     qtdvez += 1;
                     document.querySelector(".qtdvez").innerHTML = qtdvez
-                    seg(10);
+                    seg(60);
                 }
             })
         }else{
             document.location.replace("/tcc/delivery");
         }
     }
-    seg(10);
+    seg(60);
 </script>

@@ -62,6 +62,7 @@
                       <th>ID</th>
                       <th>Nome</th>
                       <th>Pode retirar?</th>
+                      <th>Possui ponto?</th>
                       <th>Ações</th>
                     </tr>
                   </thead>
@@ -71,6 +72,7 @@
                       <td class="align-middle"><?php echo $linha->id ?></td>
                       <td class="align-middle"><?php echo $linha->nome ?></td>
                       <td class="align-middle"><?php echo $linha->retirar ?></td>
+                      <td class="align-middle"><?php echo $linha->ponto ?></td>
                       <td class="align-middle">
                         <p>
                           <a href="<?= url("admin/edit/ingrediente/$linha->id") ?>"><i class="far fa-edit text-warning rounded-pill p-2"></i></a>

@@ -28,6 +28,29 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
+          <div class="col-12 text-center">
+            <?php switch ($pedido->status) {
+                case 'Pendente':
+                  echo "<h2 class='h1 text-warning'>$pedido->status";
+                break;
+                case 'Aguardo':
+                  echo "<h2 class='h1 text-warning'>$pedido->status";
+                break;
+                case 'Em Preparo':
+                  echo "<h2 class='h1 text-primary'>$pedido->status";
+                break;
+                default:
+                  echo "<h2 class='h1 text-success'>$pedido->status";
+                break;
+              }
+            ?>
+            <?php if($pedido->status != "Entregue"): ?>
+              <a href="<?= url("admin/pedido/atualizar/$pedido->id/Pedido") ?>">
+                <i class="fas fa-sync text-success" style="font-size: 18pt;"></i>
+              </a>
+            <?php endif; ?>
+            </h2>
+          </div>
           <div class="col-md-6 p-2">
             <div class="shadow p-2 rounded">
               <p class="text-bold m-0 text-uppercase">Usuário: <?php echo $usuario_show->nome ?></p>
@@ -42,7 +65,7 @@
             </div>
           </div>
           <div class="col-md-12 p-2 shadow">
-          <p class="text-bold m-0 text-uppercase p-2">Itens:</p>
+            <p class="text-bold m-0 text-uppercase p-2">Itens:</p>
             <div class="row">
               <?php foreach ($ingredientes as $key => $value):?>
               <div class="col-md-6">

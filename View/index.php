@@ -33,7 +33,7 @@
 </head>
 
 <body>
-  <?php if(isset($_SESSION["naologado"]) && $_SESSION["naologado"] == "sim_delivery"): ?>
+  <?php if(isset($_SESSION["naologado"])): ?>
   <div class="modal fade" id="modal_naologado">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content bg-dark">
@@ -196,7 +196,7 @@
               <div class="btns">
                 <a href="<?= url("cardapio") ?>" class="btn-menu animated fadeInUp scrollto">Menu</a>
                 <?php if ($logado != 0) { ?>
-                    <a href="<?= url("delivery") ?>" class="btn-book animated fadeInUp scrollto mt-2">Order a Delivery</a>
+                    <a href="<?= url("delivery") ?>" class="btn-book animated fadeInUp scrollto mt-2">Delivery</a>
                     <a href="#book-a-table" class="btn-book animated fadeInUp scrollto mt-2">Book a Table</a>
                 <?php } ?>
               </div>
@@ -209,7 +209,7 @@
       <?php else: ?>
         <div class="row">
           <div class="offset-lg-5 col-lg-7">
-            <h1>Bem vindo ao <span>Delicious Hamburgueria</span></h1>
+            <h1>Bem-vindo ao <span>Delicious Hamburgueria</span></h1>
             <h2>Lanches feitos para aproveitar a gostosura gourmet</h2>
 
             <div class="btns">
@@ -275,7 +275,7 @@
         <?php if(isset($traduzir)): ?>
           <div class="col-12 mt-3 w-100 d-flex justify-content-center align-items-center">
             <a href="<?= url("cardapio") ?>" class="btn btn-outline-primarycolor rounded-pill p-2 pr-4 pl-4  scrollto mr-3">See Menu</a>
-            <a href="<?= url("delivery") ?>" class="btn btn-primarycolor rounded-pill p-2 pr-4 pl-4  scrollto">Order a Delivery</a>
+            <a href="<?= url("delivery") ?>" class="btn btn-primarycolor rounded-pill p-2 pr-4 pl-4  scrollto">Delivery</a>
           </div>
         <?php else: ?>
           <div class="col-12 mt-3 w-100 d-flex justify-content-center align-items-center">
@@ -319,7 +319,7 @@
             <div class="col-md-4 col-sm-6 mt-4 mt-md-0">
               <div class="box p-3 p-sm-4" data-aos="zoom-in" data-aos-delay="300">
                 <span>03</span>
-                <h4>Ending with our burgers</h4>
+                <h4>Lastly, our burgers</h4>
                 <p>We have a best burgers around here, offering quality, taste and a great price.</p>
               </div>
             </div>
@@ -750,13 +750,13 @@
                 We are Delicious Burger!
               </p>
               <ul>
-                <li><i class="icofont-check-circled"></i> Our snack bar there is since 10 years ago, consider us veterans in this here :)</li>
-                <li><i class="icofont-check-circled"></i> We have the best Chefs around here, always offer quality and compromise to our clients.</li>
+                <li><i class="icofont-check-circled"></i> We are here for 10 years, we consider ourself veterans in this here :)</li>
+                <li><i class="icofont-check-circled"></i> We have the best Chefs in region, always offer quality and commitment to our clients.</li>
                 <li><i class="icofont-check-circled"></i> In this moment of pandemic, we offer confort and securance to you and your family, and you don't need to leave your home. you like it, aren't you?</li>
                 <li><i class="icofont-check-circled"></i> We offer suport in our office hours, so, if you need, just tell us!</li>
               </ul>
               <p>
-                Since you now a little more about us, fell free to book a table and enjoy to see our <a href="" class="text-primarycolor">menu</a>. We wish you a good snack!
+                Since you know a little more about us, feel free to book a table and to look our <a href="" class="text-primarycolor">menu</a>. We wish you a good snack!
               </p>
             </div>
           <?php else: ?>

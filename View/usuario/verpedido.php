@@ -28,11 +28,26 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6 p-2">
-            <div class="shadow p-2 rounded">
-              <p class="text-bold m-0 text-uppercase">Usuário: <?php echo $usuario->nome ?></p>
-              
-            </div>
+          <div class="col-12 text-center">
+            <?php
+              switch ($pedido->status) {
+                case 'Pendente':
+                  echo "<h2 class='h1 text-warning'>$pedido->status </h2>";
+                break;
+
+                case 'Aguardo':
+                  echo "<h2 class='h1 text-warning'>$pedido->status </h2>";
+                break;
+
+                case 'Em Preparo':
+                  echo "<h2 class='h1 text-primary'>$pedido->status </h2>";
+                break;
+                
+                default:
+                  echo "<h2 class='h1 text-success'>$pedido->status </h2>";
+                break;
+              }
+            ?>
           </div>
           <div class="col-md-6 p-2">
             <div class="shadow p-2 rounded">

@@ -41,7 +41,7 @@ class Usuario
             return $this->router->redirect('/');
         }else{
             $_SESSION["erro"] = "Algumas de suas credenciais estão incorretas!";
-            $_SESSION["valores"] = $data;
+            $_SESSION["valores"] = $data; 
             return $this->router->redirect('/login');
         }
     }
@@ -146,39 +146,54 @@ class Usuario
 
     public function myAccount($data){
         session_start();
-        $usuario = $_SESSION["usuario"];
-        if(isset($_SESSION["traduzir"])){
-            $traduzir = $_SESSION["traduzir"];
+        if(isset($_SESSION["usuario"])){
+            $usuario = $_SESSION["usuario"];
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
+            echo $this->view->render("usuario/minhaconta",["usuario" => $usuario, "traduzir" => $traduzir]);
         }else{
-            $traduzir = NULL;
+            $_SESSION["naologado"] = "sim";
+            return $this->router->redirect("");
         }
-        echo $this->view->render("usuario/minhaconta",["usuario" => $usuario, "traduzir" => $traduzir]);
     }
 
     public function myOrders($data){
         session_start();
-        $usuario = $_SESSION["usuario"];
-        $pedidos = new Pedido();
-        $pedidos = $pedidos->find("id_usuario=:userid AND status <> :status AND status <> :status2","userid={$usuario->id}&status=sacola&status2=cancelado")->fetch(true);
-        if(isset($_SESSION["traduzir"])){
-            $traduzir = $_SESSION["traduzir"];
+        if(isset($_SESSION["usuario"])){
+            $usuario = $_SESSION["usuario"];
+            $pedidos = new Pedido();
+            $pedidos = $pedidos->find("id_usuario=:userid AND status <> :status AND status <> :status2","userid={$usuario->id}&status=sacola&status2=cancelado")->fetch(true);
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
+            echo $this->view->render("usuario/meuspedidos",["usuario" => $usuario, "pedidos" => $pedidos, "traduzir" => $traduzir]);
         }else{
-            $traduzir = NULL;
+            $_SESSION["naologado"] = "sim";
+            return $this->router->redirect("");
         }
-        echo $this->view->render("usuario/meuspedidos",["usuario" => $usuario, "pedidos" => $pedidos, "traduzir" => $traduzir]);
     }
     
     public function myReservations($data){
         session_start();
-        $usuario = $_SESSION["usuario"];
-        $reservas = new Reserva();
-        $reservas = $reservas->find("id_usuario=:userid AND status<>:status","userid={$usuario->id}&status=Livre")->fetch(true);
-        if(isset($_SESSION["traduzir"])){
-            $traduzir = $_SESSION["traduzir"];
+        if(isset($_SESSION["usuario"])){
+            $usuario = $_SESSION["usuario"];
+            $reservas = new Reserva();
+            $reservas = $reservas->find("id_usuario=:userid AND status<>:status","userid={$usuario->id}&status=Livre")->fetch(true);
+            if(isset($_SESSION["traduzir"])){
+                $traduzir = $_SESSION["traduzir"];
+            }else{
+                $traduzir = NULL;
+            }
+            echo $this->view->render("usuario/minhasreservas",["usuario" => $usuario, "reservas" => $reservas, "traduzir" => $traduzir]);
         }else{
-            $traduzir = NULL;
+            $_SESSION["naologado"] = "sim";
+            return $this->router->redirect("");
         }
-        echo $this->view->render("usuario/minhasreservas",["usuario" => $usuario, "reservas" => $reservas, "traduzir" => $traduzir]);
     }
 
     public function showOrder($data){
@@ -232,32 +247,40 @@ class Usuario
         $email = $data["email"]; 
         $telefone = $data["telefone"];
         $senha = $data["senha"];
+        $nome = $data["nome"];
 
-        $usuariologado = $_SESSION["usuario"];
-        $usuario = new modelUsuario();
-        $usuario = $usuario->findById($usuariologado->id);
-
-        if($email && $telefone && $senha){
-            if($senha == $usuario->senha){
-                $usuario->email = $email;
-                $usuario->telefone = $telefone;
-                $usuario->save();
-
-                if($usuario->fail()){
-                    $_SESSION["erro"] = $usuario->fail()->getMessage();
+        if(isset($_SESSION["usuario"])){
+            $usuariologado = $_SESSION["usuario"];
+            $usuario = new modelUsuario();
+            $usuario = $usuario->findById($usuariologado->id);
+            if($nome && $email && $telefone && $senha){
+                $senha = sha1(md5(sha1($senha)));
+                if($senha == $usuario->senha){
+                    $usuario->nome = $nome;
+                    $usuario->email = $email;
+                    $usuario->telefone = $telefone;
+                    $usuario->save();
+    
+                    if($usuario->fail()){
+                        $_SESSION["erro"] = $usuario->fail()->getMessage();
+                    }else{
+                        $admin = $usuariologado->admin;
+                        $usuario->admin = $admin;
+                        $_SESSION["usuario"] = $usuario;
+                        $_SESSION["sucesso"] = "Conta atualizada!";
+                    }
+    
                 }else{
-                    $admin = $usuariologado->admin;
-                    $usuario->admin = $admin;
-                    $_SESSION["usuario"] = $usuario;
-                    $_SESSION["sucesso"] = "Conta atualizada!";
+                    $_SESSION["erro"] = "Senha incorreta.";
                 }
-
             }else{
-                $_SESSION["erro"] = "Senha incorreta.";
+                $_SESSION["erro"] = "Preencha todos os campos.";
             }
         }else{
-            $_SESSION["erro"] = "Preencha todos os campos.";
+            $_SESSION["naologado"] = "sim";
+            return $this->router->redirect("");
         }
+
 
         return $this->router->redirect("conta/minhaconta");
     }

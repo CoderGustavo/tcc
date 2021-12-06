@@ -104,15 +104,16 @@ class Pedido
         $nome = $data["nome"];
         $qtd = $data["qtd"];
         $obs = $data["obs"];
+        $ponto = $data["ponto"];
         $userid = $_SESSION["usuario"]->id;
         $status = "sacola";
 
         $pedido = new modelPedido();
         $itens_pedido = new Item_pedido();
 
-        if($id && $nome && $obs){
+        if($id && $nome && $obs && $ponto){
             $pedidoUser = $pedido->find("id_usuario=:uid AND status=:status","uid=$userid&status=$status")->fetch();
-            $itens_pedidoUser = $itens_pedido->find("id_pedido = :idpedido AND id_cardapio=:idcardapio AND obs =:obs", "idpedido=$pedidoUser->id&idcardapio=$id&obs=$obs")->fetch();
+            $itens_pedidoUser = $itens_pedido->find("id_pedido = :idpedido AND id_cardapio=:idcardapio AND obs =:obs AND ponto = :ponto", "idpedido=$pedidoUser->id&idcardapio=$id&obs=$obs&ponto=$ponto")->fetch();
             if($pedidoUser){
                 if($itens_pedidoUser){
                     $itens_pedidoUser->qtd = $itens_pedidoUser->qtd+$qtd;
@@ -122,6 +123,7 @@ class Pedido
                     $itens_pedido->id_cardapio = $id;
                     $itens_pedido->qtd = $qtd;
                     $itens_pedido->obs = $obs;
+                    $itens_pedido->ponto = $ponto;
                     $itens_pedido->save();
                 }
             }else{
@@ -136,6 +138,7 @@ class Pedido
                 $itens_pedido->id_cardapio = $id;
                 $itens_pedido->qtd = $qtd;
                 $itens_pedido->obs = $obs;
+                $itens_pedido->ponto = $ponto;
                 $itens_pedido->save();
             }
         }
@@ -170,7 +173,11 @@ class Pedido
                     $pedido->status = "Aguardo";
                     $pedido->save();
                     if(isset($status)){
-                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                        if($status == "Pedido"){
+                            return $this->router->redirect("admin/pedido/informacoes/$id");
+                        }else{
+                            return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                        }
                     }else{
                         return $this->router->redirect("admin/listar/pedidos");
                     }
@@ -180,7 +187,11 @@ class Pedido
                     $pedido->status = "Em Preparo";
                     $pedido->save();
                     if(isset($status)){
-                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                        if($status == "Pedido"){
+                            return $this->router->redirect("admin/pedido/informacoes/$id");
+                        }else{
+                            return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                        }
                     }else{
                         return $this->router->redirect("admin/listar/pedidos");
                     }
@@ -190,26 +201,22 @@ class Pedido
                     $pedido->status = "Entregue";
                     $pedido->save();
                     if(isset($status)){
-                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                        if($status == "Pedido"){
+                            return $this->router->redirect("admin/pedido/informacoes/$id");
+                        }else{
+                            return $this->router->redirect("admin/listar/pedidos/$pedido->status");
+                        }
                     }else{
                         return $this->router->redirect("admin/listar/pedidos");
                     }
                 break;
     
                 case 'Entregue':
-                    if(isset($status)){
                         return $this->router->redirect("admin/listar/pedidos/$pedido->status");
-                    }else{
-                        return $this->router->redirect("admin/listar/pedidos");
-                    }
                 break;
     
                 case 'Cancelado':
-                    if(isset($status)){
-                        return $this->router->redirect("admin/listar/pedidos/$pedido->status");
-                    }else{
-                        return $this->router->redirect("admin/listar/pedidos");
-                    }
+                    return $this->router->redirect("admin/listar/pedidos/$pedido->status");
                 break;
     
                 default:

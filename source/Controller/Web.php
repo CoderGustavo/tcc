@@ -162,7 +162,7 @@ class Web
             $pedidoMesa = $pedido->find("id_usuario=:uid AND status=:status","uid=$usuario->id&status=$status")->fetch();
 
             if($pedidoMesa){
-                $stmt = $conn->prepare("SELECT itens_pedido.id,cardapio.nome,cardapio.preco,itens_pedido.obs,itens_pedido.qtd FROM itens_pedido INNER JOIN cardapio ON itens_pedido.id_cardapio=cardapio.id INNER JOIN pedidos ON itens_pedido.id_pedido=pedidos.id WHERE pedidos.id = :id");
+                $stmt = $conn->prepare("SELECT itens_pedido.id,cardapio.nome,cardapio.preco,itens_pedido.obs,itens_pedido.qtd,itens_pedido.ponto FROM itens_pedido INNER JOIN cardapio ON itens_pedido.id_cardapio=cardapio.id INNER JOIN pedidos ON itens_pedido.id_pedido=pedidos.id WHERE pedidos.id = :id");
                 $stmt->bindValue(":id", $pedidoMesa->id);
                 $stmt->execute();
                 $pedido = $stmt->fetchAll();
@@ -319,8 +319,15 @@ class Web
                 }
             }else if(isset($pedidoMesa->id_endereco)){
                 $endereco = $enderecos->findById($pedidoMesa->id_endereco);
+                $pedido = $pedido->findById("$pedidoMesa->id");
+                if($pedido){
+                    foreach($pedido as $key => $ped){
+                        $somaprecos = $somaprecos+($ped->preco*$ped->qtd);
+                    }
+                }
             }else{
                 $_SESSION["erro"] = "Selecione um endereço!";
+                return $this->router->redirect("checkout/endereco");
             }
 
             echo $this->view->render("pagamento", [

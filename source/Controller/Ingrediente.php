@@ -27,13 +27,15 @@ class Ingrediente
             $ingredientes = new modelIngrediente();
             $nome = strtolower($data["nome"]);
             $retirar = $data["retirar"];
+            $ponto = $data["ponto"];
     
-            $existe= $ingredientes->find("nome=:nome","nome=$nome")->fetch();
+            $existe = $ingredientes->find("nome=:nome","nome=$nome")->fetch();
     
             if(empty($existe)){
-                if($nome && $retirar){
+                if($nome && $retirar && $ponto){
                     $ingredientes->nome = $nome;
                     $ingredientes->retirar = $retirar;
+                    $ingredientes->ponto = $ponto;
                     $ingredientes->save();
                     $_SESSION["sucesso"] = "Ingrediente cadastrado com sucesso!";
                 }else{
@@ -107,12 +109,14 @@ class Ingrediente
             $id = $data["id"];
             $nome = $data["nome"];
             $retirar = $data["retirar"];
+            $ponto = $data["ponto"];
             $ingredientes = new modelIngrediente();
-            if($id && $nome && $retirar){
+            if($id && $nome && $retirar && $ponto){
                 $ingrediente = $ingredientes->findById($id);
     
                 $ingrediente->nome = $nome;
                 $ingrediente->retirar = $retirar;
+                $ingrediente->ponto = $ponto;
                 $ingrediente->save();
     
                 $_SESSION["sucesso"] = "Ingrediente editado com sucesso!";

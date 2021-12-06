@@ -155,7 +155,7 @@ class Cardapio
             $stmt->execute();
             $ingredientes = $stmt->fetchAll();
     
-            echo $this->view->render("admin/cardapio/ver", ["cardapio" => $cardapio, "usuario" => $usuario, "ingredientes" => $ingredientes]);
+            echo $this->view->render("admin/cardapio/ver", ["cardapio" => $cardapio, "usuario" => $usuario, "ingredientes" => $ingredientes, "admin" => $admin]);
         }else{
             return $this->router->redirect("naologado");
         }
@@ -174,7 +174,7 @@ class Cardapio
             $ingredientes = new Ingrediente();
             $ingredientes = $ingredientes->find()->fetch(true);
             $usuario = $_SESSION["usuario"];
-            echo $this->view->render("admin/cardapio/edit", ["cardapio" => $cardapio, "usuario" => $usuario, "ingredientes" => $ingredientes]);
+            echo $this->view->render("admin/cardapio/edit", ["cardapio" => $cardapio, "usuario" => $usuario, "ingredientes" => $ingredientes, "admin" => $admin]);
         }else{
             return $this->router->redirect("naologado");
         }

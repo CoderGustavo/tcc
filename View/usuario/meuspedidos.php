@@ -43,7 +43,7 @@
           <?php endif?>
         </div>
         <div class="row p-3">
-          <?php foreach($pedidos as $pedido):?>
+          <?php if(isset($pedidos)): foreach($pedidos as $pedido):?>
             <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0
             <?php
               switch ($pedido->status) {
@@ -92,7 +92,7 @@
                       <p class="h4 text-light">Total: <strong>R$<?php echo $pedido->total?></strong></p>
                   </div>
             </div>
-          <?php endforeach; ?>
+          <?php endforeach; endif; ?>
         </div>
       </div>
     </section>

@@ -2,9 +2,9 @@
 
 define("URL_BASE", "http://localhost/tcc");
 
-define("PUBLIC_KEY_MP", "TEST-093bef75-aeb7-4925-a272-316316ca6aa6");
+define("PUBLIC_KEY_MP", "TEST-125cbe39-df33-4469-893e-50877df0061d");
 
-define("PRIVATE_TOKEN_MP", "TEST-7097660880917671-022323-3679249aa11bfef7b56e240708921cc3__LD_LA__-231232494");
+define("PRIVATE_TOKEN_MP", "TEST-86727251271039-120523-5a98db143751c65c852a8f0ecd8ca2a8-231232494");
 
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",

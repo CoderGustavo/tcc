@@ -37,7 +37,7 @@
                 <h1 class="mb-3 text-center">My Account</h1>
 
                 <label for="nome">Name</label>
-                <input type="email" name="email" id="nome" required="required" value= "<?php echo $usuario->nome?>" class="form-control mb-3"  />
+                <input type="text" name="nome" id="nome" required="required" value= "<?php echo $usuario->nome?>" class="form-control mb-3"  />
 
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required="required" value= "<?php echo $usuario->email?>" class="form-control mb-3"  />
@@ -53,7 +53,7 @@
                 <h1 class="mb-3 text-center">Minha Conta</h1>
 
                 <label for="nome">Nome</label>
-                <input type="email" name="email" id="nome" required="required" value= "<?php echo $usuario->nome?>" class="form-control mb-3"  />
+                <input type="nome" name="nome" id="nome" required="required" value= "<?php echo $usuario->nome?>" class="form-control mb-3"  />
   
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required="required" value= "<?php echo $usuario->email?>" class="form-control mb-3"  />

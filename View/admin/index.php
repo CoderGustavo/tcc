@@ -183,7 +183,7 @@
         datasets: [
           {
             label: 'Total de Pedidos',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [100, 180, 250, 400, 300, 550],
             backgroundColor: [
                 'rgba(0, 55, 255, 0.4)',
             ],
@@ -195,7 +195,7 @@
           },
           {
             label: 'Pedidos Entregues',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [95, 170, 243, 386, 280, 548],
             backgroundColor: [
                 'rgba(0, 250, 55, 0.4)',
             ],
@@ -207,7 +207,7 @@
           },
           {
             label: 'Pedidos Cancelados',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [5, 10, 7, 14, 20, 2],
             backgroundColor: [
                 'rgba(255, 0, 55, 0.4)',
             ],
@@ -250,7 +250,7 @@
         datasets: [
           {
             label: 'Total de Pedidos',
-            data: [19, 11, 3, 5, 8, 3],
+            data: [100, 180, 250, 400, 300, 550],
             backgroundColor: [
                 'rgba(0, 55, 255, 0.4)',
             ],
@@ -261,7 +261,7 @@
           },
           {
             label: 'Pedidos Entregues',
-            data: [12, 5, 30, 20, 15, 30],
+            data: [95, 170, 243, 386, 280, 548],
             backgroundColor: [
                 'rgba(0, 250, 55, 0.4)',
             ],
@@ -272,7 +272,7 @@
           },
           {
             label: 'Pedidos Cancelados',
-            data: [40, 19, 50, 10, 2, 10],
+            data: [5, 10, 7, 14, 20, 2],
             backgroundColor: [
                 'rgba(255, 0, 55, 0.4)',
             ],

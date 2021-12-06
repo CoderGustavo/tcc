@@ -52,6 +52,10 @@
                     </span>
                   </label>
                 </div>
+                <div class="slider-checkbox">
+                  <input type="checkbox" name="ponto" value="sim"/>
+                  <label class="label">Possui ponto?</label>
+                </div>
               </div>
               <input type="submit" class="btn btn-lg btn-block btn-primarycolor mt-5" value="Cadastrar" />
             </form>     

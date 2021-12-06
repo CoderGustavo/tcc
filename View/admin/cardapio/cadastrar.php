@@ -61,12 +61,10 @@
               <div class="row">
                 <?php if($ingredientes): foreach ($ingredientes as $key => $ingrediente):?>
                   <div class="col-md-6 p-2">
-                    <label for="check<?php echo $ingrediente->nome?>" class="w-100 p-2 rounded shadow" style="cursor: pointer;">
-                      <input type="checkbox" style="cursor: pointer;" name="ingredientes[<?php echo $key?>]" id="check<?php echo $ingrediente->nome?>" value="<?php echo $ingrediente->id?>" <?php if($ingrediente->retirar == "nao"){echo "checked";}?>>
-                      <span class="ml-3">
-                        <?php echo $ingrediente->nome?>
-                      </span>
-                    </label>
+                    <div class="slider-checkbox w-100 p-2 rounded shadow">
+                      <input type="checkbox" id="check<?php echo $ingrediente->nome?>" name="ingredientes[<?php echo $key?>]" value="<?php echo $ingrediente->id?>"/>
+                      <label class="label" style="cursor: pointer;" for="check<?php echo $ingrediente->nome?>"><?php echo $ingrediente->nome?></label>
+                    </div>
                   </div>
                 <?php endforeach; endif; ?>
               </div>

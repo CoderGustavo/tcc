@@ -144,17 +144,28 @@
                                 <div class="row">
                                     <?php foreach($lista->ingredientes() as $a){?>
                                     <div class="col-lg-6 p-2 text-center">
-                                        <div class="w-100 rounded d-flex justify-content-between p-2 border border-primarycolor">
-                                            <span class="nome_ingrediente">
-                                                <?php echo $a->nome?>
-                                            </span>
-                                            <div>
-                                                <?php if($a->retirar == "sim"){?>
-                                                <a href="" class="text-light retirar_ingrediente">
-                                                    <i class="far fa-trash"></i>
-                                                </a>
-                                                <?php } ?>
+                                        <div class="w-100 rounded p-2 border border-primarycolor">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="nome_ingrediente">
+                                                    <?php echo $a->nome?>
+                                                </span>
+                                                <div>
+                                                    <?php if($a->retirar == "sim"){?>
+                                                    <a href="" class="text-light retirar_ingrediente">
+                                                        <i class="far fa-trash"></i>
+                                                    </a>
+                                                    <?php } ?>
+                                                </div>
                                             </div>
+                                            <?php if($a->ponto == "sim"): ?>
+                                            <div>
+                                                <select name="ponto" class="form-control w-100">
+                                                    <option value="mal passado">Mal Passado</option>
+                                                    <option value="ao ponto" selected>Ao Ponto</option>
+                                                    <option value="bem passado">Bem Passado</option>
+                                                </select>
+                                            </div>
+                                            <?php endif;?>
                                         </div>
                                     </div>
                                     <?php } ?>
@@ -201,7 +212,12 @@
                     <div class="col-12 border border-primarycolor p-3 rounded mb-2">
                         <div class="row">
                             <div class="col-12 text-center d-flex justify-content-between">
-                                <p class="h3"><?php echo $linha->nome?></p>
+                                <div>
+                                    <p class="h3 text-left"><?php echo $linha->nome?></p>
+                                    <?php if(isset($linha->ponto)):?>
+                                        <p class="h6 font-weight-bold">Ponto: <?php echo $linha->ponto?></p>
+                                    <?php endif;?>
+                                </div>
                                 <p>Qtd: <?php echo $linha->qtd?></p>
                                 <h5>
                                     <a href="<?= url("delivery/excluir/$linha->id") ?>">

@@ -186,7 +186,19 @@ class Pagamento
                             if($response["id"] != NULL){
                                 $pedidoMesa->id_pagamento = $response["id"];
                                 $pedidoMesa->save();
-                            }
+                            }      
+                            
+                            var_dump($payment);
+
+                            // echo $this->view->render("pagamento", [
+                            //     "logado" => $logado,
+                            //     "usuario" => $usuario,
+                            //     "pedido" => $pedido,
+                            //     "idpedido" => $pedidoMesa->id,
+                            //     "endereco" => $endereco,
+                            //     "soma" => $somaprecos,
+                            //     "response" => $response
+                            // ]);
                         }
     
                     }else{
@@ -200,21 +212,9 @@ class Pagamento
                     return $this->router->redirect("delivery");
                 }
             }else{
-                $_SESSION["erro"] = "Você precisa inserir o CPF";
-                return $this->router->redirect("");
+                $_SESSION["erro"] = "Selecione o endereo novamente e lembre-se de informar seu cpf!";
+                return $this->router->redirect("checkout/endereco");
             }
-
-            
-
-            echo $this->view->render("pagamento", [
-                "logado" => $logado,
-                "usuario" => $usuario,
-                "pedido" => $pedido,
-                "idpedido" => $pedidoMesa->id,
-                "endereco" => $endereco,
-                "soma" => $somaprecos,
-                "response" => $response
-            ]);
         }else{
             return $this->router->redirect(" ");
         }

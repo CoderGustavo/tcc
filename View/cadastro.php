@@ -51,8 +51,8 @@
           <a href="" class="btn-view-pass"><i class="text-primarycolor fas fa-eye"></i></a>
         </div>
         <div>
-          <button type="submit" class="btn btn-lg btn-primarycolor btn-block mb-2 mt-4">Cadastrar</button>  
-          <a href="<?= url("login") ?>" class="btn text-light" >Já possue um conta? <span class="text-primarycolor">Acesse aqui!</span></a>
+          <button type="submit" class="btn btn-lg btn-primarycolor btn-block mb-2 mt-4">Register</button>  
+          <a href="<?= url("login") ?>" class="btn text-light" >Do you already have account? <span class="text-primarycolor">Log in!</span></a>
         </div>
       <?php else: ?>
         <h1 class="h3 mb-5 font-weight-normal text-light text-uppercase">Cadastre-se</h1>

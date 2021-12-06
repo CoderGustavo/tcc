@@ -43,7 +43,7 @@
           <?php endif?>
         </div>
         <div class="row p-3">
-          <?php foreach($reservas as $reserva):?>
+          <?php if(isset($reservas)): foreach($reservas as $reserva):?>
             <div class="col-12 p-4 rounded align-items-center mb-3 border border-right-0 border-top-0 border-bottom-0
             <?php
             if($reserva->status == "Livre"){
@@ -75,7 +75,7 @@
                       <p class="h4 text-light">Total gasto: <strong>R$<?php echo $reserva->total?></strong></p>
                   </div>
             </div>
-          <?php endforeach; ?>
+          <?php endforeach; endif; ?>
         </div>
       </div>
     </section>
