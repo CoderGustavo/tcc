@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Servidor:                     127.0.0.1
--- Versão do servidor:           5.6.12-log - MySQL Community Server (GPL)
--- OS do Servidor:               Win64
--- HeidiSQL Versão:              9.5.0.5196
+-- Host:                         127.0.0.1
+-- Server version:               10.4.16-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             11.1.0.6116
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,173 +10,138 @@
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Copiando estrutura do banco de dados para lanchonete2
-CREATE DATABASE IF NOT EXISTS `lanchonete2` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `lanchonete2`;
+CREATE DATABASE IF NOT EXISTS `veloxs73_tcc`;
+USE `veloxs73_tcc`;
 
--- Copiando estrutura para tabela lanchonete2.admin
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) DEFAULT NULL,
-  `niveis_acesso` varchar(45) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `FK_idUsuario` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.admin: 2 rows
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` (`id`, `id_usuario`, `niveis_acesso`) VALUES
-	(1, 2, '1'),
-	(4, 6, '1');
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.avaliacao
-CREATE TABLE IF NOT EXISTS `avaliacao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) NOT NULL,
-  `comentario` varchar(50) NOT NULL DEFAULT '',
-  `status` varchar(50) NOT NULL DEFAULT '',
-  `datahora` varchar(50) NOT NULL DEFAULT '',
-  `estrela` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK1_idUsuario` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.avaliacao: 2 rows
-/*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` (`id`, `id_usuario`, `comentario`, `status`, `datahora`, `estrela`) VALUES
-	(15, 2, 'melhor lanche que já comi.', 'Aprovado', '09/09/2021 21:38', 5),
-	(14, 2, 'achei interessante', 'Aprovado', '19/08/2021 14:26', 3);
-/*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.cardapio
-CREATE TABLE IF NOT EXISTS `cardapio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  `preco` int(11) NOT NULL,
-  `imagem` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.cardapio: 2 rows
-/*!40000 ALTER TABLE `cardapio` DISABLE KEYS */;
-INSERT INTO `cardapio` (`id`, `nome`, `preco`, `imagem`) VALUES
-	(1, 'x-tudo', 30, NULL),
-	(2, 'x-salada\r\n', 30, NULL);
-/*!40000 ALTER TABLE `cardapio` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.endereco
-CREATE TABLE IF NOT EXISTS `endereco` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_Usuario` int(11) DEFAULT NULL,
-  `logradouro` varchar(50) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL,
-  `complemento` varchar(50) DEFAULT NULL,
-  `bairro` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_idUsuario` (`id_Usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.endereco: 1 rows
-/*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` (`id`, `id_Usuario`, `logradouro`, `numero`, `complemento`, `bairro`) VALUES
-	(1, 2, 'rua pedro consentini', 145, 'casa', 'verde vale');
-/*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.ingrediente_cardapio
-CREATE TABLE IF NOT EXISTS `ingrediente_cardapio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  `cardapio_id` int(11) NOT NULL,
-  `retirar` varchar(50) NOT NULL DEFAULT 'nao',
-  PRIMARY KEY (`id`),
-  KEY `item_cardapio_id` (`cardapio_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.ingrediente_cardapio: ~3 rows (aproximadamente)
-/*!40000 ALTER TABLE `ingrediente_cardapio` DISABLE KEYS */;
-INSERT INTO `ingrediente_cardapio` (`id`, `nome`, `cardapio_id`, `retirar`) VALUES
-	(3, 'pão de Hamburguer ', 1, 'nao'),
-	(4, 'Carne 180g', 1, 'nao'),
-	(5, 'pão de Hamburguer ', 2, 'nao'),
-	(6, 'tomate', 1, 'sim');
-/*!40000 ALTER TABLE `ingrediente_cardapio` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.itens_pedido
-CREATE TABLE IF NOT EXISTS `itens_pedido` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pedido` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_idPedido` (`id_pedido`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.itens_pedido: 0 rows
-/*!40000 ALTER TABLE `itens_pedido` DISABLE KEYS */;
-/*!40000 ALTER TABLE `itens_pedido` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.pedido
-CREATE TABLE IF NOT EXISTS `pedido` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_endereco` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `total` varchar(50) NOT NULL DEFAULT '',
-  `status` varchar(50) NOT NULL DEFAULT '',
-  `forma_pagamento` varchar(50) NOT NULL DEFAULT '',
-  `obs` varchar(255) NOT NULL,
-  `entrega` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_idUsuario` (`id_usuario`),
-  KEY `id_endereco` (`id_endereco`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.pedido: 4 rows
-/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` (`id`, `id_endereco`, `id_usuario`, `total`, `status`, `forma_pagamento`, `obs`, `entrega`) VALUES
-	(1, 1, 3, '50', 'Entregue', 'dinheiro', 'retira o tomate', 'sim'),
-	(2, 1, 0, '30', 'Pendente', 'dinheiro', 'tira o tomate', ''),
-	(3, 1, 0, '30', 'Pendente', 'dinheiro', 'aaaaaaaa', ''),
-	(4, 1, 2, '30', 'Entregue', 'dinheiro', 'aaaaa', 'sim');
-/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.reserva
-CREATE TABLE IF NOT EXISTS `reserva` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) NOT NULL,
-  `numero_pessoas` int(11) DEFAULT NULL,
-  `observacao` varchar(50) DEFAULT NULL,
-  `status` varchar(50) NOT NULL,
-  `datahora` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_idUsuario` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela lanchonete2.reserva: 1 rows
-/*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` (`id`, `id_usuario`, `numero_pessoas`, `observacao`, `status`, `datahora`) VALUES
-	(7, 2, 8, 'n gostei de vcs', 'Aprovado', '09-09-2021 15:30');
-/*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
-
--- Copiando estrutura para tabela lanchonete2.usuario
-CREATE TABLE IF NOT EXISTS `usuario` (
+CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
   `telefone` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela lanchonete2.usuario: 2 rows
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `telefone`) VALUES
-	(2, 'gustavo ornaghi antunes', 'gustavoornaghiantunes@gmail.com', '123', '(35) 98835-0841'),
-	(6, '', '', '', '');
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `nivel_acesso` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `FK_idUsuario` (`id_usuario`),
+  CONSTRAINT `FK_admins_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+CREATE TABLE IF NOT EXISTS `avaliacoes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `avaliacao` varchar(50) NOT NULL DEFAULT '',
+  `status` varchar(50) NOT NULL DEFAULT '',
+  `datahora` varchar(50) NOT NULL DEFAULT '',
+  `estrela` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK1_idUsuario` (`id_usuario`),
+  CONSTRAINT `FK_avaliacoes_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `categorias_cardapio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `cardapio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `preco` float NOT NULL DEFAULT 0,
+  `imagem` varchar(100) NOT NULL,
+  `qtd_vendido` int(11) NOT NULL DEFAULT 0,
+  `id_categoria` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_cardapio_categorias_cardapio` (`id_categoria`),
+  CONSTRAINT `FK_cardapio_categorias_cardapio` FOREIGN KEY (`id_categoria`) REFERENCES `categorias_cardapio` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `enderecos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `logradouro` varchar(50) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `referencia` varchar(50) DEFAULT NULL,
+  `bairro` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_idUsuario` (`id_usuario`) USING BTREE,
+  CONSTRAINT `FK_enderecos_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `ingredientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `retirar` varchar(50) NOT NULL DEFAULT 'nao',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `ingredientes_cardapio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ingrediente` int(11) NOT NULL,
+  `id_cardapio` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_ingredientes_cardapio_ingredientes` (`id_ingrediente`),
+  KEY `FK_ingredientes_cardapio_cardapio` (`id_cardapio`),
+  CONSTRAINT `FK_ingredientes_cardapio_cardapio` FOREIGN KEY (`id_cardapio`) REFERENCES `cardapio` (`id`),
+  CONSTRAINT `FK_ingredientes_cardapio_ingredientes` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `itens_mesa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mesa` int(11) NOT NULL,
+  `id_cardapio` int(11) NOT NULL,
+  `obs` varchar(255) DEFAULT '',
+  `qtd` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_itens_mesa_cardapio` (`id_cardapio`),
+  CONSTRAINT `FK_itens_mesa_cardapio` FOREIGN KEY (`id_cardapio`) REFERENCES `cardapio` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `itens_pedido` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pedido` int(11) NOT NULL,
+  `id_cardapio` int(11) NOT NULL,
+  `obs` varchar(255) DEFAULT '',
+  `qtd` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_idPedido` (`id_pedido`),
+  KEY `FK_itens_pedido_cardapio` (`id_cardapio`),
+  CONSTRAINT `FK_itens_pedido_cardapio` FOREIGN KEY (`id_cardapio`) REFERENCES `cardapio` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_endereco` int(11) DEFAULT NULL,
+  `total` varchar(50) DEFAULT '',
+  `status` varchar(50) NOT NULL DEFAULT '',
+  `forma_pagamento` varchar(50) DEFAULT '',
+  `entrega` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_idUsuario` (`id_usuario`),
+  KEY `id_endereco` (`id_endereco`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `reservas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) DEFAULT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `numero_pessoas` int(11) NOT NULL,
+  `observacao` varchar(50) DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Livre',
+  `datahora` varchar(50) NOT NULL,
+  `total` float NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `FK_idUsuario` (`id_usuario`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+

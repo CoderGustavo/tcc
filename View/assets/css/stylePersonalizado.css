@@ -1,0 +1,395 @@
+body::-webkit-scrollbar {
+    width: 8px;
+    /* width of the entire scrollbar */
+    position: absolute;
+    right: 0; 
+}
+body::-webkit-scrollbar-track {
+    background: #222;
+    /* color of the tracking area */
+    position: absolute;
+    right: 0; 
+}
+body::-webkit-scrollbar-thumb {
+    position: absolute;
+    right: 0;
+    background-color: #fcb94e;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #fcb94e;
+    /* creates padding around scroll thumb */
+    margin: 1px; 
+}
+
+.menu-conta{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #fcb94e;
+    width: 100%;
+    border-radius: 1rem;
+    top: 3rem;
+    background-color: rgba(0, 0, 0, 0.3);
+} 
+@media (max-width: 1000px) {
+    .menu-conta{
+        position: relative;
+    }
+}
+.menu-conta li a{
+    line-height: 4rem;
+    font-size: 14pt;
+}
+
+.stars{
+	cursor: pointer;
+	transition: .5s;
+}
+
+.btn-abaixar-hero{
+    position: absolute;
+    width: 100%;
+    top: 55vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    animation: pular-seta 1s 0.5s infinite linear alternate;
+    font-size: 25pt;
+}
+.btn-abaixar-hero > i:nth-of-type(1){
+    font-size: 13pt;
+    margin-bottom: -10px;
+}
+
+@keyframes pular-seta {
+    0%{
+        margin-top: 0;
+    }
+    100%{
+        margin-top: 20px;
+    }
+}
+
+.bg-primarycolor{
+    background-color: #cda45e;
+}
+
+.border-primarycolor{
+    border-color: #cda45e !important;
+}
+
+.item-delivery{
+    cursor: pointer;
+}
+
+#delivery button{
+    background: #cda45e;
+    border: 0;
+    padding: 10px 35px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+}
+.bg-darkdark{
+    background-color: #0c0b09;
+}
+#deliverymodal .modal-content{
+    border: 1px solid #cda45e;
+}
+.btn-primarycolor{
+    background-color: #cda45e;
+    color: #fff;
+    transition: .5s;
+}
+.btn-primarycolor:hover{
+    background-color: #fcb94e;
+    color: #fff;
+}
+.btn-outline-primarycolor{
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #cda45e;
+    transition: .5s;
+}
+.btn-outline-primarycolor:hover{
+    background-color: #fcb94e;
+    color: #fff;
+    border: 1px solid #fcb94e;
+}
+.text-primarycolor{
+    color: #fcb94e;
+}
+.btn-add-end{
+    color: #cda45e;
+    border-bottom: 1px solid #cda45e;
+}
+.btn-add-end:hover{
+    color: #cda45e;
+    border: 1px solid #cda45e;
+    transition: 1s linear;
+}
+.bg-dark{
+    background-color: #1b1a18 !important;
+}
+input, textarea, select{
+    background-color: #0c0b09 !important;
+    box-shadow: none !important;
+    border: 1px solid #92918e !important;
+    box-sizing: border-box;
+}
+input:focus, input:hover, textarea:focus, textarea:hover, select:focus, select:hover{
+    background-color: #0c0b09 !important;
+    box-shadow: none !important;
+    border: 1px solid #cda45e !important;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.8) brightness(95%) sepia(100%) saturate(10000%) hue-rotate(13deg);
+}
+.btn-formapagamento{
+    cursor: pointer;
+}
+.loading{
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.loading span {
+    flex: 1;
+    margin: 5px;
+    height: 10px;
+    background-color: #EDA45EFF;
+    animation: girar .5s linear infinite;
+    animation-direction: alternate;
+}
+.loading span:nth-of-type(1){
+    animation-delay: .1s;
+}
+.loading span:nth-of-type(2){
+    animation-delay: .2s;
+}
+.loading span:nth-of-type(3){
+    animation-delay: .3s;
+}
+.loading span:nth-of-type(4){
+    animation-delay: .4s;
+}
+.loading span:nth-of-type(5){
+    animation-delay: .5s;
+}
+
+@keyframes girar {
+    100%{
+        padding: 50% 0;
+    }
+}
+
+
+.aparecer-top{
+    z-index: 0 !important;
+}
+.pedido-sacola{
+    position: fixed;
+    top: 0;
+    right: -46.5rem;
+    width: 50rem;
+    height: 100vh;
+    z-index: 4;
+    display: flex;
+    transition: 1s;
+}
+.abrir-menu{
+    right: 0 !important;
+    transition: 1s;
+}
+.div-texto{
+    position: relative;
+    height: 100vh;
+    width: 4rem;
+}
+.pedido-sacola .texto{
+    border: none;
+    box-shadow: none;
+    padding: 2rem 0rem 1.5rem;
+    font-weight:bolder;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-transform: uppercase;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+.pedido-sacola .texto p{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
+    vertical-align: middle;
+}
+.pedidos-sacola{
+    background-color: #0c0b09e5;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    padding: 3rem;
+    border-left: 4px solid #cda45e;
+    z-index: 11 !important;
+}
+.pedidos-sacola h3{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-transform: uppercase;
+    font-size: 30pt;
+}
+.logo-mesa{
+    font-size: 28pt;
+}
+.form-signin{
+    width: 50%;
+}
+#menu-flters {
+  padding: 0;
+  margin: 0 auto 0 auto;
+  list-style: none;
+  text-align: center;
+  border-radius: 50px;
+}
+#menu-flters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 12px 10px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: all ease-in-out 0.3s;
+  border-radius: 50px;
+  font-family: "Playfair Display", serif;
+}
+#menu-flters li:hover, #menu-flters li.filter-active {
+  color: #cda45e;
+}
+#menu-flters li:last-child {
+  margin-right: 0;
+}
+.baixar-app{
+    display: none;
+}
+.form-control, .form-control:focus, .form-control:hover{
+    color: #fff;
+}
+
+.bolha{
+    width: 100%;
+    height: 80vh;
+    border-radius: 50%;
+    margin-top: -40vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 15vh;
+}
+.center-msg{
+    width: 50%;
+    height: 50vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.73);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    padding: 2rem;
+    font-size: 18pt;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.center-msg h1, .center-msg h3, .center-msg p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.center-msg h3{
+    font-size: 25pt;
+}
+.center-msg h1{
+    text-align: center;
+    font-weight:normal;
+    font-size: 40pt;
+    margin-top: -3rem;
+}
+@media (max-width: 990px) {
+    .center-msg{
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .logo-mesa{
+        font-size: 20pt;
+    }
+    .btn-fecharpedido{
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+    }
+    .btn-fecharpedido:hover{
+        color: #ffa500;
+    }
+    .btn-fecharpedido:focus{
+        box-shadow: none;
+    }
+    .pedido-sacola{
+        right: -47.8rem;
+        width: 50rem;
+    }
+    .div-texto{
+        width: 2.5rem;
+    }
+    .div-texto .texto{
+    }
+    .div-texto .texto p{
+        margin: .4rem;
+    }
+
+    .pedidos-sacola{
+        border-left: none;
+    }
+    .abrir-menu{
+        right: 0 !important;
+        width: 100%;
+    }
+    .form-signin{
+        width: 100%;
+    }
+    .baixar-app{
+        display: block;
+        width: 100%;
+        background-color: #1b1a18;
+        position: fixed;
+        top: 0;
+        z-index: 1040;
+        padding-top: 1.5rem;
+    }
+    .baixar-app button{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+@media (max-width: 420px) {
+    .bolha{
+        border-radius: 0;
+    }
+    .center-msg{
+        border-radius: 0;
+        border: 0 !important;
+        box-shadow: none;
+    }
+    .logo-mesa{
+        font-size: 17pt;
+    }
+}
