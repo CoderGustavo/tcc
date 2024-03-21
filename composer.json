@@ -1,0 +1,49 @@
+{
+    "name": "codergustavo/tcc",
+    "description": "Delicious Hamburgueria \u0000 um projeto tcc ETEC JMS 2021",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gustavo Ornaghi Antunes",
+            "email": "gustavoornaghiantunes@gmail.com",
+            "role": "developer",
+            "homepage": "https://codergustavo.github.io"
+        },
+        {
+            "name": "Guilherme",
+            "email": "delicious@gmail.com",
+            "role": "worked in documentation"
+        },
+        {
+            "name": "Bárbara",
+            "email": "delicious@gmail.com",
+            "role": "worked in documentation"
+        },
+        {
+            "name": "Júlia",
+            "email": "delicious@gmail.com",
+            "role": "worked in documentation"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/Config.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4",
+        "ext-pdo": "*",
+        "coffeecode/router": "1.0.*",
+        "coffeecode/datalayer": "1.1.*",
+        "league/plates": "v4.0.0-alpha",
+        "chillerlan/php-qrcode": "dev-main",
+        "mercadopago/dx-php": "^2.4"
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    }
+}
